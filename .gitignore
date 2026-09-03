@@ -1,0 +1,12 @@
+# Version 2 is kept on this machine but is not part of the live site.
+v2/
+
+# The original build spec. Working document, not for publishing.
+BRIEF.md
+
+# OS and editor noise
+Thumbs.db
+desktop.ini
+.DS_Store
+*.tmp
+*.bak

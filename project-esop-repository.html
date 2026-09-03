@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ESOP Loan Repository | Veronica Singh</title>
+<meta name="description" content="Eleven spreadsheets owned by five teams replaced with one system of record for the PhysicsWallah ESOP loan book, built by directing AI as the engineering layer.">
+<meta name="author" content="Veronica Singh">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ESOP Loan Repository | Veronica Singh">
+<meta property="og:description" content="Eleven spreadsheets owned by five teams replaced with one system of record for the PhysicsWallah ESOP loan book, built by directing AI as the engineering layer.">
+<meta property="og:site_name" content="Veronica Singh">
+<meta property="og:locale" content="en_IN">
+<!-- Set og:url and og:image once the site is hosted. -->
+<!-- <meta property="og:url" content="https://YOUR-DOMAIN-HERE/project-esop-repository.html"> -->
+<!-- <meta property="og:image" content="https://YOUR-DOMAIN-HERE/og-image.png"> 1200x630px -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ESOP Loan Repository | Veronica Singh">
+<meta name="twitter:description" content="Eleven spreadsheets owned by five teams replaced with one system of record for the PhysicsWallah ESOP loan book, built by directing AI as the engineering layer.">
+<meta name="theme-color" content="#f9f3e7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="monogram" href="index.html" aria-label="Veronica Singh, home">VS</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <nav aria-label="Primary">
+      <ul class="nav-links" id="nav-links">
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li><a class="nav-link" href="about.html">About</a></li>
+        <li><a class="nav-link" href="projects.html" aria-current="page">Work</a></li>
+        <li><a class="nav-link" href="contact.html">Get in Touch</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section>
+  <div class="wrap">
+    <a class="back-link" href="projects.html">&larr; All work</a>
+    <div class="page-head">
+      <span class="kicker">Case 01</span>
+      <h1>ESOP Loan Repository</h1>
+      <p class="meta">FinZ and PhysicsWallah &middot; Live in production &middot; Built solo</p>
+      <p class="lede">Eleven spreadsheets owned by five teams, replaced with one system of record.</p>
+    </div>
+
+    <article class="prose">
+      <h3>The business</h3>
+      <p>PhysicsWallah grants ESOP to its employees. To exercise those options an employee owes tax immediately, long before the shares turn into any cash. FinZ lends against the pledged shares so they can pay that bill.</p>
+      <p>It is a small book with a complicated life. Around 300 loans, most of them now closed and the rest still running. Each one accrues interest, may have shares sold against it, gets repaid in parts, sometimes generates a refund, and finally has its pledged shares released. Some borrowers are Designated Persons under insider trading rules, so their releases need explicit approval before anything moves.</p>
+
+      <h3>The operational overhead</h3>
+      <p>All of that ran on eleven spreadsheets owned by five different teams. Nobody could answer a simple question quickly:</p>
+      <ol class="steps">
+        <li>What does this borrower actually owe today?</li>
+        <li>Has this loan really been repaid, or does it only say Closed?</li>
+        <li>Which pledged shares are safe to release right now?</li>
+      </ol>
+      <p>Answering any of them meant opening several files, reconciling them by hand, and trusting that whoever edited them last had done the same. Five teams held five versions of the truth and there was no way to prove which one was right.</p>
+
+      <h3>How AI was used</h3>
+      <p>I did not have an engineering team. I had a specification and a clear idea of what correct looked like, so I directed AI as the engineering layer and reviewed every step it took. That produced 108 production deployments over four months, built alongside my regular work.</p>
+      <p>The part worth knowing is where the difficulty actually sat. Almost none of it was in the money maths, which is deterministic and easy. It was in reading the source data correctly.</p>
+      <ol class="steps">
+        <li>A column labelled Confiscation Value turned out to hold share quantities, not rupees.</li>
+        <li>Dates stored day first as text were being misread, which quietly made payments vanish from schedules.</li>
+        <li>133 of 333 confiscations sat against cancelled orders, invisible to anything that only loaded completed ones.</li>
+      </ol>
+      <p>None of those crash. They produce a confident wrong answer, which is far more dangerous in a system people trust with money. Directing AI is what made the building fast. Knowing what to check is what made it correct.</p>
+
+      <h3>Two decisions</h3>
+      <ol class="decisions">
+        <li>
+          <span class="dec-lead">Release shares on evidence of cash, never on a status flag.</span>
+          <p>Releasing pledged shares cannot be undone. In the original process a loan qualified for release if a spreadsheet field said Closed, which meant a human editable cell was authorising an irreversible transfer of collateral. I removed that path. Release now depends only on evidence that cash was actually recovered. The tradeoff I accepted is that a loan genuinely repaid through an unrecorded channel waits until the payment is logged. Failing to release on time is recoverable. Releasing collateral wrongly is not.</p>
+        </li>
+        <li>
+          <span class="dec-lead">Gate compliance on the person, not the loan.</span>
+          <p>Designated Persons may only have shares released with explicit approval. The original gate matched on Loan ID, but a Designated Person is a person, not a loan, so their other loans passed through as though unregulated. I re-gated on identity, matching by BO ID and Employee Code, and added two fail safes. If the compliance list cannot be read, block every release rather than silently letting them through. If a loan carries no identifier to check, hold it.</p>
+        </li>
+      </ol>
+
+      <h3>What it does now</h3>
+      <p>One system of record joining eleven live sources, with a working surface for each real task: the repayment schedule, refunds, shares cleared to unpledge, funds reconciliation, corrections, total payable, and the Designated Persons queue. Bank reconciliation parses to &#8377;64,05,97,403 and matches the bank&rsquo;s own summary.</p>
+
+      <div class="limits">
+        <h3>Honest limitations</h3>
+        <p>I never instrumented the manual baseline, so I can show what the system catches but not a clean time saved figure. Refresh is slow on the largest sheets. The tool mirrors upstream data it does not control, which is precisely why the reconciliation views exist. And one person built it, so it needs a documented handover.</p>
+      </div>
+    </article>
+
+    <div class="figs">
+      <figure>
+        <div class="shot"><img src="img/esop-repository.png" alt="The ESOP Loan Repository dashboard showing loan counts, the working tabs and the repayment schedule table" loading="lazy" width="1600" height="760"></div>
+        <figcaption class="fig-cap"><b>Fig. 01</b>The live repository. Loan-level figures are blurred here; the working surfaces run across the tab bar.</figcaption>
+      </figure>
+      <figure>
+        <!-- Drop a screenshot in here: replace this div with
+             <div class="shot"><img src="img/esop-unpledge.png" alt="Shares to unpledge: the queue keyed on evidence of cash recovery" loading="lazy"></div> -->
+        <div class="fig-frame" role="img" aria-label="Screenshot placeholder. Shares to unpledge: the queue keyed on evidence of cash recovery.">
+          <span class="fig-slot">esop-unpledge</span>
+          <span class="fig-dims">1600 x 760px</span>
+        </div>
+        <figcaption class="fig-cap"><b>Fig. 02</b>Shares to unpledge: the queue keyed on evidence of cash recovery</figcaption>
+      </figure>
+      <figure>
+        <!-- Drop a screenshot in here: replace this div with
+             <div class="shot"><img src="img/esop-dp-actions.png" alt="Designated Persons queue: releases held for explicit approval" loading="lazy"></div> -->
+        <div class="fig-frame" role="img" aria-label="Screenshot placeholder. Designated Persons queue: releases held for explicit approval.">
+          <span class="fig-slot">esop-dp-actions</span>
+          <span class="fig-dims">1600 x 760px</span>
+        </div>
+        <figcaption class="fig-cap"><b>Fig. 03</b>Designated Persons queue: releases held for explicit approval</figcaption>
+      </figure>
+    </div>
+
+    <nav class="pager" aria-label="More work">
+      <span></span>
+      <a class="next" href="project-financing-os.html"><span class="pager-dir">Next case &rarr;</span><span class="pager-title">Employee Financing Process OS</span></a>
+    </nav>
+  </div>
+</section>
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="pill pill--lav">Let&rsquo;s connect</span>
+      <h2 class="sec-title">Get in <span class="mark">Touch</span></h2>
+      <p class="sec-intro">Open to conversations about product roles in fintech, AI-native product work and internal platform teams.</p>
+    </div>
+    <ul class="contact-actions">
+      <li>
+        <a class="action action--in" href="https://www.linkedin.com/in/veronicasingh250803" rel="me noopener" target="_blank">
+          <span class="action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></span>
+          <span class="action-label">Connect on LinkedIn</span>
+        </a>
+      </li>
+      <li>
+        <a class="action" href="mailto:veronica.singh2525@gmail.com">
+          <span class="action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2.5 7 9.5 6 9.5-6"/></svg></span>
+          <span class="action-label">Email</span>
+        </a>
+      </li>
+      <li>
+        <details class="action-details">
+          <summary class="action">
+            <span class="action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+            <span class="action-label">Phone number</span>
+          </summary>
+          <a class="action-value" href="tel:+919555914534">+91 95559 14534</a>
+        </details>
+      </li>
+    </ul>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-inner">
+      <a class="monogram" href="index.html" aria-label="Veronica Singh, home">VS</a>
+      <p class="colophon">&copy; 2026 Veronica Singh. Aspiring Product Manager, Delhi NCR.</p>
+      <a class="to-top" href="#main">Back to top &uarr;</a>
+    </div>
+  </div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>

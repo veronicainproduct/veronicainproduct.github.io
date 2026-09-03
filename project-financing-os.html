@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Employee Financing Process OS | Veronica Singh</title>
+<meta name="description" content="A monthly deduction, invoicing and payment cycle for two lenders, taken off spreadsheets and rebuilt as one system with staged uploads and an audit trail. In build.">
+<meta name="author" content="Veronica Singh">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Employee Financing Process OS | Veronica Singh">
+<meta property="og:description" content="A monthly deduction, invoicing and payment cycle for two lenders, taken off spreadsheets and rebuilt as one system with staged uploads and an audit trail. In build.">
+<meta property="og:site_name" content="Veronica Singh">
+<meta property="og:locale" content="en_IN">
+<!-- Set og:url and og:image once the site is hosted. -->
+<!-- <meta property="og:url" content="https://YOUR-DOMAIN-HERE/project-financing-os.html"> -->
+<!-- <meta property="og:image" content="https://YOUR-DOMAIN-HERE/og-image.png"> 1200x630px -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Employee Financing Process OS | Veronica Singh">
+<meta name="twitter:description" content="A monthly deduction, invoicing and payment cycle for two lenders, taken off spreadsheets and rebuilt as one system with staged uploads and an audit trail. In build.">
+<meta name="theme-color" content="#f9f3e7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="monogram" href="index.html" aria-label="Veronica Singh, home">VS</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <nav aria-label="Primary">
+      <ul class="nav-links" id="nav-links">
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li><a class="nav-link" href="about.html">About</a></li>
+        <li><a class="nav-link" href="projects.html" aria-current="page">Work</a></li>
+        <li><a class="nav-link" href="contact.html">Get in Touch</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section>
+  <div class="wrap">
+    <a class="back-link" href="projects.html">&larr; All work</a>
+    <div class="page-head page-head--pink">
+      <span class="kicker">Case 02</span>
+      <h1>Employee Financing Process OS</h1>
+      <p class="meta">FinZ and PhysicsWallah &middot; Three and a half weeks &middot; PRD to working system</p>
+      <p class="lede"><span class="status">In build, not yet launched</span><br>A monthly cycle that ran on spreadsheets and email threads, rebuilt as one system.</p>
+    </div>
+
+    <article class="prose">
+      <h3>The month, as it works today</h3>
+      <p>Every month around 2,886 PhysicsWallah employees repay a loan out of their salary. Before any of that money moves, somebody has to do all of this by hand.</p>
+      <ol class="steps">
+        <li>Build the deduction summary for the month.</li>
+        <li>Send it to payroll and wait for confirmation of what was actually deducted, which is never quite what was requested.</li>
+        <li>Work out what each of the two lenders is owed.</li>
+        <li>Raise the invoices and chase the approvals.</li>
+        <li>Record the payment when it lands.</li>
+        <li>Map that payment back to individual loans so the book is right.</li>
+      </ol>
+      <p>Every step of it lives in spreadsheets and email threads.</p>
+
+      <h3>Where it goes wrong</h3>
+      <p>Three things went wrong repeatedly, and none of them announced themselves.</p>
+      <p><strong>A mis-keyed figure becomes a wrong invoice.</strong> Nothing in the process is capable of noticing. The number is simply wrong from that point on, and it is wrong in a document that has already been sent to another company.</p>
+      <p><strong>There is no audit trail.</strong> An error that surfaces in month N+2 cannot be traced back to who changed what in month N. The answer is always somebody trying to remember.</p>
+      <p><strong>Loan IDs collide across lenders.</strong> FinZ and Prest each maintain their own ID space, so the same number means two different loans depending on who you ask. That is how a payment gets applied to the wrong loan on the wrong system, and it is very hard to spot afterwards.</p>
+
+      <h3>What I specified</h3>
+      <p>One system for the whole cycle, with three decisions doing most of the work.</p>
+      <ol class="decisions">
+        <li>
+          <span class="dec-lead">Every key is a pair, never a bare loan ID.</span>
+          <p>Nothing in the system is keyed on <code>loan_id</code> alone. It is always <code>(lender, loan_id)</code>. That removes an entire class of error by construction rather than by care, which matters because care is exactly what runs out at the end of a long month.</p>
+        </li>
+        <li>
+          <span class="dec-lead">Uploads are staged, not applied.</span>
+          <p>Each lender&rsquo;s export is checked against the previous batch before it goes live. An unusually large change waits for a human to confirm it rather than overwriting the book quietly. Every upload is versioned and can be rolled back.</p>
+        </li>
+        <li>
+          <span class="dec-lead">Every change is written down.</span>
+          <p>An append only audit log records what changed and who changed it, and the tables are checksummed so that &ldquo;I did not mean to change that&rdquo; is detectable rather than hoped for.</p>
+        </li>
+      </ol>
+
+      <h3>Where it stands</h3>
+      <p>This is a work in progress and it is not yet launched. It has been built and validated against real production data locally, with 220 automated tests and 86 commits over three and a half weeks. The monthly scheduler exists but is deliberately switched off, pending a go live decision.</p>
+
+      <div class="limits">
+        <h3>Honest limitations</h3>
+        <p>Not yet in daily production use. The live updates work is only partly done, with polling still running in parallel on purpose. Imports are file based because no reliable LMS API was available to integrate against. Until it runs a real month end, the time it saves is an estimate rather than a measurement.</p>
+      </div>
+    </article>
+
+    <div class="figs">
+      <figure>
+        <div class="shot"><img src="img/ef-os-overview.png" alt="Business Overview screen showing loan count, loan volume and a breakdown by product" loading="lazy" width="1600" height="760"></div>
+        <figcaption class="fig-cap"><b>Fig. 01</b>Business Overview: the book at a glance, filtered by product, lender and status.</figcaption>
+      </figure>
+      <figure>
+        <div class="shot"><img src="img/ef-os-imports.png" alt="Imports screen listing each lender's LMS export with row counts and version history" loading="lazy" width="1600" height="760"></div>
+        <figcaption class="fig-cap"><b>Fig. 02</b>Imports: each export is staged, checked and versioned. Uploader and filenames are blurred.</figcaption>
+      </figure>
+      <figure>
+        <div class="shot"><img src="img/ef-os-login.png" alt="Sign in screen for the Employee Financing Portal, access limited to company domains" loading="lazy" width="1600" height="760"></div>
+        <figcaption class="fig-cap"><b>Fig. 03</b>Access is restricted to company domains, with seven roles mapped to real people.</figcaption>
+      </figure>
+    </div>
+
+    <nav class="pager" aria-label="More work">
+      <a class="prev" href="project-esop-repository.html"><span class="pager-dir">&larr; Previous case</span><span class="pager-title">ESOP Loan Repository</span></a>
+      <span></span>
+    </nav>
+  </div>
+</section>
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="pill pill--lav">Let&rsquo;s connect</span>
+      <h2 class="sec-title">Get in <span class="mark">Touch</span></h2>
+      <p class="sec-intro">Open to conversations about product roles in fintech, AI-native product work and internal platform teams.</p>
+    </div>
+    <ul class="contact-actions">
+      <li>
+        <a class="action action--in" href="https://www.linkedin.com/in/veronicasingh250803" rel="me noopener" target="_blank">
+          <span class="action-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></span>
+          <span class="action-label">Connect on LinkedIn</span>
+        </a>
+      </li>
+      <li>
+        <a class="action" href="mailto:veronica.singh2525@gmail.com">
+          <span class="action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2.5 7 9.5 6 9.5-6"/></svg></span>
+          <span class="action-label">Email</span>
+        </a>
+      </li>
+      <li>
+        <details class="action-details">
+          <summary class="action">
+            <span class="action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+            <span class="action-label">Phone number</span>
+          </summary>
+          <a class="action-value" href="tel:+919555914534">+91 95559 14534</a>
+        </details>
+      </li>
+    </ul>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-inner">
+      <a class="monogram" href="index.html" aria-label="Veronica Singh, home">VS</a>
+      <p class="colophon">&copy; 2026 Veronica Singh. Aspiring Product Manager, Delhi NCR.</p>
+      <a class="to-top" href="#main">Back to top &uarr;</a>
+    </div>
+  </div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>
