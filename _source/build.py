@@ -157,7 +157,7 @@ def page(fname, title, desc, current, body):
 # ============================================================
 # shared blocks
 # ============================================================
-STATS = [("20 months","Building the product"),
+STATS = [("20+ months","Building the product"),
          ("&#8377;3 Cr+","Disbursed monthly"),
          ("&#8377;34 Cr","Active loan book"),
          ("4,500+","Employees served")]
@@ -280,7 +280,7 @@ hero = """<section class="hero">
       </ul>
       <h1 class="name">Veronica Singh</h1>
       <p class="role">Aspiring Product Manager<br>Employee Financing, FinZ</p>
-      <p class="hero-sub">Twenty months building a lending product from scratch. We started with no book, no eligibility rules and no definite collections process. The product now disburses &#8377;3 Cr+ a month to PhysicsWallah employees, and I drafted the credit policy that made those collections work.</p>
+      <p class="hero-sub">More than twenty months building a lending product from scratch. We started with no book, no eligibility rules and no definite collections process. The product now disburses &#8377;3 Cr+ a month to PhysicsWallah employees, and I drafted the credit policy that made those collections work.</p>
       <div class="hero-cta">
         <a class="btn" href="projects.html">View the work</a>
         <a class="btn btn--pink" href="contact.html">Get in touch</a>
@@ -345,7 +345,7 @@ work_preview = """<section>
 
 page("index.html",
      "Veronica Singh | Aspiring Product Manager, Employee Financing",
-     "Twenty months building a lending product from scratch at FinZ, the fintech vertical at PhysicsWallah. Now disbursing Rs 3 Cr+ a month to PhysicsWallah employees.",
+     "More than twenty months building a lending product from scratch at FinZ, the fintech vertical at PhysicsWallah. Now disbursing Rs 3 Cr+ a month to PhysicsWallah employees.",
      "index.html",
      hero + "\n" + stats() + "\n" + capabilities + "\n"
      + about_preview + "\n" + work_preview + "\n" + CONTACT)
@@ -366,8 +366,8 @@ about = """<section>
       <h3>Who I am</h3>
       <p>I did not arrive at product through a product title. I arrived by owning a lending book: its eligibility rules, its pricing, its repayment mechanics and its collections. Then I built the systems that keep it honest.</p>
 
-      <h3>Twenty months, from nothing</h3>
-      <p>I have spent twenty months building a financial product from scratch. When I started there was no book. There were no rules for who could borrow, no pricing, no repayment schedule that fit a payroll cycle, and no process for what happens when a deduction does not recover the full amount. I designed all four.</p>
+      <h3>More than twenty months, from nothing</h3>
+      <p>I have spent more than twenty months building a financial product from scratch. When I started there was no book. There were no rules for who could borrow, no pricing, no repayment schedule that fit a payroll cycle, and no process for what happens when a deduction does not recover the full amount. I designed all four.</p>
       <p>The product now disburses &#8377;3 Cr+ every month to PhysicsWallah employees through payroll deduction.</p>
       <blockquote><p>A payroll deducted loan only looks safe. Employment tells you someone is paid. It does not tell you whether they are already over borrowed somewhere else.</p></blockquote>
       <p>That gap is what the credit policy closes. I drafted it against bureau data so the decision to lend, and the limit attached to it, is made before the money leaves rather than argued about after it does not come back.</p>
@@ -405,7 +405,7 @@ about = """<section>
 """ + CONTACT
 
 page("about.html", "About | Veronica Singh",
-     "Twenty months building a lending product from scratch at FinZ, the fintech vertical at PhysicsWallah: eligibility, pricing, repayment, collections and the CIBIL based credit policy behind them.",
+     "More than twenty months building a lending product from scratch at FinZ, the fintech vertical at PhysicsWallah: eligibility, pricing, repayment, collections and the CIBIL based credit policy behind them.",
      "about.html", about)
 
 
