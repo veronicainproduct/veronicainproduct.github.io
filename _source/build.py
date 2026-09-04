@@ -94,10 +94,13 @@ CONTACT = """<section class="contact" id="contact">
         </a>
       </li>
       <li>
-        <a class="action" href="mailto:%(email)s">
-          <span class="action-icon">%(logo_mail)s</span>
-          <span class="action-label">Email</span>
-        </a>
+        <details class="action-details">
+          <summary class="action">
+            <span class="action-icon">%(logo_mail)s</span>
+            <span class="action-label">Email</span>
+          </summary>
+          <a class="action-value" href="mailto:%(email)s">%(email)s</a>
+        </details>
       </li>
       <li>
         <details class="action-details">

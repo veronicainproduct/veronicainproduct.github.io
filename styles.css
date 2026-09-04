@@ -487,6 +487,7 @@ figure{margin:0}
   border:var(--border);box-shadow:var(--shadow);
   padding:.8rem 1rem;text-align:center;
   font-weight:700;text-decoration:none;
+  font-size:var(--t-small);word-break:break-word;
 }
 .action-value:hover{background:var(--blue)}
 .cl-kind{font-size:var(--t-micro);font-weight:700;letter-spacing:.14em;text-transform:uppercase;flex:0 0 auto;min-width:7rem}
