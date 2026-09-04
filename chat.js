@@ -30,52 +30,71 @@
     return out + '</div>';
   }
 
+  function bolt() {
+    return '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+           '<path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>';
+  }
+
   function pull(t) { return '<p class="pull">' + t + '</p>'; }
 
+  var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" ' +
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg>';
+
   function proj(o) {
-    var out = '<div class="proj">';
-    if (o.shot) {
-      out += '<img class="proj-shot" src="' + o.shot + '" alt="' + o.alt +
-             '" width="' + o.w + '" height="' + o.h + '" loading="lazy">';
-    }
-    out += '<div class="proj-body">';
-    if (o.badge) out += '<span class="badge">' + o.badge + '</span>';
-    out += '<h3>' + o.name + '</h3><p class="proj-sub">' + o.sub + '</p>';
-    if (o.figs) {
-      out += '<ul class="proj-figs">';
-      for (var i = 0; i < o.figs.length; i++) out += '<li>' + o.figs[i] + '</li>';
-      out += '</ul>';
-    }
-    return out + '<a class="go" href="' + o.href + '">Read the case study</a></div></div>';
+    var body = '<div class="proj-body">';
+    if (o.badge) body += '<span class="badge">' + o.badge + '</span>';
+    body += '<p class="kicker">' + o.kicker + '</p>' +
+            '<h3>' + o.name + '</h3><p class="proj-sub">' + o.sub + '</p>';
+    if (o.figs) body += figs(o.figs);
+    body += '<a class="go" href="' + o.href + '">Read the case study ' + ARROW + '</a></div>';
+
+    var art = o.shot
+      ? '<div class="proj-art"><img src="' + o.shot + '" alt="' + o.alt +
+        '" width="' + o.w + '" height="' + o.h + '" loading="lazy"></div>'
+      : '<div class="proj-note">' + o.note + '</div>';
+
+    return '<div class="proj">' + body + art + '</div>';
   }
 
   var MAIL_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2.5 7 9.5 6 9.5-6"/></svg>';
   var IN_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>';
   var TEL_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>';
 
+  var VCARD_HEAD =
+    '<div class="vcard"><h3>Veronica Singh</h3>' +
+    '<p>Aspiring Product Manager, Employee Financing at FinZ. Delhi NCR.</p>';
+
   var REACH =
     '<div class="reach">' +
+    '<a class="primary" href="mailto:' + EMAIL + '">' + MAIL_SVG + 'Email Veronica</a>' +
     '<a href="' + LI + '" rel="me noopener" target="_blank">' + IN_SVG + 'LinkedIn</a>' +
-    '<a href="mailto:' + EMAIL + '">' + MAIL_SVG + EMAIL + '</a>' +
     '<a href="tel:' + TEL + '">' + TEL_SVG + TELSHOW + '</a>' +
     '</div>';
+
+  var VCARD = VCARD_HEAD + REACH + '</div>';
 
   /* ---- the answers ------------------------------------------ */
 
   var ESOP_CARD = proj({
-    shot: 'img/card-esop.png', w: 1265, h: 300,
+    shot: 'img/esop-repository.png', w: 1280, h: 557,
     alt: 'The ESOP Loan Repository, showing 304 loans, 239 closed and 65 active',
+    kicker: 'System of record &middot; AI-directed build',
     name: 'ESOP Loan Repository',
-    sub: 'Eleven spreadsheets owned by five teams, replaced with one system of record',
-    figs: ['Live in production', 'Around 300 loans', '11 spreadsheets, 5 teams', '108 deployments in 4 months'],
+    sub: 'Live in production. Eleven spreadsheets, replaced with one system of record.',
+    figs: [['300', 'Loans'], ['11', 'Spreadsheets'], ['108', 'Deployments']],
     href: 'project-esop-repository.html'
   });
 
   var EFOS_CARD = proj({
-    name: 'Employee Financing Process OS',
-    sub: 'The monthly deduction, invoicing and payment cycle for two lenders',
     badge: 'In build',
-    figs: ['2,886 employees a month', 'Two lenders', '220 automated tests', '86 commits in 3.5 weeks'],
+    kicker: 'Process design &middot; Audit trail',
+    name: 'Employee Financing Process OS',
+    sub: 'The monthly deduction, invoicing and payment cycle for two lenders.',
+    figs: [['2,886', 'Employees'], ['220', 'Tests'], ['2', 'Lenders']],
+    note: 'No screenshot here on purpose. It is built and validated against real ' +
+          'production data, but it has not run a live month end, so anything I showed ' +
+          'you would be an empty state dressed up as a product.',
     href: 'project-financing-os.html'
   });
 
@@ -95,7 +114,7 @@
       keys: ['best project', 'best work', 'proudest', 'favourite project', 'favorite project',
              'strongest', 'best thing', 'most proud', 'best case'],
       html:
-        '<p>The ESOP Loan Repository. It is live in production, I built it solo, and it changed a decision rather than just a screen.</p>' +
+        '<p>The ESOP Loan Repository, and not because it is the prettiest. It is live in production, I built it solo, and it changed a decision rather than just a screen.</p>' +
         '<p>Around 300 loans, and the entire lifecycle ran on eleven spreadsheets owned by five different teams. The obvious brief was a better calculator. The money maths is deterministic and easy. The real problem was five teams holding five versions of the truth with no way to prove which was right, which makes it a system of record, not a calculator.</p>' +
         '<p>The decision I would defend hardest: releasing pledged shares cannot be undone, and in the original process a loan qualified for release if a spreadsheet field said Closed. A human editable cell was authorising an irreversible transfer of collateral. I removed that path and keyed the release queue on evidence that cash actually arrived. The tradeoff I accepted is that a loan genuinely repaid through an unrecorded channel waits until the payment is logged.</p>' +
         pull('Failing to release on time is a support ticket. Releasing collateral wrongly is not.') +
@@ -107,7 +126,7 @@
       keys: ['your work', 'the work', 'projects', 'case study', 'case studies', 'portfolio',
              'what have you built', 'what did you build', 'show me your work', 'everything'],
       html:
-        '<p>Two internal systems, both built for a book that moves real money. One is live, one is in build.</p>' +
+        '<p>Two case studies, one through-line: I take a process running on spreadsheets and turn it into a system of record. Both were built for a book that moves real money. One is live, one is in build.</p>' +
         ESOP_CARD + EFOS_CARD,
       chips: ['esop', 'efos', 'best']
     },
@@ -230,8 +249,8 @@
       keys: ['contact', 'email', 'reach', 'get in touch', 'linkedin', 'phone', 'call', 'talk',
              'connect', 'hire me', 'where are you', 'based', 'location', 'delhi', 'city'],
       html:
-        '<p>Open to conversations about product roles in fintech, AI-native product work and internal platform teams. Based in Delhi NCR.</p>' +
-        REACH,
+        '<p>I would love to talk. I am open to conversations about product roles in fintech, AI-native product work and internal platform teams.</p>' +
+        VCARD,
       chips: ['why', 'work', 'unstated']
     },
 
@@ -257,9 +276,9 @@
       keys: ['recruiter', '90 second', 'ninety second', 'summary', 'summarise', 'summarize',
              'quick version', 'tldr', 'overview', 'scan', 'brief', 'short version'],
       html:
-        '<p>No fluff. Here is the scannable version.</p>' +
+        '<p>No fluff. Here is the scan-friendly version.</p>' +
         '<div class="scan">' +
-        '<h3>Veronica in 90 seconds</h3>' +
+        '<h3>' + bolt() + 'Veronica in 90 seconds</h3>' +
         '<ul>' +
         '<li>Aspiring Product Manager at FinZ, the fintech vertical at PhysicsWallah. Delhi NCR.</li>' +
         '<li>20+ months building an employee lending product from scratch: eligibility, pricing, repayment and collections.</li>' +
@@ -369,7 +388,7 @@
     wrap.className = 'msg';
     wrap.innerHTML =
       '<img class="face" src="img/avatar.jpg" alt="" width="320" height="320">' +
-      '<div class="said"><p class="sr">Veronica says</p>' +
+      '<div class="said"><p class="who">Veronica</p>' +
       '<div class="body"><span class="dots" role="status"><span class="sr">Thinking</span>' +
       '<i></i><i></i><i></i></span></div></div>';
     thread.appendChild(wrap);

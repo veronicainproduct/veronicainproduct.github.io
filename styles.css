@@ -7,24 +7,29 @@
    ============================================================ */
 
 :root{
-  --bone:#f9f3e7;
-  --ink:#2e241f;
-  --card:#faf7f0;
-  --muted-surface:#ede8de;
-  --blue:#abd6e3;
-  --pink:#dca3ac;
-  --lavender:#e0d3ee;
-  --tan:#e6d5bc;
+  --bone:#ffffff;            /* page ground */
+  --ink:#10192b;             /* near-black navy */
+  --card:#ffffff;
+  --muted-surface:#f6f7f9;   /* sidebar, and any recessed surface */
+  --line:#e4e7ec;            /* hairline rule */
+  --panel:#eceff7;           /* the ground a product shot sits on */
+  --accent:#f3c77a;          /* the one colour that means "do this" */
+  --accent-deep:#0f5a56;     /* the rule across the top */
+
+  --blue:#dbe7f5;
+  --pink:#f7e0e4;
+  --lavender:#e9e4f7;
+  --tan:#f8e8cc;
   --linkedin:#0077b5;
 
-  --muted:rgba(46,36,31,.72);
+  --muted:#5b6676;
 
-  --border:2px solid var(--ink);
-  --border-thin:1px solid var(--ink);
-  --shadow:3px 3px 0 var(--ink);
-  --shadow-md:4px 4px 0 var(--ink);
-  --shadow-lg:5px 5px 0 var(--ink);
-  --radius-lg:24px;
+  --border:1px solid var(--line);
+  --border-thin:1px solid var(--line);
+  --shadow:0 1px 2px rgba(16,25,43,.05), 0 4px 12px rgba(16,25,43,.06);
+  --shadow-md:0 2px 4px rgba(16,25,43,.05), 0 10px 26px rgba(16,25,43,.08);
+  --shadow-lg:0 4px 10px rgba(16,25,43,.06), 0 18px 44px rgba(16,25,43,.10);
+  --radius-lg:20px;
 
   --font:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
   --mono:"Space Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -150,7 +155,7 @@ section{padding-block:var(--sec-gap);position:relative}
   text-decoration:none;
   transition:transform .12s ease,box-shadow .12s ease;
 }
-.btn:hover,.btn:focus-visible{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn:hover,.btn:focus-visible{transform:translateY(-1px);box-shadow:var(--shadow-md)}
 .btn--pink{background:var(--pink)}
 .btn--lav{background:var(--lavender)}
 .btn--ink{background:var(--ink);color:var(--bone)}
@@ -240,7 +245,7 @@ section{padding-block:var(--sec-gap);position:relative}
   background:var(--card);text-decoration:none;
   transition:transform .12s ease,box-shadow .12s ease;
 }
-.case-card:hover,.case-card:focus-visible{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+.case-card:hover,.case-card:focus-visible{transform:translateY(-2px);box-shadow:var(--shadow-md)}
 @media (prefers-reduced-motion:reduce){.case-card{transition:none}}
 .case-head{
   display:flex;align-items:center;
@@ -469,7 +474,7 @@ figure{margin:0}
 }
 .action::-webkit-details-marker{display:none}
 .action::marker{content:""}
-.action:hover,.action:focus-visible{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+.action:hover,.action:focus-visible{transform:translateY(-2px);box-shadow:var(--shadow-md)}
 @media (prefers-reduced-motion:reduce){.action{transition:none}}
 .action--in{background:var(--linkedin);color:#fff}
 .action-icon{
