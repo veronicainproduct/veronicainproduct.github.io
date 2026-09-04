@@ -48,7 +48,6 @@ def nav(current):
         items += '        <li><a class="nav-link" href="%s"%s>%s</a></li>\n' % (href, cur, label)
     return """<header class="site-nav">
   <div class="nav-inner">
-    <a class="wordmark" href="index.html">Veronica Singh</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
     <nav aria-label="Primary">
       <ul class="nav-links" id="nav-links">
@@ -61,15 +60,10 @@ FOOTER = """<footer class="site-footer">
   <div class="wrap">
     <div class="footer-inner">
       <p class="colophon">&copy; 2026 Veronica Singh. Aspiring Product Manager, Delhi NCR.</p>
-      <a class="to-top" href="#main">Back to top &uarr;</a>
+      <a class="to-top" href="#main">Back to top</a>
     </div>
   </div>
 </footer>"""
-
-def band(label, mod=""):
-    cls = "band " + mod if mod else "band"
-    return ('<div class="band-wrap"><div class="%s" role="presentation">'
-            '<span class="band-label">%s</span></div></div>' % (cls, label))
 
 LOGO_IN = ('<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'
   '<path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05'
@@ -89,8 +83,7 @@ LOGO_PHONE = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 CONTACT = """<section class="contact" id="contact">
   <div class="wrap">
     <div class="sec-head">
-      <span class="pill pill--lav">Let&rsquo;s connect</span>
-      <h2 class="sec-title">Get in <span class="mark">Touch</span></h2>
+      <h2 class="sec-title">Get in Touch</h2>
       <p class="sec-intro">Open to conversations about product roles in fintech, AI-native product work and internal platform teams.</p>
     </div>
     <ul class="contact-actions">
@@ -174,7 +167,7 @@ def stats():
                   '<span class="stat-label">%s</span></li>\n' % (f, l) for f, l in STATS)
     return """<section class="tight">
   <div class="wrap">
-    <ul class="stat-list reveal">
+    <ul class="stat-list">
 %s    </ul>
   </div>
 </section>""" % lis
@@ -198,14 +191,13 @@ def case_cards():
         out += """    <li><a class="case-card %(cls)s" href="%(href)s">
       <span class="case-head">
         %(icon)s
-        <span class="arrow-box" aria-hidden="true">&rarr;</span>
       </span>
       <span class="case-body">
         %(status)s
         <h3>%(title)s</h3>
         <p>%(blurb)s</p>
         <ul class="chips">%(chips)s</ul>
-        <span class="card-more">View case study &rarr;</span>
+        <span class="card-more">View case study</span>
       </span>
     </a></li>
 """ % dict(cls=c["cls"], href=c["href"], icon=icon(c["ic"]), status=status,
@@ -220,13 +212,12 @@ CASE3 = """    <!-- THIRD CASE STUDY, NOT YET WRITTEN.
     <li><a class="case-card case--3" href="project-lending-product.html">
       <span class="case-head">
         <span class="icon-box"></span>
-        <span class="arrow-box">&rarr;</span>
       </span>
       <span class="case-body">
         <h3>TITLE</h3>
         <p>ONE OR TWO SENTENCES.</p>
         <ul class="chips"><li class="chip">TAG</li></ul>
-        <span class="card-more">View case study &rarr;</span>
+        <span class="card-more">View case study</span>
       </span>
     </a></li>
     -->
@@ -259,12 +250,11 @@ FACTS = """      <div class="fact-col card card--blue">
         </ul>
       </div>"""
 
-def shot(src, alt, cap, num):
+def shot(src, alt):
     return """      <figure>
         <div class="shot"><img src="%s" alt="%s" loading="lazy" width="1600" height="760"></div>
-        <figcaption class="fig-cap"><b>%s</b>%s</figcaption>
       </figure>
-""" % (src, alt, num, cap)
+""" % (src, alt)
 
 def slot(sid, num, cap):
     return """      <figure>
@@ -274,7 +264,6 @@ def slot(sid, num, cap):
           <span class="fig-slot">%s</span>
           <span class="fig-dims">1600 x 760px</span>
         </div>
-        <figcaption class="fig-cap"><b>%s</b>%s</figcaption>
       </figure>
 """ % (sid, cap, cap, sid, num, cap)
 
@@ -305,22 +294,21 @@ hero = """<section class="hero">
 
 capabilities = """<section>
   <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="pill pill--tan">What I do</span>
-      <h2 class="sec-title">Three things I own <span class="mark">end to end</span></h2>
+    <div class="sec-head">
+      <h2 class="sec-title">Three things I own end to end</h2>
     </div>
     <div class="grid grid--3">
-      <article class="card card--blue reveal">
+      <article class="card card--blue">
         """ + icon("shield") + """
         <h3>Credit policy</h3>
         <p>I drafted the CIBIL based credit policy that decides who qualifies and at what limit. It exists to move one number, the collection rate, by declining the wrong loans early rather than chasing them later.</p>
       </article>
-      <article class="card card--pink reveal">
+      <article class="card card--pink">
         """ + icon("layers") + """
         <h3>Systems of record</h3>
         <p>When five teams hold five versions of the truth, the product is not a calculator. It is an audit trail. I build the system that makes disagreements visible instead of silent.</p>
       </article>
-      <article class="card card--tan reveal">
+      <article class="card card--tan">
         """ + icon("growth") + """
         <h3>The product itself</h3>
         <p>I own the Employee Financing product and have reworked its user flows again and again over twenty months, each round against real feedback from the employees using it. When footfall needed lifting, I introduced coupons and a waiver on the processing fee, and rebuilt the journey around what actually got people through it.</p>
@@ -331,26 +319,26 @@ capabilities = """<section>
 
 about_preview = """<section class="tight">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="sec-title">About <span class="mark">Veronica</span></h2>
+    <div class="sec-head">
+      <h2 class="sec-title">About Veronica</h2>
       <p class="sec-intro">Aspiring Product Manager at FinZ, the fintech vertical at PhysicsWallah. Responsible for two products: ESOP Financing and Employee Financing.</p>
     </div>
-    <div class="grid grid--3 reveal">
+    <div class="grid grid--3">
 """ + FACTS + """
     </div>
     <p style="text-align:center;margin-top:clamp(2rem,4vw,2.75rem)">
-      <a class="btn btn--lav" href="about.html">More about me &rarr;</a>
+      <a class="btn btn--lav" href="about.html">More about me</a>
     </p>
   </div>
 </section>"""
 
 work_preview = """<section>
   <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="sec-title">Featured <span class="mark">Work</span></h2>
+    <div class="sec-head">
+      <h2 class="sec-title">Featured Work</h2>
       <p class="sec-intro">Two internal systems built for a book that moves real money.</p>
     </div>
-    <ul class="case-list reveal">
+    <ul class="case-list">
 """ + case_cards() + CASE3 + """    </ul>
   </div>
 </section>"""
@@ -360,8 +348,7 @@ page("index.html",
      "Twenty months building a lending product from scratch at FinZ, the fintech vertical at PhysicsWallah. Now disbursing Rs 3 Cr+ a month to PhysicsWallah employees.",
      "index.html",
      hero + "\n" + stats() + "\n" + capabilities + "\n"
-     + band("Who am I?") + "\n" + about_preview + "\n"
-     + band("My work", "band--blue") + "\n" + work_preview + "\n" + CONTACT)
+     + about_preview + "\n" + work_preview + "\n" + CONTACT)
 
 
 # ============================================================
@@ -369,14 +356,13 @@ page("index.html",
 # ============================================================
 about = """<section>
   <div class="wrap">
-    <a class="back-link" href="index.html">&larr; Back to home</a>
+    <a class="back-link" href="index.html">Back to home</a>
     <div class="page-head">
-      <span class="kicker">Get to know me</span>
       <h1>About Veronica</h1>
       <p class="lede">Aspiring Product Manager at FinZ, the fintech vertical at PhysicsWallah. Responsible for two products: ESOP Financing and Employee Financing. Based in Delhi NCR.</p>
     </div>
 
-    <div class="prose reveal">
+    <div class="prose">
       <h3>Who I am</h3>
       <p>I did not arrive at product through a product title. I arrived by owning a lending book: its eligibility rules, its pricing, its repayment mechanics and its collections. Then I built the systems that keep it honest.</p>
 
@@ -395,25 +381,23 @@ about = """<section>
   </div>
 </section>
 
-""" + band("How I work", "band--blue") + """
 
 <section class="tight">
   <div class="wrap">
     <ol class="principles">
-      <li class="reveal"><div class="p-text"><span class="p-lead">Irreversibility drives the design.</span> Releasing collateral and paying money out cannot be undone, so those paths get the strictest gates and fail safe defaults.</div></li>
-      <li class="reveal"><div class="p-text"><span class="p-lead">Evidence over declaration.</span> Prefer &ldquo;the cash arrived&rdquo; over &ldquo;someone ticked Closed&rdquo;.</div></li>
-      <li class="reveal"><div class="p-text"><span class="p-lead">Business exceptions belong to the business.</span> Encoded as data the operations team owns, not as rules buried in code they cannot see.</div></li>
-      <li class="reveal"><div class="p-text"><span class="p-lead">Silence is the enemy.</span> Fail soft, but never fail quietly. A financial tool that degrades without saying so is worse than one that stops.</div></li>
-      <li class="reveal"><div class="p-text"><span class="p-lead">Signal over completeness.</span> A report nobody trusts because it flags &#8377;3 discrepancies is worse than no report at all. Choosing what not to show is a product decision.</div></li>
+      <li><div class="p-text"><span class="p-lead">Irreversibility drives the design.</span> Releasing collateral and paying money out cannot be undone, so those paths get the strictest gates and fail safe defaults.</div></li>
+      <li><div class="p-text"><span class="p-lead">Evidence over declaration.</span> Prefer &ldquo;the cash arrived&rdquo; over &ldquo;someone ticked Closed&rdquo;.</div></li>
+      <li><div class="p-text"><span class="p-lead">Business exceptions belong to the business.</span> Encoded as data the operations team owns, not as rules buried in code they cannot see.</div></li>
+      <li><div class="p-text"><span class="p-lead">Silence is the enemy.</span> Fail soft, but never fail quietly. A financial tool that degrades without saying so is worse than one that stops.</div></li>
+      <li><div class="p-text"><span class="p-lead">Signal over completeness.</span> A report nobody trusts because it flags &#8377;3 discrepancies is worse than no report at all. Choosing what not to show is a product decision.</div></li>
     </ol>
   </div>
 </section>
 
-""" + band("Background") + """
 
 <section class="tight">
   <div class="wrap">
-    <div class="grid grid--3 reveal">
+    <div class="grid grid--3">
 """ + FACTS + """
     </div>
   </div>
@@ -430,13 +414,12 @@ page("about.html", "About | Veronica Singh",
 # ============================================================
 work = """<section>
   <div class="wrap">
-    <a class="back-link" href="index.html">&larr; Back to home</a>
+    <a class="back-link" href="index.html">Back to home</a>
     <div class="page-head page-head--pink">
-      <span class="kicker">My work</span>
       <h1>Case Studies</h1>
       <p class="lede">Two internal systems built for the employee financing book at FinZ. Every figure here is one I can walk through in an interview.</p>
     </div>
-    <ul class="case-list reveal">
+    <ul class="case-list">
 """ + case_cards() + CASE3 + """    </ul>
   </div>
 </section>
@@ -450,51 +433,49 @@ page("projects.html", "Work | Veronica Singh",
 # ============================================================
 # CASE 01
 # ============================================================
-def step(src, alt, cap, num, heading, story):
-    return """    <article class="case-step reveal">
+def step(src, alt, heading, story):
+    return """    <article class="case-step">
       <figure>
         <div class="shot"><img src="%s" alt="%s" loading="lazy"></div>
-        <figcaption class="fig-cap"><b>%s</b>%s</figcaption>
       </figure>
       <div class="step-body">
         <h3>%s</h3>
         %s
       </div>
     </article>
-""" % (src, alt, num, cap, heading, story)
+""" % (src, alt, heading, story)
 
 
 c1 = ("""<section>
   <div class="wrap">
-    <a class="back-link" href="projects.html">&larr; All work</a>
+    <a class="back-link" href="projects.html">All work</a>
     <div class="page-head">
       <span class="kicker">Case 01</span>
       <h1>ESOP Loan Repository</h1>
-      <p class="meta">FinZ and PhysicsWallah &middot; Live in production &middot; Built solo</p>
-      <p class="lede">PhysicsWallah grants ESOP. Exercising it triggers a tax bill immediately, long before the shares are worth anything spendable, so FinZ lends against the pledged shares. Around 300 loans, and the entire lifecycle ran on eleven spreadsheets owned by five different teams.</p>
+      <p class="meta">Live in production at FinZ and PhysicsWallah. Built solo.</p>
+    </div>
+
+    <div class="case-intro">
+      <p><strong>The problem.</strong> PhysicsWallah grants ESOP. Exercising it triggers a tax bill immediately, long before the shares are worth anything spendable, so FinZ lends against the pledged shares. Around 300 loans, and the entire lifecycle ran on eleven spreadsheets owned by five different teams.</p>
+      <p><strong>Who it is for.</strong> The FinZ operations team, who answer questions about individual loans daily, and the compliance officer, who has to approve every release for a Designated Person before it happens.</p>
+      <p><strong>The reframe.</strong> The obvious brief was a better calculator. The money maths is deterministic and easy. The real problem was five teams holding five versions of the truth with no way to prove which was right, which makes this a system of record, not a calculator.</p>
     </div>
 
     <div class="case-steps">
 """ + step("img/esop-repository.png",
       "The ESOP Loan Repository dashboard showing loan counts, the working tabs and the repayment schedule",
-      "The repository. Loan-level figures are blurred; the working surfaces run across the tab bar.",
-      "Fig. 01",
       "Eleven spreadsheets became one system of record",
       """<p>Interest accrual, share sales, repayment, surplus refunds and share release each lived in a different file owned by a different team. Nobody could answer what a borrower owed today without opening several of them and reconciling by hand.</p>
         <p>This screen computes every repayment schedule from a single canonical formula, joined across eleven live sources. The tab bar is the point: one working surface for each real job, rather than one spreadsheet per team. Bank reconciliation parses to &#8377;64,05,97,403 and matches the bank&rsquo;s own summary.</p>""")
 
 + step("img/esop-unpledge.png",
       "Shares to Unpledge tab showing the count of loans cleared for release and the total shares to be unpledged",
-      "Shares to Unpledge: the release queue, keyed on cash recovery rather than a status field.",
-      "Fig. 02",
       "Collateral is released on evidence, never on a status flag",
       """<p>Releasing pledged shares cannot be undone. In the original process a loan qualified for release if a spreadsheet field said Closed, which meant a human editable cell was authorising an irreversible transfer of collateral.</p>
         <p>I removed that path. This queue keys only on evidence that cash was actually recovered, so a loan appears here because the money arrived, not because somebody ticked a box. The tradeoff I accepted: a loan genuinely repaid through an unrecorded channel waits until the payment is logged. Failing to release on time is a support ticket. Releasing collateral wrongly is not.</p>""")
 
 + step("img/esop-refunds.png",
       "Refunds tab showing loans with refunds pending, total refund amount, refund paid and refund outstanding",
-      "Refunds: what is owed back, what has been paid, and what is still outstanding.",
-      "Fig. 03",
       "Surplus owed back, tracked to the rupee",
       """<p>When the proceeds of a share sale exceed what a borrower owes, the surplus has to go back to them. Who was owed a refund, how much, and whether it had actually been paid was spread across the same eleven files, which is exactly the kind of thing that goes unnoticed until someone asks.</p>
         <p>This view holds all of it in one place: refunds pending, the total owed, what has been paid and what is still outstanding. The reconciliation behind it is what surfaces the case nobody wants to find, a refund paid where none was owed.</p>""") + """    </div>
@@ -521,7 +502,7 @@ c1 = ("""<section>
 
     <nav class="pager" aria-label="More work">
       <span></span>
-      <a class="next" href="project-financing-os.html"><span class="pager-dir">Next case &rarr;</span><span class="pager-title">Employee Financing Process OS</span></a>
+      <a class="next" href="project-financing-os.html"><span class="pager-dir">Next case</span><span class="pager-title">Employee Financing Process OS</span></a>
     </nav>
   </div>
 </section>
@@ -537,12 +518,12 @@ page("project-esop-repository.html", "ESOP Loan Repository | Veronica Singh",
 # ============================================================
 c2 = """<section>
   <div class="wrap">
-    <a class="back-link" href="projects.html">&larr; All work</a>
+    <a class="back-link" href="projects.html">All work</a>
     <div class="page-head page-head--pink">
       <span class="kicker">Case 02</span>
       <h1>Employee Financing Process OS</h1>
-      <p class="meta">FinZ and PhysicsWallah &middot; Three and a half weeks &middot; PRD to working system</p>
-      <p class="lede"><span class="status">In build, not yet launched</span><br>A monthly cycle that ran on spreadsheets and email threads, rebuilt as one system.</p>
+      <p class="meta">FinZ and PhysicsWallah. Three and a half weeks from PRD to working system.</p>
+      <span class="status">In build, not yet launched</span>
     </div>
 
     <article class="prose">
@@ -593,17 +574,14 @@ c2 = """<section>
     <div class="figs">
 """ + shot("img/ef-os-overview.png",
            "Business Overview screen showing loan count, loan volume and a breakdown by product",
-           "Business Overview: the book at a glance, filtered by product, lender and status.",
-           "Fig. 01") + shot("img/ef-os-imports.png",
+) + shot("img/ef-os-imports.png",
            "Imports screen listing each lender's LMS export with row counts and version history",
-           "Imports: each export is staged, checked and versioned. Uploader and filenames are blurred.",
-           "Fig. 02") + shot("img/ef-os-login.png",
+) + shot("img/ef-os-login.png",
            "Sign in screen for the Employee Financing Portal, access limited to company domains",
-           "Access is restricted to company domains, with seven roles mapped to real people.",
-           "Fig. 03") + """    </div>
+) + """    </div>
 
     <nav class="pager" aria-label="More work">
-      <a class="prev" href="project-esop-repository.html"><span class="pager-dir">&larr; Previous case</span><span class="pager-title">ESOP Loan Repository</span></a>
+      <a class="prev" href="project-esop-repository.html"><span class="pager-dir">Previous case</span><span class="pager-title">ESOP Loan Repository</span></a>
       <span></span>
     </nav>
   </div>
@@ -620,9 +598,8 @@ page("project-financing-os.html", "Employee Financing Process OS | Veronica Sing
 # ============================================================
 contact = """<section class="tight">
   <div class="wrap">
-    <a class="back-link" href="index.html">&larr; Back to home</a>
+    <a class="back-link" href="index.html">Back to home</a>
     <div class="page-head page-head--lav">
-      <span class="kicker">Let&rsquo;s connect</span>
       <h1>Get in Touch</h1>
       <p class="lede">Open to conversations about product roles in fintech, AI-native product work and internal platform teams. The fastest way to reach me is LinkedIn or email.</p>
     </div>

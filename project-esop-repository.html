@@ -27,7 +27,6 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-nav">
   <div class="nav-inner">
-    <a class="wordmark" href="index.html">Veronica Singh</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
     <nav aria-label="Primary">
       <ul class="nav-links" id="nav-links">
@@ -42,19 +41,23 @@
 <main id="main">
 <section>
   <div class="wrap">
-    <a class="back-link" href="projects.html">&larr; All work</a>
+    <a class="back-link" href="projects.html">All work</a>
     <div class="page-head">
       <span class="kicker">Case 01</span>
       <h1>ESOP Loan Repository</h1>
-      <p class="meta">FinZ and PhysicsWallah &middot; Live in production &middot; Built solo</p>
-      <p class="lede">PhysicsWallah grants ESOP. Exercising it triggers a tax bill immediately, long before the shares are worth anything spendable, so FinZ lends against the pledged shares. Around 300 loans, and the entire lifecycle ran on eleven spreadsheets owned by five different teams.</p>
+      <p class="meta">Live in production at FinZ and PhysicsWallah. Built solo.</p>
+    </div>
+
+    <div class="case-intro">
+      <p><strong>The problem.</strong> PhysicsWallah grants ESOP. Exercising it triggers a tax bill immediately, long before the shares are worth anything spendable, so FinZ lends against the pledged shares. Around 300 loans, and the entire lifecycle ran on eleven spreadsheets owned by five different teams.</p>
+      <p><strong>Who it is for.</strong> The FinZ operations team, who answer questions about individual loans daily, and the compliance officer, who has to approve every release for a Designated Person before it happens.</p>
+      <p><strong>The reframe.</strong> The obvious brief was a better calculator. The money maths is deterministic and easy. The real problem was five teams holding five versions of the truth with no way to prove which was right, which makes this a system of record, not a calculator.</p>
     </div>
 
     <div class="case-steps">
-    <article class="case-step reveal">
+    <article class="case-step">
       <figure>
         <div class="shot"><img src="img/esop-repository.png" alt="The ESOP Loan Repository dashboard showing loan counts, the working tabs and the repayment schedule" loading="lazy"></div>
-        <figcaption class="fig-cap"><b>Fig. 01</b>The repository. Loan-level figures are blurred; the working surfaces run across the tab bar.</figcaption>
       </figure>
       <div class="step-body">
         <h3>Eleven spreadsheets became one system of record</h3>
@@ -62,10 +65,9 @@
         <p>This screen computes every repayment schedule from a single canonical formula, joined across eleven live sources. The tab bar is the point: one working surface for each real job, rather than one spreadsheet per team. Bank reconciliation parses to &#8377;64,05,97,403 and matches the bank&rsquo;s own summary.</p>
       </div>
     </article>
-    <article class="case-step reveal">
+    <article class="case-step">
       <figure>
         <div class="shot"><img src="img/esop-unpledge.png" alt="Shares to Unpledge tab showing the count of loans cleared for release and the total shares to be unpledged" loading="lazy"></div>
-        <figcaption class="fig-cap"><b>Fig. 02</b>Shares to Unpledge: the release queue, keyed on cash recovery rather than a status field.</figcaption>
       </figure>
       <div class="step-body">
         <h3>Collateral is released on evidence, never on a status flag</h3>
@@ -73,10 +75,9 @@
         <p>I removed that path. This queue keys only on evidence that cash was actually recovered, so a loan appears here because the money arrived, not because somebody ticked a box. The tradeoff I accepted: a loan genuinely repaid through an unrecorded channel waits until the payment is logged. Failing to release on time is a support ticket. Releasing collateral wrongly is not.</p>
       </div>
     </article>
-    <article class="case-step reveal">
+    <article class="case-step">
       <figure>
         <div class="shot"><img src="img/esop-refunds.png" alt="Refunds tab showing loans with refunds pending, total refund amount, refund paid and refund outstanding" loading="lazy"></div>
-        <figcaption class="fig-cap"><b>Fig. 03</b>Refunds: what is owed back, what has been paid, and what is still outstanding.</figcaption>
       </figure>
       <div class="step-body">
         <h3>Surplus owed back, tracked to the rupee</h3>
@@ -108,15 +109,14 @@
 
     <nav class="pager" aria-label="More work">
       <span></span>
-      <a class="next" href="project-financing-os.html"><span class="pager-dir">Next case &rarr;</span><span class="pager-title">Employee Financing Process OS</span></a>
+      <a class="next" href="project-financing-os.html"><span class="pager-dir">Next case</span><span class="pager-title">Employee Financing Process OS</span></a>
     </nav>
   </div>
 </section>
 <section class="contact" id="contact">
   <div class="wrap">
     <div class="sec-head">
-      <span class="pill pill--lav">Let&rsquo;s connect</span>
-      <h2 class="sec-title">Get in <span class="mark">Touch</span></h2>
+      <h2 class="sec-title">Get in Touch</h2>
       <p class="sec-intro">Open to conversations about product roles in fintech, AI-native product work and internal platform teams.</p>
     </div>
     <ul class="contact-actions">
@@ -149,7 +149,7 @@
   <div class="wrap">
     <div class="footer-inner">
       <p class="colophon">&copy; 2026 Veronica Singh. Aspiring Product Manager, Delhi NCR.</p>
-      <a class="to-top" href="#main">Back to top &uarr;</a>
+      <a class="to-top" href="#main">Back to top</a>
     </div>
   </div>
 </footer>

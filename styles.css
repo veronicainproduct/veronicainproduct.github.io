@@ -94,12 +94,7 @@ section{padding-block:var(--sec-gap);position:relative}
 .nav-inner{
   max-width:var(--max);margin-inline:auto;
   padding:.85rem var(--gutter);
-  display:flex;align-items:center;justify-content:space-between;gap:1rem;
-}
-.wordmark{
-  font-weight:700;font-size:var(--t-micro);
-  letter-spacing:.18em;text-transform:uppercase;
-  text-decoration:none;white-space:nowrap;flex:0 0 auto;
+  display:flex;align-items:center;justify-content:flex-end;gap:1rem;
 }
 .nav-links{display:flex;align-items:center;gap:clamp(1rem,2.4vw,2.25rem);list-style:none;margin:0;padding:0}
 .nav-link{
@@ -199,43 +194,11 @@ section{padding-block:var(--sec-gap);position:relative}
 .photo-frame img{width:100%;filter:grayscale(1) contrast(1.05)}
 
 /* ============================================================
-   BAND DIVIDER WITH CENTRED LABEL
-   ============================================================ */
-.band-wrap{overflow:hidden;margin-block:clamp(2.5rem,5vw,4rem)}
-.band{
-  position:relative;
-  background:var(--pink);
-  border-block:var(--border);
-  height:clamp(52px,7vw,78px);
-  transform:rotate(-.9deg) scale(1.04);
-}
-.band--blue{background:var(--blue);transform:rotate(.9deg) scale(1.04)}
-.band--lav{background:var(--lavender)}
-.band-label{
-  position:absolute;left:50%;top:50%;
-  transform:translate(-50%,-50%) rotate(.9deg);
-  background:var(--blue);
-  border:var(--border);box-shadow:var(--shadow);
-  padding:.4rem .9rem;
-  font-size:var(--t-micro);font-weight:700;
-  letter-spacing:.12em;text-transform:uppercase;
-  white-space:nowrap;
-}
-.band--blue .band-label{background:var(--bone);transform:translate(-50%,-50%) rotate(-.9deg)}
-
-/* ============================================================
    SECTION HEADINGS
    ============================================================ */
 .sec-head{text-align:center;margin-bottom:clamp(2rem,4vw,3rem)}
 .sec-head--left{text-align:left}
 .sec-title{font-size:var(--t-h2);margin-top:1rem}
-.sec-title .mark{
-  background-image:linear-gradient(var(--pink),var(--pink));
-  background-repeat:no-repeat;
-  background-size:100% .22em;
-  background-position:0 92%;
-  padding-inline:.06em;
-}
 .sec-intro{color:var(--muted);max-width:44ch;margin:1rem auto 0}
 .sec-head--left .sec-intro{margin-inline:0}
 
@@ -280,23 +243,19 @@ section{padding-block:var(--sec-gap);position:relative}
 .case-card:hover,.case-card:focus-visible{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
 @media (prefers-reduced-motion:reduce){.case-card{transition:none}}
 .case-head{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1rem 1.1rem;border-bottom:var(--border);
+  display:flex;align-items:center;
+  padding:.9rem 1.1rem;border-bottom:var(--border);
 }
 .case-head .icon-box{margin:0;width:44px;height:44px}
 .case-head .icon-box svg{width:20px;height:20px}
 .case--1 .case-head{background:var(--blue)}
 .case--2 .case-head{background:var(--pink)}
 .case--3 .case-head{background:var(--tan)}
-.arrow-box{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:40px;height:40px;background:var(--card);border:var(--border);font-weight:700;
-}
 .case-body{padding:clamp(1.15rem,2.4vw,1.6rem);display:flex;flex-direction:column;flex:1}
 .case-body h3{font-size:var(--t-h3);text-transform:uppercase;letter-spacing:.02em;margin-bottom:.75rem}
 .case-body p{font-size:var(--t-small);color:var(--muted)}
 .status{
-  display:inline-block;background:var(--tan);
+  display:inline-block;align-self:flex-start;width:fit-content;background:var(--tan);
   border:var(--border-thin);
   padding:.15rem .5rem;margin-bottom:.85rem;
   font-size:var(--t-micro);font-weight:700;
@@ -329,22 +288,26 @@ section{padding-block:var(--sec-gap);position:relative}
 .page-head{
   border:var(--border);box-shadow:var(--shadow-lg);
   background:var(--blue);
-  padding:clamp(1.5rem,3.5vw,2.5rem);
-  margin-bottom:clamp(2rem,4vw,3rem);
+  padding:clamp(1.1rem,2.2vw,1.6rem) clamp(1.1rem,2.4vw,1.75rem);
+  margin-bottom:clamp(1.75rem,3vw,2.25rem);
 }
 .page-head--pink{background:var(--pink)}
 .page-head--tan{background:var(--tan)}
 .page-head--lav{background:var(--lavender)}
 .page-head .kicker{font-size:var(--t-micro);font-weight:700;letter-spacing:.16em;text-transform:uppercase;display:block;margin-bottom:.6rem}
-.page-head h1{font-size:var(--t-h1);text-transform:uppercase;letter-spacing:.02em;margin-bottom:.85rem}
+.page-head h1{font-size:var(--t-h2);text-transform:uppercase;letter-spacing:.02em;margin-bottom:.85rem}
 .page-head .meta{font-family:var(--mono);font-size:var(--t-small)}
-.page-head .lede{font-size:var(--t-lead);margin-top:.9rem;max-width:44ch}
+.page-head .lede{font-size:var(--t-lead);margin-top:.75rem;max-width:46ch}
 .back-link{
   display:inline-block;font-weight:700;font-size:var(--t-micro);
   letter-spacing:.12em;text-transform:uppercase;
   text-decoration:none;margin-bottom:1.25rem;
-  border-bottom:3px solid var(--ink);
+  border-bottom:2px solid var(--ink);
 }
+.back-link::before{content:"";display:inline-block;vertical-align:.18em;
+  width:.9em;height:2px;background:currentColor;margin-right:.55em}
+/* status sits on its own line in a case-study head */
+.page-head .status{margin:.85rem 0 0}
 
 /* ============================================================
    PROSE
@@ -413,14 +376,16 @@ figure{margin:0}
 }
 .fig-slot{font-family:var(--mono);font-weight:700;font-size:var(--t-small);letter-spacing:.1em;text-transform:uppercase}
 .fig-dims{font-family:var(--mono);font-size:var(--t-micro);color:var(--muted)}
-.fig-cap{display:block;margin-top:.85rem;font-family:var(--mono);font-size:var(--t-micro);line-height:1.6;color:var(--muted)}
-.fig-cap b{color:var(--ink);margin-right:.4rem}
 
 /* ============================================================
    CASE STEPS: a screenshot followed by what it solved
    ============================================================ */
-.case-steps{display:grid;gap:clamp(3rem,6vw,5rem);margin-bottom:clamp(3rem,6vw,5rem)}
-.case-step .step-body{max-width:var(--measure-wide);margin-top:clamp(1.25rem,2.5vw,1.75rem)}
+.case-intro{max-width:var(--measure-wide);margin-bottom:clamp(2.5rem,5vw,3.5rem)}
+.case-intro p{margin-bottom:.9em}
+.case-intro p:last-child{margin-bottom:0}
+.case-steps{display:grid;gap:clamp(2.75rem,5vw,4rem);margin-bottom:clamp(2.75rem,5vw,4rem)}
+.case-step figure{max-width:54rem}
+.case-step .step-body{max-width:var(--measure-wide);margin-top:clamp(1rem,2vw,1.4rem)}
 .case-step .step-body h3{
   font-size:var(--t-h3);text-transform:uppercase;letter-spacing:.03em;margin:0 0 .8rem;
 }
@@ -541,13 +506,6 @@ figure{margin:0}
 }
 
 /* ============================================================
-   MOTION
-   ============================================================ */
-.js .reveal{opacity:0;transform:translateY(16px)}
-.js .reveal.is-in{opacity:1;transform:none;transition:opacity .5s ease-out,transform .5s ease-out}
-@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}}
-
-/* ============================================================
    BREAKPOINTS
    ============================================================ */
 @media (min-width:40em){
@@ -558,7 +516,7 @@ figure{margin:0}
   .stat-list{grid-template-columns:repeat(4,1fr)}
   .contact-actions{grid-template-columns:repeat(3,1fr)}
   .pager{grid-template-columns:1fr 1fr}
-  .footer-inner{grid-template-columns:1fr auto;justify-items:start;align-items:center;text-align:left}
+  .footer-inner{grid-template-columns:1fr auto;align-items:center;text-align:left}
   .footer-inner .to-top{justify-self:end}
   .colophon{text-align:center}
 }
