@@ -48,7 +48,7 @@ def nav(current):
         items += '        <li><a class="nav-link" href="%s"%s>%s</a></li>\n' % (href, cur, label)
     return """<header class="site-nav">
   <div class="nav-inner">
-    <a class="monogram" href="index.html" aria-label="Veronica Singh, home">VS</a>
+    <a class="wordmark" href="index.html">Veronica Singh</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
     <nav aria-label="Primary">
       <ul class="nav-links" id="nav-links">
@@ -60,7 +60,6 @@ def nav(current):
 FOOTER = """<footer class="site-footer">
   <div class="wrap">
     <div class="footer-inner">
-      <a class="monogram" href="index.html" aria-label="Veronica Singh, home">VS</a>
       <p class="colophon">&copy; 2026 Veronica Singh. Aspiring Product Manager, Delhi NCR.</p>
       <a class="to-top" href="#main">Back to top &uarr;</a>
     </div>
@@ -288,8 +287,6 @@ hero = """<section class="hero">
     <div>
       <ul class="hero-pills" aria-label="Focus areas">
         <li class="pill">Fintech</li>
-        <li class="pill pill--lav">0&rarr;1 Product</li>
-        <li class="pill pill--pink">Credit policy</li>
         <li class="pill pill--tan">Product strategy</li>
       </ul>
       <h1 class="name">Veronica Singh</h1>
@@ -453,31 +450,57 @@ page("projects.html", "Work | Veronica Singh",
 # ============================================================
 # CASE 01
 # ============================================================
-c1 = """<section>
+def step(src, alt, cap, num, heading, story):
+    return """    <article class="case-step reveal">
+      <figure>
+        <div class="shot"><img src="%s" alt="%s" loading="lazy"></div>
+        <figcaption class="fig-cap"><b>%s</b>%s</figcaption>
+      </figure>
+      <div class="step-body">
+        <h3>%s</h3>
+        %s
+      </div>
+    </article>
+""" % (src, alt, num, cap, heading, story)
+
+
+c1 = ("""<section>
   <div class="wrap">
     <a class="back-link" href="projects.html">&larr; All work</a>
     <div class="page-head">
       <span class="kicker">Case 01</span>
       <h1>ESOP Loan Repository</h1>
       <p class="meta">FinZ and PhysicsWallah &middot; Live in production &middot; Built solo</p>
-      <p class="lede">Eleven spreadsheets owned by five teams, replaced with one system of record.</p>
+      <p class="lede">PhysicsWallah grants ESOP. Exercising it triggers a tax bill immediately, long before the shares are worth anything spendable, so FinZ lends against the pledged shares. Around 300 loans, and the entire lifecycle ran on eleven spreadsheets owned by five different teams.</p>
     </div>
 
+    <div class="case-steps">
+""" + step("img/esop-repository.png",
+      "The ESOP Loan Repository dashboard showing loan counts, the working tabs and the repayment schedule",
+      "The repository. Loan-level figures are blurred; the working surfaces run across the tab bar.",
+      "Fig. 01",
+      "Eleven spreadsheets became one system of record",
+      """<p>Interest accrual, share sales, repayment, surplus refunds and share release each lived in a different file owned by a different team. Nobody could answer what a borrower owed today without opening several of them and reconciling by hand.</p>
+        <p>This screen computes every repayment schedule from a single canonical formula, joined across eleven live sources. The tab bar is the point: one working surface for each real job, rather than one spreadsheet per team. Bank reconciliation parses to &#8377;64,05,97,403 and matches the bank&rsquo;s own summary.</p>""")
+
++ step("img/esop-unpledge.png",
+      "Shares to Unpledge tab showing the count of loans cleared for release and the total shares to be unpledged",
+      "Shares to Unpledge: the release queue, keyed on cash recovery rather than a status field.",
+      "Fig. 02",
+      "Collateral is released on evidence, never on a status flag",
+      """<p>Releasing pledged shares cannot be undone. In the original process a loan qualified for release if a spreadsheet field said Closed, which meant a human editable cell was authorising an irreversible transfer of collateral.</p>
+        <p>I removed that path. This queue keys only on evidence that cash was actually recovered, so a loan appears here because the money arrived, not because somebody ticked a box. The tradeoff I accepted: a loan genuinely repaid through an unrecorded channel waits until the payment is logged. Failing to release on time is a support ticket. Releasing collateral wrongly is not.</p>""")
+
++ step("img/esop-refunds.png",
+      "Refunds tab showing loans with refunds pending, total refund amount, refund paid and refund outstanding",
+      "Refunds: what is owed back, what has been paid, and what is still outstanding.",
+      "Fig. 03",
+      "Surplus owed back, tracked to the rupee",
+      """<p>When the proceeds of a share sale exceed what a borrower owes, the surplus has to go back to them. Who was owed a refund, how much, and whether it had actually been paid was spread across the same eleven files, which is exactly the kind of thing that goes unnoticed until someone asks.</p>
+        <p>This view holds all of it in one place: refunds pending, the total owed, what has been paid and what is still outstanding. The reconciliation behind it is what surfaces the case nobody wants to find, a refund paid where none was owed.</p>""") + """    </div>
+
     <article class="prose">
-      <h3>The business</h3>
-      <p>PhysicsWallah grants ESOP to its employees. To exercise those options an employee owes tax immediately, long before the shares turn into any cash. FinZ lends against the pledged shares so they can pay that bill.</p>
-      <p>It is a small book with a complicated life. Around 300 loans, most of them now closed and the rest still running. Each one accrues interest, may have shares sold against it, gets repaid in parts, sometimes generates a refund, and finally has its pledged shares released. Some borrowers are Designated Persons under insider trading rules, so their releases need explicit approval before anything moves.</p>
-
-      <h3>The operational overhead</h3>
-      <p>All of that ran on eleven spreadsheets owned by five different teams. Nobody could answer a simple question quickly:</p>
-      <ol class="steps">
-        <li>What does this borrower actually owe today?</li>
-        <li>Has this loan really been repaid, or does it only say Closed?</li>
-        <li>Which pledged shares are safe to release right now?</li>
-      </ol>
-      <p>Answering any of them meant opening several files, reconciling them by hand, and trusting that whoever edited them last had done the same. Five teams held five versions of the truth and there was no way to prove which one was right.</p>
-
-      <h3>How AI was used</h3>
+      <h3>How it was built</h3>
       <p>I did not have an engineering team. I had a specification and a clear idea of what correct looked like, so I directed AI as the engineering layer and reviewed every step it took. That produced 108 production deployments over four months, built alongside my regular work.</p>
       <p>The part worth knowing is where the difficulty actually sat. Almost none of it was in the money maths, which is deterministic and easy. It was in reading the source data correctly.</p>
       <ol class="steps">
@@ -487,20 +510,8 @@ c1 = """<section>
       </ol>
       <p>None of those crash. They produce a confident wrong answer, which is far more dangerous in a system people trust with money. Directing AI is what made the building fast. Knowing what to check is what made it correct.</p>
 
-      <h3>Two decisions</h3>
-      <ol class="decisions">
-        <li>
-          <span class="dec-lead">Release shares on evidence of cash, never on a status flag.</span>
-          <p>Releasing pledged shares cannot be undone. In the original process a loan qualified for release if a spreadsheet field said Closed, which meant a human editable cell was authorising an irreversible transfer of collateral. I removed that path. Release now depends only on evidence that cash was actually recovered. The tradeoff I accepted is that a loan genuinely repaid through an unrecorded channel waits until the payment is logged. Failing to release on time is recoverable. Releasing collateral wrongly is not.</p>
-        </li>
-        <li>
-          <span class="dec-lead">Gate compliance on the person, not the loan.</span>
-          <p>Designated Persons may only have shares released with explicit approval. The original gate matched on Loan ID, but a Designated Person is a person, not a loan, so their other loans passed through as though unregulated. I re-gated on identity, matching by BO ID and Employee Code, and added two fail safes. If the compliance list cannot be read, block every release rather than silently letting them through. If a loan carries no identifier to check, hold it.</p>
-        </li>
-      </ol>
-
-      <h3>What it does now</h3>
-      <p>One system of record joining eleven live sources, with a working surface for each real task: the repayment schedule, refunds, shares cleared to unpledge, funds reconciliation, corrections, total payable, and the Designated Persons queue. Bank reconciliation parses to &#8377;64,05,97,403 and matches the bank&rsquo;s own summary.</p>
+      <h3>Compliance gates on the person, not the loan</h3>
+      <p>Designated Persons under insider trading rules may only have shares released with explicit approval. The original gate matched on Loan ID, but a Designated Person is a person, not a loan, so their other loans passed through as though unregulated. I re-gated on identity, matching by BO ID and Employee Code, and added two fail safes. If the compliance list cannot be read, block every release rather than silently letting them through. If a loan carries no identifier to check, hold it.</p>
 
       <div class="limits">
         <h3>Honest limitations</h3>
@@ -508,22 +519,13 @@ c1 = """<section>
       </div>
     </article>
 
-    <div class="figs">
-""" + shot("img/esop-repository.png",
-           "The ESOP Loan Repository dashboard showing loan counts, the working tabs and the repayment schedule table",
-           "The live repository. Loan-level figures are blurred here; the working surfaces run across the tab bar.",
-           "Fig. 01") + slot("esop-unpledge", "Fig. 02",
-           "Shares to unpledge: the queue keyed on evidence of cash recovery") + slot(
-           "esop-dp-actions", "Fig. 03",
-           "Designated Persons queue: releases held for explicit approval") + """    </div>
-
     <nav class="pager" aria-label="More work">
       <span></span>
       <a class="next" href="project-financing-os.html"><span class="pager-dir">Next case &rarr;</span><span class="pager-title">Employee Financing Process OS</span></a>
     </nav>
   </div>
 </section>
-""" + CONTACT
+""" + CONTACT)
 
 page("project-esop-repository.html", "ESOP Loan Repository | Veronica Singh",
      "Eleven spreadsheets owned by five teams replaced with one system of record for the PhysicsWallah ESOP loan book, built by directing AI as the engineering layer.",
