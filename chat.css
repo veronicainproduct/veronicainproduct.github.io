@@ -1,14 +1,16 @@
 /* ============================================================
    Veronica Singh | conversational portfolio
    Loaded AFTER styles.css, which supplies the palette, the type
-   scale and the focus ring. This file only does the chat shell.
+   scale and the focus ring. This file only does the chat screen.
+
+   Space Mono does one job here: the label under a figure.
+   Everything else is Space Grotesk. Small uppercase mono on
+   every label is a look, not a system, and it stops carrying
+   meaning once it is on all of them.
    ============================================================ */
 
 html,body{height:100%}
-body.app{
-  overflow:hidden;
-  display:block;
-}
+body.app{overflow:hidden;display:block}
 
 .sr{
   position:absolute;width:1px;height:1px;padding:0;margin:-1px;
@@ -29,7 +31,7 @@ body.app{
   border-right:var(--border);
   background:var(--muted-surface);
   display:flex;flex-direction:column;
-  gap:1.35rem;
+  gap:1.3rem;
   padding:1.35rem 1.15rem;
   overflow-y:auto;
 }
@@ -41,10 +43,7 @@ body.app{
   object-fit:cover;
 }
 .side-name{margin:0;font-weight:700;line-height:1.2}
-.side-role{
-  margin:.1rem 0 0;font-family:var(--mono);
-  font-size:var(--t-micro);color:var(--muted);line-height:1.3;
-}
+.side-role{margin:.05rem 0 0;font-size:var(--t-micro);color:var(--muted);line-height:1.3}
 
 .side-nav{display:flex;flex-direction:column;gap:.15rem}
 .side-link{
@@ -55,25 +54,18 @@ body.app{
   padding:.5rem .6rem;cursor:pointer;
 }
 .side-link:hover{background:var(--card)}
-.side-link[aria-current="true"]{background:var(--card);font-weight:700}
 
-.side-label{
-  margin:0 0 .5rem;font-family:var(--mono);
-  font-size:var(--t-micro);letter-spacing:.12em;
-  text-transform:uppercase;color:var(--muted);
+/* The claim the whole page rests on. It used to be 13px grey type
+   under the composer, which is not where you put your best argument. */
+.creed{
+  margin-top:auto;padding-top:1.1rem;
+  border-top:var(--border-thin);
+  font-size:var(--t-small);line-height:1.45;color:var(--muted);
 }
-.try-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.4rem}
-.try{
-  display:block;width:100%;text-align:left;
-  font-family:var(--font);font-size:var(--t-small);color:var(--ink);
-  background:var(--card);border:var(--border-thin);border-radius:12px;
-  padding:.55rem .7rem;cursor:pointer;line-height:1.35;
-}
-.try:hover{background:var(--blue)}
+.creed b{display:block;color:var(--ink);margin-bottom:.25rem}
 
 /* recruiter mode */
 .rec{
-  margin-top:auto;
   background:var(--card);border:var(--border-thin);
   border-top:3px solid var(--tan);
   border-radius:12px;padding:.8rem;
@@ -90,8 +82,7 @@ body.app{
 }
 .rec-switch::after{
   content:"";position:absolute;top:2px;left:2px;
-  width:14px;height:14px;border-radius:50%;
-  background:var(--ink);
+  width:14px;height:14px;border-radius:50%;background:var(--ink);
 }
 .rec input:checked + .rec-switch{background:var(--blue)}
 .rec input:checked + .rec-switch::after{left:auto;right:2px}
@@ -112,13 +103,9 @@ body.app{
 .topbar{
   display:flex;align-items:center;gap:1rem;
   padding:.85rem clamp(1rem,3vw,2rem);
-  border-bottom:var(--border);
-  background:var(--bone);
+  border-bottom:var(--border);background:var(--bone);
 }
-.avail{
-  margin:0;font-size:var(--t-small);
-  display:flex;align-items:center;gap:.55rem;
-}
+.avail{margin:0;font-size:var(--t-small);display:flex;align-items:center;gap:.55rem}
 .dot{
   width:9px;height:9px;flex:0 0 auto;border-radius:50%;
   background:#1c7a3c;border:1px solid rgba(0,0,0,.25);
@@ -126,8 +113,7 @@ body.app{
 .topbar .home-link{
   margin-left:auto;flex:0 0 auto;
   font-size:var(--t-micro);font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;
-  text-decoration:none;
+  letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
   border:var(--border-thin);border-radius:999px;
   padding:.4rem .8rem;background:var(--card);
 }
@@ -135,12 +121,14 @@ body.app{
 .drawer-toggle{display:none}
 
 /* ---- the conversation -------------------------------------- */
-.scroll{flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;
-  padding-inline:clamp(1rem,3vw,2rem)}
+.scroll{
+  flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;
+  padding-inline:clamp(1rem,3vw,2rem);
+}
 .thread{
-  max-width:52rem;margin-inline:auto;
-  padding:clamp(1.5rem,4vw,2.75rem) 0 1rem;
-  display:flex;flex-direction:column;gap:1.6rem;
+  max-width:48rem;margin-inline:auto;
+  padding:clamp(1.5rem,4vw,2.5rem) 0 1rem;
+  display:flex;flex-direction:column;gap:1.7rem;
 }
 
 .msg{display:flex;gap:.8rem;max-width:100%}
@@ -152,22 +140,38 @@ body.app{
   max-width:min(32rem,85%);
 }
 .face{
-  width:32px;height:32px;flex:0 0 auto;margin-top:.15rem;
+  width:32px;height:32px;flex:0 0 auto;margin-top:.2rem;
   border:var(--border-thin);border-radius:50%;object-fit:cover;
 }
 .said{min-width:0;flex:1 1 auto}
-.who{
-  margin:0 0 .35rem;font-family:var(--mono);
-  font-size:var(--t-micro);letter-spacing:.1em;
-  text-transform:uppercase;color:var(--muted);
-}
-.said p{margin:0 0 .8em}
+.said p{margin:0 0 .85em}
 .said p:last-child{margin-bottom:0}
-.said strong{font-weight:700}
 .said a{text-decoration-thickness:2px;text-underline-offset:3px}
 .said a:hover{background:var(--blue)}
-.said ul{margin:.2rem 0 .9em;padding-left:1.1rem}
-.said li{margin-bottom:.4rem}
+.said ul{margin:.2rem 0 .95em;padding-left:1.15rem}
+.said li{margin-bottom:.45rem}
+
+/* the opening line, and the only display-scale type on the page */
+.lede{
+  font-size:clamp(1.55rem,3vw,2.3rem);
+  font-weight:700;line-height:1.13;letter-spacing:-.01em;
+  margin:0 0 .8rem;max-width:min(100%,30ch);
+}
+.sub{font-size:var(--t-lead);margin-bottom:1.15rem}
+.ask-lead{color:var(--muted);font-size:var(--t-small);margin-bottom:.55rem}
+
+/* the one line in an answer that carries the argument */
+.pull{
+  margin:1.15rem 0;padding:.1rem 0 .1rem 1.05rem;
+  border-left:4px solid var(--pink);
+  font-size:var(--t-lead);font-weight:500;line-height:1.42;
+}
+
+/* an answer arriving, in reply to something the visitor did */
+@media (prefers-reduced-motion:no-preference){
+  .body{animation:say .2s ease-out}
+  @keyframes say{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+}
 
 /* thinking dots */
 .dots{display:inline-flex;gap:.28rem;align-items:center;padding:.55rem 0}
@@ -179,58 +183,69 @@ body.app{
   @keyframes blink{0%,60%,100%{opacity:.25}30%{opacity:1}}
 }
 
-/* ---- answer furniture -------------------------------------- */
+/* ---- figures ------------------------------------------------
+   Her own stat blocks: 2px ink border, hard offset shadow, one
+   pastel each. The same system as every other card on the site.
+   ------------------------------------------------------------ */
 .numset{
-  display:grid;gap:.7rem;margin:.9rem 0 1rem;
-  grid-template-columns:repeat(auto-fit,minmax(8.5rem,1fr));
+  display:grid;gap:.75rem;margin:1.1rem 0 1.2rem;
+  grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));
 }
 .num{
-  background:var(--lavender);border:var(--border-thin);border-radius:12px;
-  padding:.75rem .85rem;
+  background:var(--lavender);border:var(--border);box-shadow:var(--shadow);
+  border-radius:14px;padding:.85rem .95rem;
+  display:flex;flex-direction:column;justify-content:space-between;
 }
-.num b{display:block;font-size:1.5rem;font-weight:700;line-height:1.1}
+.num:nth-child(4n+1){background:var(--blue)}
+.num:nth-child(4n+2){background:var(--tan)}
+.num:nth-child(4n+3){background:var(--lavender)}
+.num:nth-child(4n+4){background:var(--pink)}
+.num b{display:block;font-size:clamp(1.3rem,2.1vw,1.8rem);font-weight:700;line-height:1.05}
 .num span{
-  display:block;margin-top:.15rem;font-family:var(--mono);
-  font-size:var(--t-micro);line-height:1.35;
+  display:block;margin-top:.25rem;
+  font-family:var(--mono);font-size:var(--t-micro);line-height:1.3;
 }
 
+/* ---- case study card ---------------------------------------- */
 .proj{
-  background:var(--card);border:var(--border);box-shadow:var(--shadow);
-  border-radius:16px;overflow:hidden;margin:1rem 0;
+  background:var(--card);border:var(--border);box-shadow:var(--shadow-md);
+  border-radius:16px;overflow:hidden;margin:1.15rem 0;
 }
-.proj-shot{display:block;width:100%;border-bottom:var(--border-thin);background:var(--muted-surface)}
-.proj-body{padding:1rem 1.1rem 1.15rem}
+.proj-shot{
+  display:block;width:100%;height:auto;
+  border-bottom:var(--border-thin);background:var(--muted-surface);
+}
+.proj-body{padding:1.05rem 1.15rem 1.2rem}
 .proj h3{font-size:var(--t-h3);margin:0 0 .2rem}
-.proj-sub{margin:0 0 .8rem;color:var(--muted);font-size:var(--t-small)}
-.proj-figs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.9rem}
+.proj-sub{margin:0 0 .85rem;color:var(--muted);font-size:var(--t-small)}
+.proj-figs{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 .95rem;padding:0}
 .proj-figs li{
-  list-style:none;font-family:var(--mono);font-size:var(--t-micro);
+  list-style:none;font-size:var(--t-micro);font-weight:500;
   background:var(--bone);border:var(--border-thin);border-radius:999px;
-  padding:.28rem .6rem;
+  padding:.3rem .65rem;
 }
 .go{
   display:inline-block;background:var(--tan);color:var(--ink);
-  border:var(--border);box-shadow:var(--shadow);
-  border-radius:999px;padding:.55rem 1.1rem;
-  font-weight:700;font-size:var(--t-small);text-decoration:none;
+  border:var(--border);box-shadow:var(--shadow);border-radius:999px;
+  padding:.55rem 1.1rem;font-weight:700;font-size:var(--t-small);
+  text-decoration:none;
 }
 .go:hover{background:var(--blue)}
 .badge{
   display:inline-block;background:var(--tan);border:var(--border-thin);
-  border-radius:999px;padding:.2rem .6rem;margin-bottom:.6rem;
-  font-family:var(--mono);font-size:var(--t-micro);
-  letter-spacing:.08em;text-transform:uppercase;
+  border-radius:999px;padding:.22rem .65rem;margin-bottom:.6rem;
+  font-size:var(--t-micro);font-weight:700;letter-spacing:.04em;
 }
 
 .scan{
-  background:var(--card);border:var(--border);box-shadow:var(--shadow);
+  background:var(--card);border:var(--border);box-shadow:var(--shadow-md);
   border-top:5px solid var(--tan);
-  border-radius:16px;padding:1.1rem 1.2rem;margin:1rem 0;
+  border-radius:16px;padding:1.15rem 1.25rem;margin:1.1rem 0;
 }
-.scan h3{font-size:var(--t-h3);margin:0 0 .7rem}
-.scan ul{margin:0;padding-left:1.1rem}
+.scan h3{font-size:var(--t-h3);margin:0 0 .75rem}
+.scan ul{margin:0;padding-left:1.15rem}
 
-.reach{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0}
+.reach{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.1rem 0}
 .reach a{
   display:inline-flex;align-items:center;gap:.5rem;
   background:var(--card);border:var(--border);box-shadow:var(--shadow);
@@ -240,10 +255,10 @@ body.app{
 .reach a:hover{background:var(--blue)}
 .reach svg{width:16px;height:16px;flex:0 0 auto}
 
-/* follow-up chips */
+/* follow-up prompts */
 .asks{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
 .askchip{
-  font-family:var(--font);font-size:var(--t-small);color:var(--ink);
+  font-family:var(--font);font-size:var(--t-small);font-weight:500;color:var(--ink);
   background:var(--bone);border:var(--border-thin);border-radius:999px;
   padding:.45rem .95rem;cursor:pointer;
 }
@@ -252,10 +267,10 @@ body.app{
 /* ---- composer ---------------------------------------------- */
 .composer-wrap{
   border-top:var(--border);background:var(--bone);
-  padding:.9rem clamp(1rem,3vw,2rem) 1rem;
+  padding:.9rem clamp(1rem,3vw,2rem) 1.1rem;
 }
 .composer{
-  max-width:52rem;margin-inline:auto;
+  max-width:48rem;margin-inline:auto;
   display:flex;align-items:center;gap:.6rem;
   background:var(--card);border:var(--border);box-shadow:var(--shadow);
   border-radius:999px;padding:.35rem .35rem .35rem 1.1rem;
@@ -276,11 +291,6 @@ body.app{
 }
 .send:hover{background:var(--tan)}
 .send svg{width:18px;height:18px}
-.note{
-  max-width:52rem;margin:.55rem auto 0;
-  font-family:var(--mono);font-size:var(--t-micro);
-  color:var(--muted);text-align:center;
-}
 
 /* ============================================================
    NARROW SCREENS
@@ -291,8 +301,7 @@ body.app{
   .shell{grid-template-columns:1fr}
   .side{
     position:fixed;z-index:120;top:0;bottom:0;left:0;
-    width:min(19rem,84vw);
-    transform:translateX(-100%);
+    width:min(19rem,84vw);transform:translateX(-100%);
   }
   .side.open{transform:none}
   @media (prefers-reduced-motion:no-preference){
@@ -306,8 +315,7 @@ body.app{
   .drawer-toggle{
     display:inline-block;order:-1;
     background:var(--blue);color:var(--ink);
-    border:var(--border);box-shadow:var(--shadow);
-    border-radius:999px;
+    border:var(--border);box-shadow:var(--shadow);border-radius:999px;
     font-family:var(--font);font-weight:700;font-size:var(--t-micro);
     letter-spacing:.1em;text-transform:uppercase;
     padding:.5rem .85rem;cursor:pointer;
@@ -318,4 +326,5 @@ body.app{
 
 @media (max-width:26em){
   .avail .avail-tail{display:none}
+  .numset{grid-template-columns:1fr 1fr}
 }

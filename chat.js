@@ -30,10 +30,13 @@
     return out + '</div>';
   }
 
+  function pull(t) { return '<p class="pull">' + t + '</p>'; }
+
   function proj(o) {
     var out = '<div class="proj">';
     if (o.shot) {
-      out += '<img class="proj-shot" src="' + o.shot + '" alt="' + o.alt + '" loading="lazy">';
+      out += '<img class="proj-shot" src="' + o.shot + '" alt="' + o.alt +
+             '" width="' + o.w + '" height="' + o.h + '" loading="lazy">';
     }
     out += '<div class="proj-body">';
     if (o.badge) out += '<span class="badge">' + o.badge + '</span>';
@@ -60,8 +63,8 @@
   /* ---- the answers ------------------------------------------ */
 
   var ESOP_CARD = proj({
-    shot: 'img/esop-repository.png',
-    alt: 'The ESOP Loan Repository, showing repayment schedules joined across eleven sources',
+    shot: 'img/card-esop.png', w: 1265, h: 300,
+    alt: 'The ESOP Loan Repository, showing 304 loans, 239 closed and 65 active',
     name: 'ESOP Loan Repository',
     sub: 'Eleven spreadsheets owned by five teams, replaced with one system of record',
     figs: ['Live in production', 'Around 300 loans', '11 spreadsheets, 5 teams', '108 deployments in 4 months'],
@@ -69,8 +72,6 @@
   });
 
   var EFOS_CARD = proj({
-    shot: 'img/ef-os-overview.png',
-    alt: 'The Employee Financing Process OS business overview screen',
     name: 'Employee Financing Process OS',
     sub: 'The monthly deduction, invoicing and payment cycle for two lenders',
     badge: 'In build',
@@ -96,7 +97,8 @@
       html:
         '<p>The ESOP Loan Repository. It is live in production, I built it solo, and it changed a decision rather than just a screen.</p>' +
         '<p>Around 300 loans, and the entire lifecycle ran on eleven spreadsheets owned by five different teams. The obvious brief was a better calculator. The money maths is deterministic and easy. The real problem was five teams holding five versions of the truth with no way to prove which was right, which makes it a system of record, not a calculator.</p>' +
-        '<p>The decision I would defend hardest: releasing pledged shares cannot be undone, and in the original process a loan qualified for release if a spreadsheet field said Closed. A human editable cell was authorising an irreversible transfer of collateral. I removed that path and keyed the release queue on evidence that cash actually arrived. The tradeoff I accepted is that a loan genuinely repaid through an unrecorded channel waits until the payment is logged. Failing to release on time is a support ticket. Releasing collateral wrongly is not.</p>' +
+        '<p>The decision I would defend hardest: releasing pledged shares cannot be undone, and in the original process a loan qualified for release if a spreadsheet field said Closed. A human editable cell was authorising an irreversible transfer of collateral. I removed that path and keyed the release queue on evidence that cash actually arrived. The tradeoff I accepted is that a loan genuinely repaid through an unrecorded channel waits until the payment is logged.</p>' +
+        pull('Failing to release on time is a support ticket. Releasing collateral wrongly is not.') +
         ESOP_CARD,
       chips: ['esop', 'efos', 'ai', 'limits']
     },
@@ -117,7 +119,7 @@
         '<p><b>The problem.</b> PhysicsWallah grants ESOP. Exercising it triggers a tax bill immediately, long before the shares are worth anything spendable, so FinZ lends against the pledged shares. Around 300 loans, and the entire lifecycle ran on eleven spreadsheets owned by five different teams.</p>' +
         '<p><b>Who it is for.</b> The FinZ operations team, who answer questions about individual loans daily, and the compliance officer, who has to approve every release for a Designated Person before it happens.</p>' +
         '<p><b>The reframe.</b> The obvious brief was a better calculator. The real problem was five teams holding five versions of the truth with no way to prove which was right.</p>' +
-        '<p>The gate I am most glad I moved was the compliance one. Designated Persons under insider trading rules may only have shares released with explicit approval, and the original gate matched on Loan ID. A Designated Person is a person, not a loan, so their other loans passed through as though unregulated. I re-gated on identity, matching by BO ID and Employee Code, and added two fail safes: if the compliance list cannot be read, block every release rather than silently letting them through, and if a loan carries no identifier to check, hold it.</p>' +
+        '' + pull('A Designated Person is a person, not a loan.') + '<p>The gate I am most glad I moved was the compliance one. Designated Persons under insider trading rules may only have shares released with explicit approval, and the original gate matched on Loan ID, so their other loans passed through as though unregulated. I re-gated on identity, matching by BO ID and Employee Code, and added two fail safes: if the compliance list cannot be read, block every release rather than silently letting them through, and if a loan carries no identifier to check, hold it.</p>' +
         ESOP_CARD,
       chips: ['ai', 'limits', 'efos']
     },
@@ -128,7 +130,7 @@
       html:
         '<p>In build, not yet launched. Every month around 2,886 PhysicsWallah employees repay a loan out of their salary, and before any of that money moves somebody builds the deduction summary by hand, waits for payroll to confirm what was actually deducted, works out what each of the two lenders is owed, raises the invoices, chases the approvals, records the payment and maps it back to individual loans. All of it lives in spreadsheets and email threads.</p>' +
         '<p>Three things went wrong repeatedly, and none of them announced themselves. A mis-keyed figure becomes a wrong invoice, and nothing in the process is capable of noticing. There is no audit trail, so an error surfacing in month N+2 cannot be traced back to who changed what in month N. And loan IDs collide across the two lenders, so the same number means two different loans depending on who you ask.</p>' +
-        '<p>Three decisions do most of the work in what I specified. Every key is a pair, always (lender, loan_id) and never a bare loan ID, which removes a whole class of error by construction rather than by care, and care is exactly what runs out at the end of a long month. Uploads are staged rather than applied, checked against the previous batch, versioned and rollable back, so an unusually large change waits for a human to confirm it. And every change is written to an append only audit log, with the tables checksummed.</p>' +
+        '' + pull('It removes a whole class of error by construction rather than by care, and care is exactly what runs out at the end of a long month.') + '<p>Three decisions do most of the work in what I specified. Every key is a pair, always (lender, loan_id) and never a bare loan ID. Uploads are staged rather than applied, checked against the previous batch, versioned and rollable back, so an unusually large change waits for a human to confirm it. And every change is written to an append only audit log, with the tables checksummed.</p>' +
         '<p>The monthly scheduler exists but is deliberately switched off, pending a go live decision.</p>' +
         EFOS_CARD,
       chips: ['limits', 'esop', 'principles']
@@ -147,7 +149,8 @@
         '<li>Dates stored day first as text were being misread, which quietly made payments vanish from schedules.</li>' +
         '<li>133 of 333 confiscations sat against cancelled orders, invisible to anything that only loaded completed ones.</li>' +
         '</ul>' +
-        '<p>None of those crash. They produce a confident wrong answer, which is far more dangerous in a system people trust with money. Directing AI is what made the building fast. Knowing what to check is what made it correct.</p>',
+        '<p>None of those crash. They produce a confident wrong answer, which is far more dangerous in a system people trust with money.</p>' +
+        pull('Directing AI is what made the building fast. Knowing what to check is what made it correct.'),
       chips: ['esop', 'limits', 'principles']
     },
 
@@ -155,7 +158,8 @@
       keys: ['credit policy', 'cibil', 'bureau', 'collection', 'collections', 'eligibility',
              'underwriting', 'risk', 'who qualifies', 'default', 'repayment'],
       html:
-        '<p>A payroll deducted loan only looks safe. Employment tells you someone is paid. It does not tell you whether they are already over borrowed somewhere else.</p>' +
+        '<p>A payroll deducted loan only looks safe.</p>' +
+        pull('Employment tells you someone is paid. It does not tell you whether they are already over borrowed somewhere else.') +
         '<p>That gap is what the credit policy closes. I drafted it against bureau data, so the decision to lend and the limit attached to it are made before the money leaves, rather than argued about after it does not come back.</p>' +
         '<p>It exists to move one number, the collection rate, by declining the wrong loans early rather than chasing them later.</p>',
       chips: ['numbers', 'principles', 'work']
@@ -166,10 +170,10 @@
              'disbursed', 'loan book', 'scale', 'stats', 'figures', 'achievements'],
       html:
         figs([
-          ['20+ months', 'Building the product'],
           ['&#8377;3 Cr+', 'Disbursed monthly'],
           ['&#8377;34 Cr', 'Active loan book'],
-          ['4,500+', 'Employees served']
+          ['4,500+', 'Employees served'],
+          ['20+ months', 'Building the product']
         ]) +
         '<p>From the two systems: around 300 ESOP loans that ran on eleven spreadsheets owned by five teams, 108 production deployments over four months, and a bank reconciliation that parses to &#8377;64,05,97,403 and matches the bank’s own summary. On the Financing OS, 2,886 employees repaying through payroll in a month, 220 automated tests and 86 commits over three and a half weeks.</p>' +
         '<p>Every figure here is one I can walk through in an interview. Where I do not have a number, I say so, and the case studies list those places explicitly.</p>',
@@ -195,7 +199,7 @@
       keys: ['limitation', 'limitations', 'what did not work', 'went wrong', 'failure', 'failed',
              'mistake', 'mistakes', 'weakness', 'weaknesses', 'honest', 'caveat', 'gaps'],
       html:
-        '<p>Both case studies carry a section I did not have to write.</p>' +
+        pull('Both case studies carry a section I did not have to write.') +
         '<p><b>ESOP Loan Repository.</b> I never instrumented the manual baseline, so I can show what the system catches but not a clean time saved figure. Refresh is slow on the largest sheets. The tool mirrors upstream data it does not control, which is precisely why the reconciliation views exist. And one person built it, so it needs a documented handover.</p>' +
         '<p><b>Employee Financing Process OS.</b> Not yet in daily production use. The live updates work is only partly done, with polling still running in parallel on purpose. Imports are file based because no reliable LMS API was available to integrate against. Until it runs a real month end, the time it saves is an estimate rather than a measurement.</p>',
       chips: ['esop', 'efos', 'principles']
@@ -365,7 +369,7 @@
     wrap.className = 'msg';
     wrap.innerHTML =
       '<img class="face" src="img/avatar.jpg" alt="" width="320" height="320">' +
-      '<div class="said"><p class="who">Veronica</p>' +
+      '<div class="said"><p class="sr">Veronica says</p>' +
       '<div class="body"><span class="dots" role="status"><span class="sr">Thinking</span>' +
       '<i></i><i></i><i></i></span></div></div>';
     thread.appendChild(wrap);
@@ -382,8 +386,16 @@
     var body = shell();
     var html = A[id] ? A[id].html + chipRow(A[id].chips)
                      : FALLBACK + chipRow(['best', 'work', 'numbers', 'why', 'contact']);
-    var paint = function () { body.innerHTML = html; anchor(from); };
-    if (reduce) paint(); else window.setTimeout(paint, 420);
+    var paint = function () {
+      var fresh = document.createElement('div');
+      fresh.className = 'body';
+      fresh.innerHTML = html;
+      body.parentNode.replaceChild(fresh, body);
+      anchor(from);
+    };
+    /* Short enough to read as rendering, not as a machine pretending to think.
+       There is no model here and the page should not imply one. */
+    if (reduce) paint(); else window.setTimeout(paint, 220);
   }
 
   function ask(id, spoken) {
@@ -429,27 +441,9 @@
 
   /* recruiter mode */
   var rec = document.getElementById('rec');
-  var tryList = document.getElementById('try-list');
-
-  var TRY_NORMAL = ['best', 'ai', 'credit', 'numbers', 'limits'];
-  var TRY_REC = ['recruiter', 'why', 'numbers', 'unstated', 'contact'];
-
-  function fillTry(ids) {
-    var out = '';
-    for (var i = 0; i < ids.length; i++) {
-      out += '<li><button class="try" type="button" data-ask="' + ids[i] + '">' +
-             (ASKED[ids[i]] || LABEL[ids[i]]) + '</button></li>';
-    }
-    tryList.innerHTML = out;
-  }
 
   rec.addEventListener('change', function () {
-    if (rec.checked) {
-      fillTry(TRY_REC);
-      ask('recruiter', 'Recruiter mode');
-    } else {
-      fillTry(TRY_NORMAL);
-    }
+    if (rec.checked) ask('recruiter', 'Recruiter mode');
   });
 
   /* mobile drawer */
@@ -467,6 +461,10 @@
     toggle.setAttribute('aria-expanded', 'true');
     backdrop.hidden = false;
   }
+  if (window.matchMedia && window.matchMedia('(min-width: 60em) and (pointer: fine)').matches) {
+    input.focus();
+  }
+
   toggle.addEventListener('click', function () {
     if (side.classList.contains('open')) closeDrawer(); else openDrawer();
   });
