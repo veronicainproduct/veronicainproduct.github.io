@@ -164,10 +164,6 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
 .theme-toggle .sun{display:none}
 :root[data-theme="dark"] .theme-toggle .sun{display:block}
 :root[data-theme="dark"] .theme-toggle .moon{display:none}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) .theme-toggle .sun{display:block}
-  :root:not([data-theme="light"]) .theme-toggle .moon{display:none}
-}
 .topbar .home-link{margin-left:0}
 .drawer-toggle{display:none}
 
@@ -363,7 +359,9 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
 .composer{
   max-width:48rem;margin-inline:auto;
   display:flex;align-items:center;gap:.6rem;
-  background:var(--card);border:var(--border);box-shadow:var(--shadow);
+  background:var(--card);
+  border:2px solid var(--accent);
+  box-shadow:0 0 0 4px rgba(243,199,122,.18), var(--shadow);
   border-radius:16px;padding:.4rem .4rem .4rem 1.15rem;
 }
 .composer input{
@@ -373,14 +371,17 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
 }
 .composer input::placeholder{color:var(--muted)}
 .composer input:focus{outline:none}
-.composer:focus-within{border-color:var(--ink);box-shadow:var(--shadow-md)}
+.composer:focus-within{
+  border-color:#e0a23f;
+  box-shadow:0 0 0 4px rgba(243,199,122,.34), var(--shadow-md);
+}
 .send{
   flex:0 0 auto;width:42px;height:42px;
   display:inline-flex;align-items:center;justify-content:center;
-  background:var(--muted-surface);color:var(--ink);
+  background:var(--accent);color:var(--on-accent);
   border:0;border-radius:12px;cursor:pointer;
 }
-.send:hover{background:var(--accent);color:var(--on-accent)}
+.send:hover{background:#e0a23f}
 .send svg{width:18px;height:18px}
 
 /* ============================================================

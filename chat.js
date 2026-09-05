@@ -1,11 +1,18 @@
 /* ============================================================
    Veronica Singh | conversational portfolio
 
-   The answers below are written by hand. There is no model
-   behind this page and no API key in it. Every figure appears
-   somewhere else on this site and can be walked through in an
-   interview. If a question is not covered, the page says so
-   rather than guessing.
+   Retrieval, not generation. Every answer below is written by
+   hand from what is already on this site or on the resume it
+   links to. There is no model behind this page and no API key
+   in it, so nothing here can invent a figure.
+
+   What makes it feel like an assistant is the matcher, not a
+   model: queries are tokenised, stopped, weighted by inverse
+   document frequency and matched with prefix and edit-distance
+   tolerance, so "are you open for remot" finds the same answer
+   as "do you work remotely". When nothing scores well enough it
+   says so and offers the nearest three topics rather than
+   guessing.
 
    No browser storage APIs are used anywhere.
    ============================================================ */
@@ -50,12 +57,10 @@
             '<h3>' + o.name + '</h3><p class="proj-sub">' + o.sub + '</p>';
     if (o.figs) body += figs(o.figs);
     body += '<a class="go" href="' + o.href + '">Read the case study ' + ARROW + '</a></div>';
-
     var art = o.shot
       ? '<div class="proj-art"><img src="' + o.shot + '" alt="' + o.alt +
         '" width="' + o.w + '" height="' + o.h + '" loading="lazy"></div>'
       : '<div class="proj-note">' + o.note + '</div>';
-
     return '<div class="proj">' + body + art + '</div>';
   }
 
@@ -63,11 +68,6 @@
   var IN_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>';
   var WA_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 1.67c2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.25-8.25 8.25a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.39c0-4.54 3.7-8.24 8.24-8.24Zm-2.9 4.06c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.43s1.05 2.82 1.19 3.01c.15.2 2.03 3.1 4.93 4.23 2.41.95 2.9.76 3.43.71.52-.05 1.68-.69 1.92-1.35.24-.66.24-1.23.17-1.35-.07-.12-.27-.2-.56-.34-.29-.15-1.68-.83-1.94-.93-.26-.09-.45-.14-.64.15-.19.29-.73.93-.9 1.12-.16.2-.33.22-.61.08-.29-.15-1.21-.45-2.31-1.42-.85-.76-1.43-1.7-1.6-1.98-.16-.29-.02-.45.13-.59.13-.13.29-.34.44-.51.14-.17.19-.29.29-.49.1-.19.05-.37-.02-.51-.07-.15-.63-1.54-.88-2.1-.21-.5-.43-.5-.61-.51h-.53Z"/></svg>';
   var DL_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>';
-  var TEL_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>';
-
-  var VCARD_HEAD =
-    '<div class="vcard"><h3>Veronica Singh</h3>' +
-    '<p>Product Strategy, Employee Financing at FinZ. Delhi NCR.</p>';
 
   var REACH =
     '<div class="reach">' +
@@ -77,9 +77,9 @@
     '<a href="' + CV + '" download>' + DL_SVG + 'Resume</a>' +
     '</div>';
 
-  var VCARD = VCARD_HEAD + REACH + '</div>';
-
-  /* ---- the answers ------------------------------------------ */
+  var VCARD =
+    '<div class="vcard"><h3>Veronica Singh</h3>' +
+    '<p>Product Strategy, Employee Financing at FinZ. Delhi NCR.</p>' + REACH + '</div>';
 
   var ESOP_CARD = proj({
     shot: 'img/esop-repository.png', w: 1280, h: 557,
@@ -103,21 +103,61 @@
     href: 'project-financing-os.html'
   });
 
+  /* ============================================================
+     THE CORPUS
+     terms: free text the matcher indexes. Write the ways people
+     actually ask, not a tidy keyword list.
+     boost: exact phrases that should decide the topic outright.
+     ============================================================ */
+
   var A = {
 
+    whois: {
+      q: 'Who is Veronica?',
+      label: 'Who is Veronica',
+      terms: 'who is veronica singh who are you introduce yourself tell me about yourself ' +
+             'your background summary profile bio about you overview elevator pitch',
+      boost: ['who is veronica', 'who are you'],
+      html:
+        '<p>Veronica Singh works on product strategy at FinZ, the fintech vertical at PhysicsWallah, where she owns two employee lending products: ESOP Financing and Employee Financing. She has spent more than twenty months building the employee lending book from nothing, and she owns the parts of it that decide whether it makes money: who qualifies, what it costs, how it is repaid and what happens when a payroll deduction does not recover the full amount.</p>' +
+        '<p>She wrote the CIBIL based credit policy behind it, and she built two internal systems to keep the book honest. One is live and replaced eleven spreadsheets with a single system of record. The other is in build. She directed AI as the engineering layer for both, and reviewed every step it took.</p>' +
+        '<p>Background is computer science at the University of Delhi. Based in Delhi NCR, open to remote.</p>',
+      chips: ['work', 'why', 'timeline', 'contact']
+    },
+
     about: {
-      keys: ['about you', 'about veronica', 'who are you', 'who is veronica', 'your background',
-             'your story', 'introduce', 'yourself', 'bio'],
+      q: 'Tell me about yourself',
+      label: 'About Veronica',
+      terms: 'about veronica about me your story how did you get into product background ' +
+             'journey path career story what do you do',
+      boost: ['about me', 'about veronica', 'your story'],
       html:
         '<p>I did not arrive at product through a product title. I arrived by owning a lending book: its eligibility rules, its pricing, its repayment mechanics and its collections. Then I built the systems that keep it honest.</p>' +
         '<p>Today I work on product strategy at FinZ, the fintech vertical at PhysicsWallah, and I own two products. <b>ESOP Financing</b> lends against pledged ESOP shares so employees can pay the exercise tax before the shares turn into cash. <b>Employee Financing</b> is salary advance and top-up loans, recovered from monthly pay through payroll deduction.</p>' +
         '<p>What I am working towards is a product role where the correctness bar is part of the job. Fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>',
-      chips: ['principles', 'work', 'education', 'contact']
+      chips: ['principles', 'work', 'timeline', 'contact']
+    },
+
+    dayjob: {
+      q: 'What do you actually do day to day?',
+      label: 'Day to day',
+      terms: 'day to day daily what do you actually do responsibilities role scope ' +
+             'own ownership what are you responsible for typical day job description',
+      boost: ['day to day', 'what do you actually do'],
+      html:
+        '<p>Three things, and they feed each other.</p>' +
+        '<p><b>The book.</b> Who can borrow, at what limit, at what price, on what schedule, and what happens when a deduction comes back short. I wrote those rules and I change them when the collection rate tells me to.</p>' +
+        '<p><b>The product.</b> The journey employees actually walk through, reworked repeatedly against their feedback. When footfall needed lifting I introduced coupons and a waiver on the processing fee, and rebuilt the flow around what was getting people through it.</p>' +
+        '<p><b>The systems underneath.</b> Specifying and building the internal tools that make the book auditable, because a lending product that cannot prove what it did is a liability with a nice interface.</p>',
+      chips: ['credit', 'work', 'numbers']
     },
 
     best: {
-      keys: ['best project', 'best work', 'proudest', 'favourite project', 'favorite project',
-             'strongest', 'best thing', 'most proud', 'best case'],
+      q: 'What is your best project?',
+      label: 'Best project',
+      terms: 'best project best work proudest strongest best case study ' +
+             'which is your best highlight',
+      boost: ['best project', 'best work', 'most proud', 'proudest', 'favourite project', 'favorite project'],
       html:
         '<p>The ESOP Loan Repository, and not because it is the prettiest. It is live in production, I built it solo, and it changed a decision rather than just a screen.</p>' +
         '<p>Around 300 loans, and the entire lifecycle ran on eleven spreadsheets owned by five different teams. The obvious brief was a better calculator. The money maths is deterministic and easy. The real problem was five teams holding five versions of the truth with no way to prove which was right, which makes it a system of record, not a calculator.</p>' +
@@ -128,8 +168,11 @@
     },
 
     work: {
-      keys: ['your work', 'the work', 'projects', 'case study', 'case studies', 'portfolio',
-             'what have you built', 'what did you build', 'show me your work', 'everything'],
+      q: 'Show me everything you have built',
+      label: 'The work',
+      terms: 'your work the work projects case studies portfolio what have you built ' +
+             'what did you build show me everything all projects things you made shipped',
+      boost: ['your work', 'case studies', 'all projects', 'everything you have built'],
       html:
         '<p>Two case studies, one through-line: I take a process running on eleven spreadsheets and turn it into one system of record. Both were built for a book that moves real money, which is a good way to find out quickly whether your product works. One is live, one is in build.</p>' +
         ESOP_CARD + EFOS_CARD,
@@ -137,34 +180,44 @@
     },
 
     esop: {
-      keys: ['esop', 'repository', 'case 01', 'case one', 'first case', 'pledged', 'unpledge',
-             'collateral', 'compliance', 'designated person', 'insider'],
+      q: 'Tell me about the ESOP Loan Repository',
+      label: 'ESOP Repository',
+      terms: 'esop loan repository case 01 first case pledged shares unpledge collateral ' +
+             'compliance designated person insider trading release reconciliation interest accrual',
+      boost: ['esop loan repository', 'case 01', 'designated person'],
       html:
         '<p><b>The problem.</b> PhysicsWallah grants ESOP. Exercising it triggers a tax bill immediately, long before the shares are worth anything spendable, so FinZ lends against the pledged shares. Around 300 loans, and the entire lifecycle ran on eleven spreadsheets owned by five different teams.</p>' +
         '<p><b>Who it is for.</b> The FinZ operations team, who answer questions about individual loans daily, and the compliance officer, who has to approve every release for a Designated Person before it happens.</p>' +
         '<p><b>The reframe.</b> The obvious brief was a better calculator. The real problem was five teams holding five versions of the truth with no way to prove which was right.</p>' +
-        '' + pull('A Designated Person is a person, not a loan.') + '<p>The gate I am most glad I moved was the compliance one. Designated Persons under insider trading rules may only have shares released with explicit approval, and the original gate matched on Loan ID, so their other loans passed through as though unregulated. I re-gated on identity, matching by BO ID and Employee Code, and added two fail safes: if the compliance list cannot be read, block every release rather than silently letting them through, and if a loan carries no identifier to check, hold it.</p>' +
+        pull('A Designated Person is a person, not a loan.') +
+        '<p>The gate I am most glad I moved was the compliance one. Designated Persons under insider trading rules may only have shares released with explicit approval, and the original gate matched on Loan ID, so their other loans passed through as though unregulated. I re-gated on identity, matching by BO ID and Employee Code, and added two fail safes: if the compliance list cannot be read, block every release rather than silently letting them through, and if a loan carries no identifier to check, hold it.</p>' +
         ESOP_CARD,
       chips: ['ai', 'limits', 'efos']
     },
 
     efos: {
-      keys: ['financing os', 'process os', 'case 02', 'case two', 'second case', 'invoice',
-             'lender', 'lenders', 'month end', 'audit trail', 'in build'],
+      q: 'Tell me about the Employee Financing Process OS',
+      label: 'Financing OS',
+      terms: 'employee financing os process os case 02 second case invoice invoicing lender ' +
+             'lenders month end audit trail in build upload staging rollback prest',
+      boost: ['financing os', 'process os', 'case 02', 'audit trail'],
       html:
         '<p>In build, not yet launched. Every month around 2,886 PhysicsWallah employees repay a loan out of their salary, and before any of that money moves somebody builds the deduction summary by hand, waits for payroll to confirm what was actually deducted, works out what each of the two lenders is owed, raises the invoices, chases the approvals, records the payment and maps it back to individual loans. All of it lives in spreadsheets and email threads.</p>' +
         '<p>Three things went wrong repeatedly, and none of them announced themselves. A mis-keyed figure becomes a wrong invoice, and nothing in the process is capable of noticing. There is no audit trail, so an error surfacing in month N+2 cannot be traced back to who changed what in month N. And loan IDs collide across the two lenders, so the same number means two different loans depending on who you ask.</p>' +
-        '' + pull('It removes a whole class of error by construction rather than by care, and care is exactly what runs out at the end of a long month.') + '<p>Three decisions do most of the work in what I specified. Every key is a pair, always (lender, loan_id) and never a bare loan ID. Uploads are staged rather than applied, checked against the previous batch, versioned and rollable back, so an unusually large change waits for a human to confirm it. And every change is written to an append only audit log, with the tables checksummed.</p>' +
+        pull('It removes a whole class of error by construction rather than by care, and care is exactly what runs out at the end of a long month.') +
+        '<p>Three decisions do most of the work in what I specified. Every key is a pair, always (lender, loan_id) and never a bare loan ID. Uploads are staged rather than applied, checked against the previous batch, versioned and rollable back, so an unusually large change waits for a human to confirm it. And every change is written to an append only audit log, with the tables checksummed.</p>' +
         '<p>The monthly scheduler exists but is deliberately switched off, pending a go live decision.</p>' +
         EFOS_CARD,
       chips: ['limits', 'esop', 'principles']
     },
 
     ai: {
-      keys: ['ai', 'artificial intelligence', 'claude', 'chatgpt', 'llm', 'no engineers',
-             'without engineers', 'how did you build', 'how was it built', 'engineering layer',
-             'engineer', 'engineers', 'a team', 'solo', 'by yourself', 'alone',
-             'code', 'coding', 'technical'],
+      q: 'How did you build it without engineers?',
+      label: 'AI experience',
+      terms: 'ai artificial intelligence claude chatgpt llm prompt engineering no engineers ' +
+             'without engineers how did you build engineering layer code coding technical ' +
+             'vibe coding ai tools ai native how do you use ai solo alone a team',
+      boost: ['without engineers', 'use ai', 'ai experience', 'engineering layer'],
       html:
         '<p>I did not have an engineering team. I had a specification and a clear idea of what correct looked like, so I directed AI as the engineering layer and reviewed every step it took. That produced <b>108 production deployments over four months</b>, built alongside my regular work.</p>' +
         '<p>The part worth knowing is where the difficulty actually sat. Almost none of it was in the money maths, which is deterministic and easy. It was in reading the source data correctly.</p>' +
@@ -175,38 +228,86 @@
         '</ul>' +
         '<p>None of those crash. That is the problem. They produce a confident wrong answer, which is the most expensive kind, and the only sort that survives a demo.</p>' +
         pull('Directing AI is what made the building fast. Knowing what to check is what made it correct.'),
-      chips: ['esop', 'limits', 'principles']
+      chips: ['esop', 'limits', 'skills']
     },
 
     credit: {
-      keys: ['credit policy', 'cibil', 'bureau', 'collection', 'collections', 'eligibility',
-             'underwriting', 'risk', 'who qualifies', 'default', 'repayment'],
+      q: 'What does the credit policy do?',
+      label: 'Credit policy',
+      terms: 'credit policy cibil bureau underwriting eligibility risk who qualifies ' +
+             'approval limits pricing rules decisioning score decide decides ' +
+             'who gets a loan approve reject declined',
+      boost: ['credit policy', 'cibil'],
       html:
         '<p>A payroll deducted loan only looks safe.</p>' +
         pull('Employment tells you someone is paid. It does not tell you whether they are already over borrowed somewhere else.') +
-        '<p>That gap is what the credit policy closes. I drafted it against bureau data, so the decision to lend and the limit attached to it are made before the money leaves, rather than argued about after it does not come back.</p>' +
+        '<p>That gap is what the credit policy closes. I drafted it against bureau data, so the decision to lend and the limit attached to it are made before the money leaves, rather than argued about after it does not come back. It replaced manual review with rule based eligibility, which is what made instant approvals possible and cut the turnaround on a disbursal.</p>' +
         '<p>It exists to move one number, the collection rate, by declining the wrong loans early rather than chasing them later.</p>',
-      chips: ['numbers', 'principles', 'work']
+      chips: ['collections', 'numbers', 'products']
+    },
+
+    collections: {
+      q: 'How do collections work?',
+      label: 'Collections',
+      terms: 'collections collection rate defaults default rate delinquency npa recovery ' +
+             'repayment payroll deduction salary deduction what if someone does not pay dpd',
+      boost: ['collections', 'default rate', 'defaults'],
+      html:
+        '<p>Repayment is architected, not chased. The loan is recovered from monthly pay through payroll deduction, so the money moves before the borrower ever has to decide to pay it.</p>' +
+        '<p>Together with the CIBIL based credit policy, that has held <b>defaults at 1.5 to 2%</b>.</p>' +
+        '<p>The interesting part is the exception. A deduction does not always recover the full amount, and when it does not, somebody has to decide what happens next. There was no process for that when I started. Designing it was most of the work, and it is why the second system exists at all: the monthly cycle is where those exceptions either get caught or quietly become someone else&rsquo;s problem in two months.</p>',
+      chips: ['credit', 'efos', 'numbers']
+    },
+
+    products: {
+      q: 'What are the products exactly?',
+      label: 'The products',
+      terms: 'products what products salary advance top up topup loan products two products ' +
+             'esop financing employee financing what do you sell offering lending products',
+      boost: ['salary advance', 'two products', 'what products'],
+      html:
+        '<p>Two, both for PhysicsWallah employees.</p>' +
+        '<p><b>Employee Financing.</b> Salary Advance and Salary Top-up. Short duration credit recovered from monthly pay through payroll deduction. I own eligibility, pricing, the repayment flow and the collections design end to end.</p>' +
+        '<p><b>ESOP Financing.</b> Lending against pledged ESOP shares. Exercising ESOP triggers a tax bill immediately, long before the shares are worth anything spendable, so the loan bridges that gap. I own the operations end to end: onboarding, credit checks, the share pledge, disbursement and closure, across credit, NBFC and depository stakeholders.</p>',
+      chips: ['credit', 'esop', 'work']
+    },
+
+    research: {
+      q: 'How do you do user research?',
+      label: 'User research',
+      terms: 'user research interviews surveys users customers talked to employees discovery ' +
+             'feedback validation what users want acquisition funnel talked to users',
+      boost: ['user research', 'interviews', 'surveys'],
+      html:
+        '<p>By talking to the people the deduction actually happens to. I ran interviews and surveys across <b>5,000+ employees</b>, and the initiatives that came out of it contributed to a <b>12% lift in acquisition</b>.</p>' +
+        '<p>The most useful finding was not a feature request. It was that people abandoned at the point where the cost stopped being legible. So I introduced coupons and a waiver on the processing fee, and rebuilt the journey around what was actually getting people through it rather than around what we had assumed was the blocker.</p>',
+      chips: ['dayjob', 'numbers', 'principles']
     },
 
     numbers: {
-      keys: ['numbers', 'metrics', 'impact', 'results', 'how much', 'how many', 'disbursal',
-             'disbursed', 'loan book', 'scale', 'stats', 'figures', 'achievements'],
+      q: 'Show me the numbers',
+      label: 'The numbers',
+      terms: 'numbers metrics impact results how much how many disbursal disbursed loan book ' +
+             'scale stats figures achievements growth revenue size volume aum',
+      boost: ['the numbers', 'metrics', 'loan book'],
       html:
         figs([
           ['&#8377;3 Cr+', 'Disbursed monthly'],
           ['&#8377;34 Cr', 'Active loan book'],
           ['4,500+', 'Employees served'],
-          ['20+ months', 'Building the product']
+          ['1.5 to 2%', 'Default rate']
         ]) +
-        '<p>From the two systems: around 300 ESOP loans that ran on eleven spreadsheets owned by five teams, 108 production deployments over four months, and a bank reconciliation that parses to &#8377;64,05,97,403 and matches the bank’s own summary. On the Financing OS, 2,886 employees repaying through payroll in a month, 220 automated tests and 86 commits over three and a half weeks.</p>' +
+        '<p>From the two systems: around 300 ESOP loans that ran on eleven spreadsheets owned by five teams, 108 production deployments over four months, and a bank reconciliation that parses to &#8377;64,05,97,403 and matches the bank&rsquo;s own summary. On the Financing OS, 2,886 employees repaying through payroll in a month, 220 automated tests and 86 commits over three and a half weeks.</p>' +
         '<p>Every figure here is one I can walk through in an interview. Where I do not have a number, I say so, and the case studies list those places explicitly.</p>',
       chips: ['limits', 'esop', 'efos']
     },
 
     principles: {
-      keys: ['principle', 'principles', 'philosophy', 'how do you think', 'how you think',
-             'approach', 'process', 'beliefs', 'opinions', 'design principles', 'values'],
+      q: 'How do you think about product?',
+      label: 'How you think',
+      terms: 'principles philosophy how do you think approach process beliefs values ' +
+             'design principles opinions product sense judgement how do you prioritise tradeoffs',
+      boost: ['principles', 'philosophy', 'how do you think'],
       html:
         '<p>Five, and all of them come out of the same job.</p>' +
         '<ul>' +
@@ -220,8 +321,12 @@
     },
 
     limits: {
-      keys: ['limitation', 'limitations', 'what did not work', 'went wrong', 'failure', 'failed',
-             'mistake', 'mistakes', 'weakness', 'weaknesses', 'honest', 'caveat', 'gaps'],
+      q: 'What did not work?',
+      label: 'What did not work',
+      terms: 'limitations what did not work went wrong failure failed mistake mistakes ' +
+             'weakness weaknesses honest caveat gaps regrets what would you do differently ' +
+             'criticism shortcomings',
+      boost: ['did not work', 'limitations', 'went wrong', 'weakness', 'go wrong', 'do differently'],
       html:
         pull('Both case studies carry a section I did not have to write. It is the section I would read first.') +
         '<p><b>ESOP Loan Repository.</b> I never instrumented the manual baseline, so I can show what the system catches but not a clean time saved figure. Refresh is slow on the largest sheets. The tool mirrors upstream data it does not control, which is precisely why the reconciliation views exist. And one person built it, so it needs a documented handover.</p>' +
@@ -229,40 +334,106 @@
       chips: ['esop', 'efos', 'principles']
     },
 
-    education: {
-      keys: ['education', 'college', 'degree', 'university', 'class 10', 'class 12', 'marks',
-             'academics', 'studied', 'study', 'studies', 'graduated', 'qualification', 'school'],
+    timeline: {
+      q: 'Give me your experience timeline',
+      label: 'Experience timeline',
+      terms: 'timeline experience history career when did you start how long years ' +
+             'previous jobs internship edumentor employment work history cv path progression',
+      boost: ['timeline', 'experience', 'how long have you'],
       html:
-        '<p>BSc (Hons) Computer Science with a minor in Mathematics, Aryabhatta College, University of Delhi.</p>' +
-        figs([['96%', 'Class 12'], ['97%', 'Class 10']]),
-      chips: ['about', 'why', 'work']
+        '<p><b>FinZ (PhysicsWallah), Noida. December 2024 to now.</b> Product strategy on Employee Financing. Launched the vertical from concept and scaled it to &#8377;3 Cr+ in monthly disbursal. Designed two loan products end to end, wrote the CIBIL based credit policy, and own ESOP Financing operations across credit, NBFC and depository stakeholders. Built the two internal systems on this site along the way.</p>' +
+        '<p><b>Edumentor Educational Services. April to June 2023.</b> Zonal Manager intern. Scoped and delivered a one month student engagement programme, and ran a 20 to 25 member team executing daily operations for a multi-centre activation.</p>' +
+        '<p><b>University of Delhi. 2021 to 2024.</b> BSc (Hons) Computer Science, minor in Mathematics.</p>',
+      chips: ['education', 'work', 'resume']
+    },
+
+    skills: {
+      q: 'What are your skills?',
+      label: 'Skills and tools',
+      terms: 'skills tools stack technical abilities sql python power bi excel figma ' +
+             'what can you do capabilities competencies prd prds analytics data',
+      boost: ['your skills', 'what tools', 'tech stack'],
+      html:
+        '<p><b>Product.</b> 0 to 1 launches, PRDs, pricing constructs, user research, funnel metrics.</p>' +
+        '<p><b>Product operations.</b> Process automation, SOP design, reconciliation, exception handling, turnaround time reporting.</p>' +
+        '<p><b>AI and data.</b> Claude API, LLM prompt engineering, evaluation design, SQL, Python, Power BI.</p>' +
+        '<p><b>Domain.</b> Consumer lending, underwriting, collections, compliance workflows, payroll integrations.</p>' +
+        '<p>The computer science degree is why the AI-directed build worked. I can read what it writes, which is the difference between directing a build and hoping.</p>',
+      chips: ['ai', 'certs', 'education']
+    },
+
+    certs: {
+      q: 'What certifications do you have?',
+      label: 'Certifications',
+      terms: 'certifications certificates courses coursera google hackerrank pwc credentials qualifications',
+      boost: ['certifications', 'certificates'],
+      html:
+        '<p>Google Data Analytics (Coursera). Data Analysis and Presentation Skills, a five course specialisation (PwC). SQL (HackerRank).</p>' +
+        '<p>None of them taught me as much as being responsible for a loan book, but they are on the resume and they are real.</p>',
+      chips: ['skills', 'education', 'resume']
+    },
+
+    education: {
+      q: 'What did you study?',
+      label: 'Education',
+      terms: 'education college degree university studied study studies graduate graduation ' +
+             'class 10 class 12 marks school academics delhi aryabhatta computer science',
+      boost: ['did you study', 'education', 'your degree', 'class 12', 'class 10'],
+      html:
+        '<p>BSc (Hons) Computer Science with a minor in Mathematics, Aryabhatta College, University of Delhi, 2021 to 2024. Coursework included machine learning, artificial intelligence, data structures and algorithms, SQL and DBMS, and Python data analysis.</p>' +
+        figs([['96%', 'Class 12'], ['97%', 'Class 10']]) +
+        '<p>Schooling at RLB Group of Schools, Lucknow.</p>',
+      chips: ['skills', 'timeline', 'why']
     },
 
     why: {
-      keys: ['why hire', 'why should', 'why you', 'what are you looking for', 'next role',
-             'what do you want', 'strengths', 'good fit', 'sell yourself', 'pitch'],
+      q: 'Why should we hire you?',
+      label: 'Why hire you',
+      terms: 'why should we hire you why you what are you looking for next role ' +
+             'what do you want strengths good fit sell yourself pitch value add ' +
+             'why are you a good candidate convince me',
+      boost: ['should we hire', 'hire you', 'looking for', 'why you'],
       html:
         '<p>Three things, and you can check all of them on this site.</p>' +
-        '<p><b>I own outcomes, not screens.</b> The credit policy I drafted exists to move one number, the collection rate, by declining the wrong loans early rather than chasing them later. That is a business decision expressed as a product.</p>' +
+        '<p><b>I own outcomes, not screens.</b> The credit policy I drafted exists to move one number, the collection rate, by declining the wrong loans early rather than chasing them later. Defaults sit at 1.5 to 2%. That is a business decision expressed as a product.</p>' +
         '<p><b>I ship.</b> 108 production deployments over four months on the ESOP Repository, built solo and alongside my regular work. 220 automated tests and 86 commits over three and a half weeks on the Financing OS.</p>' +
         '<p><b>I am honest about what I do not know.</b> Both case studies list their limitations, including the ones that make the numbers less impressive. I would rather be trusted on the figures I do give.</p>' +
-        '<p>What I want is a product role where the correctness bar is part of the job. Fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>',
+        '<p>What I want is a product role where the correctness bar is part of the job. AI-native products, fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>',
       chips: ['limits', 'numbers', 'contact']
     },
 
-    contact: {
-      keys: ['contact', 'email', 'reach', 'get in touch', 'linkedin', 'phone', 'call', 'talk',
-             'connect', 'hire me', 'where are you', 'based', 'location', 'delhi', 'city'],
+    switch: {
+      q: 'Why product and not engineering?',
+      label: 'Why product',
+      terms: 'why product not engineering switch move career change why did you choose ' +
+             'computer science developer coder why not software',
+      boost: ['why product', 'not engineering', 'not be an engineer', 'switch from'],
       html:
-        '<p>I would love to talk. I am open to conversations about product roles in fintech, AI-native product work and internal platform teams.</p>' +
-        VCARD,
-      chips: ['why', 'work', 'logistics']
+        '<p>I read computer science, so engineering was the obvious road. I did not take it because the decisions I found interesting were not in the code.</p>' +
+        '<p>Whether to lend someone money, at what limit, and what to do when the repayment falls short is not an engineering question. It is a product question with a balance sheet attached. The degree still earns its keep every day: it is why I can direct AI to build a system and then catch the three data bugs that would otherwise have produced a confident wrong answer.</p>',
+      chips: ['ai', 'about', 'why']
+    },
+
+    stakeholders: {
+      q: 'Who do you work with?',
+      label: 'Stakeholders',
+      terms: 'stakeholders teams who do you work with collaborate cross functional ' +
+             'engineering design operations compliance nbfc depository payroll lenders partners',
+      boost: ['stakeholders', 'who do you work with'],
+      html:
+        '<p>More external than most product roles. ESOP Financing runs across credit, an NBFC and a depository, and none of them share a system with us, which is exactly why the reconciliation views in the first case study exist.</p>' +
+        '<p>Internally: the FinZ operations team, who answer questions about individual loans daily and are the real users of both systems; payroll, who confirm what was actually deducted each month, which is never quite what was requested; and a compliance officer who has to approve every share release for a Designated Person before it happens.</p>',
+      chips: ['esop', 'efos', 'dayjob']
     },
 
     logistics: {
-      keys: ['notice period', 'notice', 'salary', 'compensation', 'ctc', 'expected', 'remote',
-             'relocate', 'relocation', 'work from home', 'hybrid', 'availability',
-             'when can you start', 'start date', 'joining'],
+      q: 'Are you open to remote roles?',
+      label: 'Remote, notice and pay',
+      terms: 'remote remotely work from home wfh hybrid onsite relocate relocation ' +
+             'notice period joining start date availability salary compensation ctc pay ' +
+             'expected package expectation expectations negotiable when can you join ' +
+             'how much do you want budget band offer',
+      boost: ['open to remote', 'notice period', 'expected salary', 'salary expectation', 'compensation', 'work from home'],
       html:
         '<p><b>Remote.</b> Yes. I have spent more than twenty months building a lending product with the people who use it sitting in a different city, so I am well past needing a desk next to anyone.</p>' +
         '<p><b>Notice period.</b> 20 to 30 days.</p>' +
@@ -271,29 +442,56 @@
       chips: ['contact', 'why', 'work']
     },
 
+    location: {
+      q: 'Where are you based?',
+      label: 'Location',
+      terms: 'where are you based location city live delhi ncr noida india timezone',
+      boost: ['where are you based', 'which city'],
+      html:
+        '<p>Delhi NCR. The FinZ office is in Noida. Open to remote, and used to working with the people who use the product sitting somewhere else.</p>',
+      chips: ['logistics', 'contact']
+    },
+
+    contact: {
+      q: 'How do I get in touch?',
+      label: 'Get in touch',
+      terms: 'contact email reach get in touch linkedin phone whatsapp call talk connect ' +
+             'hire me message speak dm how do i contact you',
+      boost: ['get in touch', 'contact you', 'reach you'],
+      html:
+        '<p>I would love to talk. I am open to conversations about AI-native product roles, fintech, and internal platform teams.</p>' + VCARD,
+      chips: ['why', 'work', 'logistics']
+    },
+
     resume: {
-      keys: ['resume', 'cv', 'download', 'pdf', 'one pager'],
+      q: 'Can I see your resume?',
+      label: 'Resume',
+      terms: 'resume cv download pdf one pager curriculum vitae send me your resume',
+      boost: ['your resume', 'your cv', 'download resume'],
       html:
         '<p>Here it is. One page: FinZ and the employee lending vertical, the two systems, and the skills behind them. The case studies go a good deal further, mostly because they are not obliged to fit on one page.</p>' +
         '<div class="vcard"><h3>Veronica Singh, resume</h3>' +
         '<p>PDF, one page. Product Strategy, Employee Financing at FinZ.</p>' +
         '<div class="reach"><a class="primary" href="' + CV + '" download>' + DL_SVG + 'Download resume (PDF)</a>' +
         '<a href="' + LI + '" rel="me noopener" target="_blank">' + IN_SVG + 'LinkedIn</a></div></div>',
-      chips: ['work', 'why', 'contact']
+      chips: ['timeline', 'why', 'contact']
     },
 
     recruiter: {
-      keys: ['recruiter', '90 second', 'ninety second', 'summary', 'summarise', 'summarize',
-             'quick version', 'tldr', 'overview', 'scan', 'brief', 'short version'],
+      q: 'Give me the 90 second version',
+      label: 'The 90 second version',
+      terms: 'recruiter mode 90 second ninety second summary summarise summarize quick version ' +
+             'tldr tl dr overview scan brief short version give me the gist fast',
+      boost: ['recruiter mode', '90 second', 'tldr', 'summary', 'the gist'],
       html:
         '<p>No fluff. Here is the scan-friendly version.</p>' +
         '<div class="scan">' +
         '<h3>' + bolt() + 'Veronica in 90 seconds</h3>' +
         '<ul>' +
-        '<li>Product strategy, Employee Financing at FinZ, the fintech vertical at PhysicsWallah. Delhi NCR.</li>' +
+        '<li>Product Strategy, Employee Financing at FinZ, the fintech vertical at PhysicsWallah. Delhi NCR, open to remote.</li>' +
         '<li>20+ months building an employee lending product from scratch: eligibility, pricing, repayment and collections.</li>' +
-        '<li>&#8377;3 Cr+ disbursed monthly, &#8377;34 Cr active loan book, 4,500+ employees served.</li>' +
-        '<li>Drafted the CIBIL based credit policy that decides who qualifies and at what limit.</li>' +
+        '<li>&#8377;3 Cr+ disbursed monthly, &#8377;34 Cr active loan book, 4,500+ employees served, defaults held at 1.5 to 2%.</li>' +
+        '<li>Wrote the CIBIL based credit policy that decides who qualifies and at what limit, replacing manual review with rule based eligibility.</li>' +
         '<li>Owns two products: ESOP Financing and Employee Financing.</li>' +
         '<li>ESOP Loan Repository, live: eleven spreadsheets across five teams replaced with one system of record. 108 production deployments in four months, built solo.</li>' +
         '<li>Employee Financing Process OS, in build: the monthly cycle for 2,886 employees and two lenders. 220 automated tests, 86 commits, three and a half weeks.</li>' +
@@ -303,55 +501,142 @@
         '</ul>' +
         '</div>',
       chips: ['why', 'numbers', 'limits', 'contact']
+    },
+
+    hello: {
+      q: 'Hello',
+      label: 'Say hello',
+      terms: 'hi hello hey good morning good evening namaste thanks thank you cheers ' +
+             'nice to meet you sup yo greetings',
+      boost: ['hello', 'thank you'],
+      html:
+        '<p>Hello. Ask me anything about the lending product I own, the two systems I built for it, the numbers behind them, or the parts that did not work.</p>' +
+        '<p>If you are recruiting, the fastest route is the 90 second version.</p>',
+      chips: ['recruiter', 'best', 'numbers', 'contact']
+    },
+
+    capabilities: {
+      q: 'What can I ask you?',
+      label: 'What can I ask?',
+      terms: 'what can i ask help topics options how does this work are you an ai ' +
+             'are you a bot are you a real person is this real human chatgpt',
+      boost: ['can i ask', 'are you an ai', 'are you a bot', 'real person', 'how does this work'],
+      html:
+        '<p>Anything on this site, which is: the lending book and how it is priced and collected, the two systems I built, the numbers, how I use AI, my background and education, and the practical questions about hiring me.</p>' +
+        '<p>To be straight with you, I am not a model. Every reply here was written by Veronica in advance and matched to your question. That is deliberate: a model would eventually state a figure about her work that nobody can defend in an interview, and this whole site is built on the opposite promise.</p>',
+      chips: ['recruiter', 'work', 'numbers', 'contact']
     }
   };
 
-  var LABEL = {
-    about: 'About Veronica', best: 'Best project', work: 'The work',
-    esop: 'ESOP Repository', efos: 'Financing OS', ai: 'How you use AI',
-    credit: 'Credit policy', numbers: 'The numbers', principles: 'How you think',
-    limits: 'What did not work', education: 'Education', why: 'Why hire you',
-    contact: 'Get in touch', logistics: 'Remote, notice and pay', resume: 'Resume',
-    recruiter: 'The 90 second version'
-  };
+  /* ============================================================
+     RETRIEVAL
+     ============================================================ */
 
-  var ASKED = {
-    about: 'Tell me about yourself', best: 'What is your best project?',
-    work: 'Show me your work', esop: 'Tell me about the ESOP Loan Repository',
-    efos: 'Tell me about the Employee Financing Process OS',
-    ai: 'How did you build it without engineers?',
-    credit: 'What does the credit policy do?', numbers: 'Show me the numbers',
-    principles: 'How do you think about product?', limits: 'What did not work?',
-    education: 'What did you study?', why: 'Why should we hire you?',
-    contact: 'How do I get in touch?', logistics: 'Are you open to remote roles?',
-    resume: 'Can I see your resume?', recruiter: 'Give me the 90 second version'
-  };
+  var STOP = ('a an the and or but if is are was were be been being do does did doing ' +
+    'to of in on at for with about into over after by from up down out so than then ' +
+    'that this these those it its i me my you your yours we us our he she they them ' +
+    'his her their have has had can could would should will shall may might must ' +
+    'what which who whom whose when where why how any some all more most other such ' +
+    'no nor not only own same too very just also as tell show give me please').split(' ');
+  var STOPSET = {};
+  for (var si = 0; si < STOP.length; si++) STOPSET[STOP[si]] = 1;
 
-  /* ---- matching --------------------------------------------- */
-
-  function esc(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
-
-  var COMPILED = [];
-  for (var id in A) {
-    if (!Object.prototype.hasOwnProperty.call(A, id)) continue;
-    var res = [];
-    for (var k = 0; k < A[id].keys.length; k++) {
-      var key = A[id].keys[k];
-      res.push({ re: new RegExp('\\b' + esc(key) + '\\b', 'i'), weight: key.length });
-    }
-    COMPILED.push({ id: id, res: res });
+  function norm(s) {
+    return String(s).toLowerCase()
+      .replace(/[‘’]/g, "'")
+      .replace(/[^a-z0-9%+.\s]/g, ' ')
+      .replace(/\s+/g, ' ').trim();
   }
 
-  function match(text) {
-    var bestId = null, bestScore = 0;
-    for (var i = 0; i < COMPILED.length; i++) {
-      var score = 0;
-      for (var j = 0; j < COMPILED[i].res.length; j++) {
-        if (COMPILED[i].res[j].re.test(text)) score += COMPILED[i].res[j].weight;
-      }
-      if (score > bestScore) { bestScore = score; bestId = COMPILED[i].id; }
+  function tokenise(s, keepStop) {
+    var raw = norm(s).split(' '), out = [];
+    for (var i = 0; i < raw.length; i++) {
+      var t = raw[i].replace(/\.$/, '');
+      if (!t) continue;
+      if (!keepStop && STOPSET[t]) continue;
+      out.push(t);
     }
-    return bestScore > 0 ? bestId : null;
+    return out;
+  }
+
+  /* true when a and b differ by at most one edit, counting a swap of two
+     neighbouring letters as one: "recuriter" is one slip, not two. */
+  function near(a, b) {
+    if (a.length === b.length) {
+      var d = [];
+      for (var x = 0; x < a.length; x++) if (a.charAt(x) !== b.charAt(x)) d.push(x);
+      if (d.length === 2 && d[1] === d[0] + 1 &&
+          a.charAt(d[0]) === b.charAt(d[1]) && a.charAt(d[1]) === b.charAt(d[0])) return true;
+    }
+    return near1(a, b);
+  }
+
+  function near1(a, b) {
+    if (a === b) return true;
+    var la = a.length, lb = b.length;
+    if (Math.abs(la - lb) > 1) return false;
+    var i = 0, j = 0, edits = 0;
+    while (i < la && j < lb) {
+      if (a.charAt(i) === b.charAt(j)) { i++; j++; continue; }
+      if (++edits > 1) return false;
+      if (la > lb) i++; else if (lb > la) j++; else { i++; j++; }
+    }
+    if (i < la || j < lb) edits++;
+    return edits <= 1;
+  }
+
+  var IDS = [], DF = {}, INDEX = {};
+  for (var id in A) {
+    if (!Object.prototype.hasOwnProperty.call(A, id)) continue;
+    IDS.push(id);
+    var toks = tokenise(A[id].terms + ' ' + A[id].q + ' ' + A[id].label);
+    var seen = {};
+    for (var k = 0; k < toks.length; k++) seen[toks[k]] = 1;
+    INDEX[id] = seen;
+    for (var t in seen) DF[t] = (DF[t] || 0) + 1;
+  }
+  var N = IDS.length;
+  function idf(t) {
+    var df = DF[t];
+    if (!df) return 0;
+    return Math.log(1 + N / df);
+  }
+
+  function rank(query) {
+    var qn = norm(query);
+    var qt = tokenise(query);
+    if (!qt.length) qt = tokenise(query, true);
+    var scored = [];
+    for (var i = 0; i < IDS.length; i++) {
+      var id = IDS[i], set = INDEX[id], s = 0;
+      for (var j = 0; j < qt.length; j++) {
+        var q = qt[j], best = 0;
+        for (var tt in set) {
+          var v = 0;
+          if (tt === q) v = 1;
+          else if (q.length >= 4 && tt.length >= 4 &&
+                   (tt.indexOf(q) === 0 || q.indexOf(tt) === 0)) v = 0.82;
+          else if (q.length >= 5 && tt.length >= 5 && near(q, tt)) v = 0.62;
+          /* The weight is the matched term's rarity, not the typed token's.
+             A typo is by definition absent from the index, so weighting by
+             the query token scored every misspelling at zero. */
+          if (v) { var sc = v * idf(tt); if (sc > best) best = sc; }
+        }
+        s += best;
+      }
+      var boosts = A[id].boost || [];
+      for (var b = 0; b < boosts.length; b++) {
+        if (qn.indexOf(boosts[b]) !== -1) s += 3.2;
+      }
+      scored.push([id, s]);
+    }
+    scored.sort(function (x, y) { return y[1] - x[1]; });
+    return scored;
+  }
+
+  function match(query) {
+    var r = rank(query);
+    return (r[0] && r[0][1] >= 1.15) ? r[0][0] : null;
   }
 
   /* ---- rendering -------------------------------------------- */
@@ -363,8 +648,6 @@
 
   function toBottom() { scroll.scrollTop = scroll.scrollHeight; }
 
-  /* Put the question the visitor just asked at the top of the view, so a long
-     answer is read from its first line rather than from its last. */
   function anchor(el) {
     if (!el) { toBottom(); return; }
     scroll.scrollTop += el.getBoundingClientRect().top -
@@ -375,8 +658,9 @@
     if (!ids || !ids.length) return '';
     var out = '<div class="asks">';
     for (var i = 0; i < ids.length; i++) {
-      if (!LABEL[ids[i]]) continue;
-      out += '<button class="askchip" type="button" data-ask="' + ids[i] + '">' + LABEL[ids[i]] + '</button>';
+      if (!A[ids[i]]) continue;
+      out += '<button class="askchip" type="button" data-ask="' + ids[i] + '">' +
+             A[ids[i]].label + '</button>';
     }
     return out + '</div>';
   }
@@ -406,15 +690,26 @@
     return wrap.querySelector('.body');
   }
 
-  var FALLBACK =
-    '<p>That is not something I have a written answer for. I could improvise, but improvising around numbers is exactly how lending products go wrong, so I will not.</p>' +
-    '<p>Try one of these, or ask me directly and I will answer properly.</p>' +
-    REACH;
+  /* Nothing scored well enough. Say so, and offer the nearest topics
+     rather than inventing an answer to a question nobody wrote. */
+  function fallback(query) {
+    var r = rank(query);
+    /* Only call them "closest" when something actually scored. On a query
+       with no overlap at all, the top of a flat ranking is arbitrary, and
+       presenting it as related would be its own small lie. */
+    var related = r[0] && r[0][1] >= 0.45;
+    var ids = related
+      ? r.slice(0, 3).map(function (x) { return x[0]; })
+      : ['best', 'work', 'numbers', 'why', 'contact'];
+    return '<p>That is not something I have a written answer for. I could improvise, but improvising around numbers is exactly how lending products go wrong, so I will not.</p>' +
+           '<p>' + (related ? 'The closest things I do have:' : 'Here is what I can cover:') + '</p>' +
+           chipRow(ids) +
+           '<p style="margin-top:1rem">Or ask me directly and I will answer properly.</p>' + REACH;
+  }
 
-  function answer(id, from) {
+  function answer(id, from, query) {
     var body = shell();
-    var html = A[id] ? A[id].html + chipRow(A[id].chips)
-                     : FALLBACK + chipRow(['best', 'work', 'numbers', 'why', 'contact']);
+    var html = A[id] ? A[id].html + chipRow(A[id].chips) : fallback(query || '');
     var paint = function () {
       var fresh = document.createElement('div');
       fresh.className = 'body';
@@ -422,20 +717,18 @@
       body.parentNode.replaceChild(fresh, body);
       anchor(from);
     };
-    /* Long enough that the Thinking state is actually seen. The replies are
-       written, not generated, which the rail says plainly. */
     window.setTimeout(paint, reduce ? 350 : 700);
   }
 
   function ask(id, spoken) {
     if (id === 'reset') { reset(); return; }
-    answer(id, youSaid(spoken || ASKED[id] || LABEL[id] || id));
+    answer(id, youSaid(spoken || (A[id] && A[id].q) || id));
   }
 
   function send(text) {
     text = text.replace(/\s+/g, ' ').trim();
     if (!text) return;
-    answer(match(text.toLowerCase()), youSaid(text));
+    answer(match(text), youSaid(text), text);
   }
 
   /* ---- wiring ------------------------------------------------ */
@@ -468,38 +761,26 @@
     send(v);
   });
 
-  /* recruiter mode */
   var rec = document.getElementById('rec');
-
   rec.addEventListener('change', function () {
     if (rec.checked) ask('recruiter', 'Recruiter mode');
   });
 
-  /* night mode. Follows the system by default; the toggle overrides it for
-     this visit. Persisting the choice would need localStorage, which this
-     site does not use. */
+  /* night mode. White is the default in every browser; the moon
+     switches it for this visit. Persisting the choice would need
+     localStorage, which this site does not use. */
   var themeBtn = document.getElementById('theme-toggle');
   var root = document.documentElement;
 
-  function systemDark() {
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  }
-  function isDark() {
-    var set = root.getAttribute('data-theme');
-    return set ? set === 'dark' : systemDark();
-  }
+  function isDark() { return root.getAttribute('data-theme') === 'dark'; }
   function syncThemeBtn() {
-    var dark = isDark();
-    themeBtn.setAttribute('aria-pressed', String(dark));
-    themeBtn.setAttribute('aria-label', dark ? 'Switch to day mode' : 'Switch to night mode');
+    themeBtn.setAttribute('aria-pressed', String(isDark()));
+    themeBtn.setAttribute('aria-label', isDark() ? 'Switch to day mode' : 'Switch to night mode');
   }
   themeBtn.addEventListener('click', function () {
     root.setAttribute('data-theme', isDark() ? 'light' : 'dark');
     syncThemeBtn();
   });
-  if (window.matchMedia) {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncThemeBtn);
-  }
   syncThemeBtn();
 
   /* mobile drawer */
@@ -517,6 +798,7 @@
     toggle.setAttribute('aria-expanded', 'true');
     backdrop.hidden = false;
   }
+
   if (window.matchMedia && window.matchMedia('(min-width: 60em) and (pointer: fine)').matches) {
     input.focus();
   }
