@@ -16,6 +16,8 @@
   var TEL = '+919555914534';
   var TELSHOW = '+91 95559 14534';
   var LI = 'https://www.linkedin.com/in/veronicasingh250803';
+  var WA = 'https://wa.me/919555914534';
+  var CV = 'assets/Veronica-Singh-Resume.pdf';
 
   var reduce = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -59,6 +61,8 @@
 
   var MAIL_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2.5 7 9.5 6 9.5-6"/></svg>';
   var IN_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>';
+  var WA_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 1.67c2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.25-8.25 8.25a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.39c0-4.54 3.7-8.24 8.24-8.24Zm-2.9 4.06c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.43s1.05 2.82 1.19 3.01c.15.2 2.03 3.1 4.93 4.23 2.41.95 2.9.76 3.43.71.52-.05 1.68-.69 1.92-1.35.24-.66.24-1.23.17-1.35-.07-.12-.27-.2-.56-.34-.29-.15-1.68-.83-1.94-.93-.26-.09-.45-.14-.64.15-.19.29-.73.93-.9 1.12-.16.2-.33.22-.61.08-.29-.15-1.21-.45-2.31-1.42-.85-.76-1.43-1.7-1.6-1.98-.16-.29-.02-.45.13-.59.13-.13.29-.34.44-.51.14-.17.19-.29.29-.49.1-.19.05-.37-.02-.51-.07-.15-.63-1.54-.88-2.1-.21-.5-.43-.5-.61-.51h-.53Z"/></svg>';
+  var DL_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>';
   var TEL_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>';
 
   var VCARD_HEAD =
@@ -69,7 +73,8 @@
     '<div class="reach">' +
     '<a class="primary" href="mailto:' + EMAIL + '">' + MAIL_SVG + 'Email Veronica</a>' +
     '<a href="' + LI + '" rel="me noopener" target="_blank">' + IN_SVG + 'LinkedIn</a>' +
-    '<a href="tel:' + TEL + '">' + TEL_SVG + TELSHOW + '</a>' +
+    '<a href="' + WA + '" rel="noopener" target="_blank">' + WA_SVG + 'WhatsApp</a>' +
+    '<a href="' + CV + '" download>' + DL_SVG + 'Resume</a>' +
     '</div>';
 
   var VCARD = VCARD_HEAD + REACH + '</div>';
@@ -267,8 +272,11 @@
     resume: {
       keys: ['resume', 'cv', 'download', 'pdf', 'one pager'],
       html:
-        '<p>There is no PDF on this site yet. The two case studies go a good deal further than a resume would, and LinkedIn carries the conventional version.</p>' +
-        REACH,
+        '<p>Here it is. One page: FinZ and the employee lending vertical, the two systems under Projects, and the skills behind them. The case studies on this site go a good deal further than a resume can.</p>' +
+        '<div class="vcard"><h3>Veronica Singh, resume</h3>' +
+        '<p>PDF, one page. Aspiring Product Manager, Employee Financing at FinZ.</p>' +
+        '<div class="reach"><a class="primary" href="' + CV + '" download>' + DL_SVG + 'Download resume (PDF)</a>' +
+        '<a href="' + LI + '" rel="me noopener" target="_blank">' + IN_SVG + 'LinkedIn</a></div></div>',
       chips: ['work', 'why', 'contact']
     },
 
@@ -389,8 +397,8 @@
     wrap.innerHTML =
       '<img class="face" src="img/avatar.jpg" alt="" width="320" height="320">' +
       '<div class="said"><p class="who">Veronica</p>' +
-      '<div class="body"><span class="dots" role="status"><span class="sr">Thinking</span>' +
-      '<i></i><i></i><i></i></span></div></div>';
+      '<div class="body"><span class="dots" role="status">' +
+      '<span class="think">Thinking</span><i></i><i></i><i></i></span></div></div>';
     thread.appendChild(wrap);
     toBottom();
     return wrap.querySelector('.body');
@@ -412,9 +420,9 @@
       body.parentNode.replaceChild(fresh, body);
       anchor(from);
     };
-    /* Short enough to read as rendering, not as a machine pretending to think.
-       There is no model here and the page should not imply one. */
-    if (reduce) paint(); else window.setTimeout(paint, 220);
+    /* Long enough that the Thinking state is actually seen. The replies are
+       written, not generated, which the rail says plainly. */
+    window.setTimeout(paint, reduce ? 350 : 700);
   }
 
   function ask(id, spoken) {
@@ -464,6 +472,33 @@
   rec.addEventListener('change', function () {
     if (rec.checked) ask('recruiter', 'Recruiter mode');
   });
+
+  /* night mode. Follows the system by default; the toggle overrides it for
+     this visit. Persisting the choice would need localStorage, which this
+     site does not use. */
+  var themeBtn = document.getElementById('theme-toggle');
+  var root = document.documentElement;
+
+  function systemDark() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function isDark() {
+    var set = root.getAttribute('data-theme');
+    return set ? set === 'dark' : systemDark();
+  }
+  function syncThemeBtn() {
+    var dark = isDark();
+    themeBtn.setAttribute('aria-pressed', String(dark));
+    themeBtn.setAttribute('aria-label', dark ? 'Switch to day mode' : 'Switch to night mode');
+  }
+  themeBtn.addEventListener('click', function () {
+    root.setAttribute('data-theme', isDark() ? 'light' : 'dark');
+    syncThemeBtn();
+  });
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncThemeBtn);
+  }
+  syncThemeBtn();
 
   /* mobile drawer */
   var side = document.getElementById('side');
