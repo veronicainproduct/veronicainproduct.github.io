@@ -59,7 +59,7 @@ def nav(current):
 FOOTER = """<footer class="site-footer">
   <div class="wrap">
     <div class="footer-inner">
-      <p class="colophon">&copy; 2026 Veronica Singh. Aspiring Product Manager, Delhi NCR.</p>
+      <p class="colophon">&copy; 2026 Veronica Singh. Product Strategy, Delhi NCR.</p>
       <a class="to-top" href="#main">Back to top</a>
     </div>
   </div>
@@ -282,7 +282,7 @@ hero = """<section class="hero">
         <li class="pill pill--tan">Product strategy</li>
       </ul>
       <h1 class="name">Veronica Singh</h1>
-      <p class="role">Aspiring Product Manager<br>Employee Financing, FinZ</p>
+      <p class="role">Product Strategy<br>Employee Financing, FinZ</p>
       <p class="hero-sub">More than twenty months building a lending product from scratch. We started with no book, no eligibility rules and no definite collections process. The product now disburses &#8377;3 Cr+ a month to PhysicsWallah employees, and I drafted the credit policy that made those collections work.</p>
       <div class="hero-cta">
         <a class="btn" href="projects.html">View the work</a>
@@ -324,7 +324,7 @@ about_preview = """<section class="tight">
   <div class="wrap">
     <div class="sec-head">
       <h2 class="sec-title">About Veronica</h2>
-      <p class="sec-intro">Aspiring Product Manager at FinZ, the fintech vertical at PhysicsWallah. Responsible for two products: ESOP Financing and Employee Financing.</p>
+      <p class="sec-intro">Product strategy at FinZ, the fintech vertical at PhysicsWallah. I own two products: ESOP Financing and Employee Financing.</p>
     </div>
     <div class="grid grid--3">
 """ + FACTS + """
@@ -347,7 +347,7 @@ work_preview = """<section>
 </section>"""
 
 page("index.html",
-     "Veronica Singh | Aspiring Product Manager, Employee Financing",
+     "Veronica Singh | Product Strategy, Employee Financing",
      "More than twenty months building a lending product from scratch at FinZ, the fintech vertical at PhysicsWallah. Now disbursing Rs 3 Cr+ a month to PhysicsWallah employees.",
      "index.html",
      hero + "\n" + stats() + "\n" + capabilities + "\n"
@@ -362,7 +362,7 @@ about = """<section>
     <a class="back-link" href="index.html">Back to home</a>
     <div class="page-head">
       <h1>About Veronica</h1>
-      <p class="lede">Aspiring Product Manager at FinZ, the fintech vertical at PhysicsWallah. Responsible for two products: ESOP Financing and Employee Financing. Based in Delhi NCR.</p>
+      <p class="lede">Product strategy at FinZ, the fintech vertical at PhysicsWallah. I own two products: ESOP Financing and Employee Financing. Based in Delhi NCR.</p>
     </div>
 
     <div class="prose">

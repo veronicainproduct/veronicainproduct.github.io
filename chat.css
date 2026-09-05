@@ -414,8 +414,8 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
   .avail{font-size:var(--t-micro)}
   .topbar .home-link span{display:none}
   .topbar .home-link{padding:.55rem .7rem}
-  /* the rail already carries this link, and four controls do not fit at 320px */
-  .home-link--page{display:none}
+  /* the rail no longer carries this link, so the top bar keeps it at every
+     width. It fits because the status line truncates instead of pushing. */
   .proj-art{padding:1.1rem 1.1rem 0}
 }
 

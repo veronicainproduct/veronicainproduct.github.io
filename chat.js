@@ -67,7 +67,7 @@
 
   var VCARD_HEAD =
     '<div class="vcard"><h3>Veronica Singh</h3>' +
-    '<p>Aspiring Product Manager, Employee Financing at FinZ. Delhi NCR.</p>';
+    '<p>Product Strategy, Employee Financing at FinZ. Delhi NCR.</p>';
 
   var REACH =
     '<div class="reach">' +
@@ -110,7 +110,7 @@
              'your story', 'introduce', 'yourself', 'bio'],
       html:
         '<p>I did not arrive at product through a product title. I arrived by owning a lending book: its eligibility rules, its pricing, its repayment mechanics and its collections. Then I built the systems that keep it honest.</p>' +
-        '<p>Today I am an aspiring product manager at FinZ, the fintech vertical at PhysicsWallah, responsible for two products. <b>ESOP Financing</b> lends against pledged ESOP shares so employees can pay the exercise tax before the shares turn into cash. <b>Employee Financing</b> is salary advance and top-up loans, recovered from monthly pay through payroll deduction.</p>' +
+        '<p>Today I work on product strategy at FinZ, the fintech vertical at PhysicsWallah, and I own two products. <b>ESOP Financing</b> lends against pledged ESOP shares so employees can pay the exercise tax before the shares turn into cash. <b>Employee Financing</b> is salary advance and top-up loans, recovered from monthly pay through payroll deduction.</p>' +
         '<p>What I am working towards is a product role where the correctness bar is part of the job. Fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>',
       chips: ['principles', 'work', 'education', 'contact']
     },
@@ -276,7 +276,7 @@
       html:
         '<p>Here it is. One page: FinZ and the employee lending vertical, the two systems, and the skills behind them. The case studies go a good deal further, mostly because they are not obliged to fit on one page.</p>' +
         '<div class="vcard"><h3>Veronica Singh, resume</h3>' +
-        '<p>PDF, one page. Aspiring Product Manager, Employee Financing at FinZ.</p>' +
+        '<p>PDF, one page. Product Strategy, Employee Financing at FinZ.</p>' +
         '<div class="reach"><a class="primary" href="' + CV + '" download>' + DL_SVG + 'Download resume (PDF)</a>' +
         '<a href="' + LI + '" rel="me noopener" target="_blank">' + IN_SVG + 'LinkedIn</a></div></div>',
       chips: ['work', 'why', 'contact']
@@ -290,7 +290,7 @@
         '<div class="scan">' +
         '<h3>' + bolt() + 'Veronica in 90 seconds</h3>' +
         '<ul>' +
-        '<li>Aspiring Product Manager at FinZ, the fintech vertical at PhysicsWallah. Delhi NCR.</li>' +
+        '<li>Product strategy, Employee Financing at FinZ, the fintech vertical at PhysicsWallah. Delhi NCR.</li>' +
         '<li>20+ months building an employee lending product from scratch: eligibility, pricing, repayment and collections.</li>' +
         '<li>&#8377;3 Cr+ disbursed monthly, &#8377;34 Cr active loan book, 4,500+ employees served.</li>' +
         '<li>Drafted the CIBIL based credit policy that decides who qualifies and at what limit.</li>' +
