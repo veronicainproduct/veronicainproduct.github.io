@@ -131,7 +131,7 @@
       keys: ['your work', 'the work', 'projects', 'case study', 'case studies', 'portfolio',
              'what have you built', 'what did you build', 'show me your work', 'everything'],
       html:
-        '<p>Two case studies, one through-line: I take a process running on spreadsheets and turn it into a system of record. Both were built for a book that moves real money. One is live, one is in build.</p>' +
+        '<p>Two case studies, one through-line: I take a process running on eleven spreadsheets and turn it into one system of record. Both were built for a book that moves real money, which is a good way to find out quickly whether your product works. One is live, one is in build.</p>' +
         ESOP_CARD + EFOS_CARD,
       chips: ['esop', 'efos', 'best']
     },
@@ -173,7 +173,7 @@
         '<li>Dates stored day first as text were being misread, which quietly made payments vanish from schedules.</li>' +
         '<li>133 of 333 confiscations sat against cancelled orders, invisible to anything that only loaded completed ones.</li>' +
         '</ul>' +
-        '<p>None of those crash. They produce a confident wrong answer, which is far more dangerous in a system people trust with money.</p>' +
+        '<p>None of those crash. That is the problem. They produce a confident wrong answer, which is the most expensive kind, and the only sort that survives a demo.</p>' +
         pull('Directing AI is what made the building fast. Knowing what to check is what made it correct.'),
       chips: ['esop', 'limits', 'principles']
     },
@@ -223,7 +223,7 @@
       keys: ['limitation', 'limitations', 'what did not work', 'went wrong', 'failure', 'failed',
              'mistake', 'mistakes', 'weakness', 'weaknesses', 'honest', 'caveat', 'gaps'],
       html:
-        pull('Both case studies carry a section I did not have to write.') +
+        pull('Both case studies carry a section I did not have to write. It is the section I would read first.') +
         '<p><b>ESOP Loan Repository.</b> I never instrumented the manual baseline, so I can show what the system catches but not a clean time saved figure. Refresh is slow on the largest sheets. The tool mirrors upstream data it does not control, which is precisely why the reconciliation views exist. And one person built it, so it needs a documented handover.</p>' +
         '<p><b>Employee Financing Process OS.</b> Not yet in daily production use. The live updates work is only partly done, with polling still running in parallel on purpose. Imports are file based because no reliable LMS API was available to integrate against. Until it runs a real month end, the time it saves is an estimate rather than a measurement.</p>',
       chips: ['esop', 'efos', 'principles']
@@ -256,23 +256,25 @@
       html:
         '<p>I would love to talk. I am open to conversations about product roles in fintech, AI-native product work and internal platform teams.</p>' +
         VCARD,
-      chips: ['why', 'work', 'unstated']
+      chips: ['why', 'work', 'logistics']
     },
 
-    unstated: {
-      keys: ['notice period', 'salary', 'compensation', 'ctc', 'expected', 'remote', 'relocate',
-             'relocation', 'availability', 'when can you start', 'visa', 'references'],
+    logistics: {
+      keys: ['notice period', 'notice', 'salary', 'compensation', 'ctc', 'expected', 'remote',
+             'relocate', 'relocation', 'work from home', 'hybrid', 'availability',
+             'when can you start', 'start date', 'joining'],
       html:
-        '<p>This site does not say, and I would rather not put a number here that I cannot stand behind in the same way as the others.</p>' +
-        '<p>Notice period, compensation, location flexibility and start dates are all best asked directly, and I will answer them straight.</p>' +
+        '<p><b>Remote.</b> Yes. I have spent more than twenty months building a lending product with the people who use it sitting in a different city, so I am well past needing a desk next to anyone.</p>' +
+        '<p><b>Notice period.</b> 20 to 30 days.</p>' +
+        '<p><b>Pay.</b> Best discussed on a call. It is the one number on this site I would rather not publish, and unlike the others it is genuinely negotiable.</p>' +
         REACH,
-      chips: ['contact', 'why']
+      chips: ['contact', 'why', 'work']
     },
 
     resume: {
       keys: ['resume', 'cv', 'download', 'pdf', 'one pager'],
       html:
-        '<p>Here it is. One page: FinZ and the employee lending vertical, the two systems under Projects, and the skills behind them. The case studies on this site go a good deal further than a resume can.</p>' +
+        '<p>Here it is. One page: FinZ and the employee lending vertical, the two systems, and the skills behind them. The case studies go a good deal further, mostly because they are not obliged to fit on one page.</p>' +
         '<div class="vcard"><h3>Veronica Singh, resume</h3>' +
         '<p>PDF, one page. Aspiring Product Manager, Employee Financing at FinZ.</p>' +
         '<div class="reach"><a class="primary" href="' + CV + '" download>' + DL_SVG + 'Download resume (PDF)</a>' +
@@ -309,7 +311,7 @@
     esop: 'ESOP Repository', efos: 'Financing OS', ai: 'How you use AI',
     credit: 'Credit policy', numbers: 'The numbers', principles: 'How you think',
     limits: 'What did not work', education: 'Education', why: 'Why hire you',
-    contact: 'Get in touch', unstated: 'Notice period and pay', resume: 'Resume',
+    contact: 'Get in touch', logistics: 'Remote, notice and pay', resume: 'Resume',
     recruiter: 'The 90 second version'
   };
 
@@ -321,7 +323,7 @@
     credit: 'What does the credit policy do?', numbers: 'Show me the numbers',
     principles: 'How do you think about product?', limits: 'What did not work?',
     education: 'What did you study?', why: 'Why should we hire you?',
-    contact: 'How do I get in touch?', unstated: 'What about notice period and pay?',
+    contact: 'How do I get in touch?', logistics: 'Are you open to remote roles?',
     resume: 'Can I see your resume?', recruiter: 'Give me the 90 second version'
   };
 
@@ -405,7 +407,7 @@
   }
 
   var FALLBACK =
-    '<p>That is not something I have a written answer for, and this page does not guess. It only says what is already documented on the site.</p>' +
+    '<p>That is not something I have a written answer for. I could improvise, but improvising around numbers is exactly how lending products go wrong, so I will not.</p>' +
     '<p>Try one of these, or ask me directly and I will answer properly.</p>' +
     REACH;
 
