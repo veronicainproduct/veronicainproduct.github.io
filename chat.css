@@ -85,13 +85,6 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
 }
 .try:hover{border-color:var(--ink)}
 
-/* the claim the page rests on */
-.creed{
-  padding-top:.9rem;margin-top:.9rem;border-top:var(--border);
-  font-size:11px;line-height:1.5;color:var(--muted);
-}
-.creed b{display:block;color:var(--ink);margin-bottom:.2rem;font-size:var(--t-small)}
-
 /* recruiter mode */
 .rec{
   margin-top:.9rem;
