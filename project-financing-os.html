@@ -50,7 +50,7 @@
     </div>
 
     <article class="prose">
-      <h3>The month, as it works today</h3>
+      <h2>The month, as it works today</h2>
       <p>Every month around 2,886 PhysicsWallah employees repay a loan out of their salary. Before any of that money moves, somebody has to do all of this by hand.</p>
       <ol class="steps">
         <li>Build the deduction summary for the month.</li>
@@ -62,13 +62,13 @@
       </ol>
       <p>Every step of it lives in spreadsheets and email threads.</p>
 
-      <h3>Where it goes wrong</h3>
+      <h2>Where it goes wrong</h2>
       <p>Three things went wrong repeatedly, and none of them announced themselves.</p>
       <p><strong>A mis-keyed figure becomes a wrong invoice.</strong> Nothing in the process is capable of noticing. The number is simply wrong from that point on, and it is wrong in a document that has already been sent to another company.</p>
       <p><strong>There is no audit trail.</strong> An error that surfaces in month N+2 cannot be traced back to who changed what in month N. The answer is always somebody trying to remember.</p>
       <p><strong>Loan IDs collide across lenders.</strong> FinZ and Prest each maintain their own ID space, so the same number means two different loans depending on who you ask. That is how a payment gets applied to the wrong loan on the wrong system, and it is very hard to spot afterwards.</p>
 
-      <h3>What I specified</h3>
+      <h2>What I specified</h2>
       <p>One system for the whole cycle, with three decisions doing most of the work.</p>
       <ol class="decisions">
         <li>
@@ -85,11 +85,11 @@
         </li>
       </ol>
 
-      <h3>Where it stands</h3>
+      <h2>Where it stands</h2>
       <p>This is a work in progress and it is not yet launched. It has been built and validated against real production data locally, with 220 automated tests and 86 commits over three and a half weeks. The monthly scheduler exists but is deliberately switched off, pending a go live decision.</p>
 
       <div class="limits">
-        <h3>Honest limitations</h3>
+        <h2>Honest limitations</h2>
         <p>Not yet in daily production use. The live updates work is only partly done, with polling still running in parallel on purpose. Imports are file based because no reliable LMS API was available to integrate against. Until it runs a real month end, the time it saves is an estimate rather than a measurement.</p>
       </div>
     </article>

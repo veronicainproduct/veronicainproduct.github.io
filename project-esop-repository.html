@@ -60,7 +60,7 @@
         <div class="shot"><img src="img/esop-repository.png" alt="The ESOP Loan Repository dashboard showing loan counts, the working tabs and the repayment schedule" loading="lazy"></div>
       </figure>
       <div class="step-body">
-        <h3>Eleven spreadsheets became one system of record</h3>
+        <h2>Eleven spreadsheets became one system of record</h2>
         <p>Interest accrual, share sales, repayment, surplus refunds and share release each lived in a different file owned by a different team. Nobody could answer what a borrower owed today without opening several of them and reconciling by hand.</p>
         <p>This screen computes every repayment schedule from a single canonical formula, joined across eleven live sources. The tab bar is the point: one working surface for each real job, rather than one spreadsheet per team. Bank reconciliation parses to &#8377;64,05,97,403 and matches the bank&rsquo;s own summary.</p>
       </div>
@@ -70,7 +70,7 @@
         <div class="shot"><img src="img/esop-unpledge.png" alt="Shares to Unpledge tab showing the count of loans cleared for release and the total shares to be unpledged" loading="lazy"></div>
       </figure>
       <div class="step-body">
-        <h3>Collateral is released on evidence, never on a status flag</h3>
+        <h2>Collateral is released on evidence, never on a status flag</h2>
         <p>Releasing pledged shares cannot be undone. In the original process a loan qualified for release if a spreadsheet field said Closed, which meant a human editable cell was authorising an irreversible transfer of collateral.</p>
         <p>I removed that path. This queue keys only on evidence that cash was actually recovered, so a loan appears here because the money arrived, not because somebody ticked a box. The tradeoff I accepted: a loan genuinely repaid through an unrecorded channel waits until the payment is logged. Failing to release on time is a support ticket. Releasing collateral wrongly is not.</p>
       </div>
@@ -80,7 +80,7 @@
         <div class="shot"><img src="img/esop-refunds.png" alt="Refunds tab showing loans with refunds pending, total refund amount, refund paid and refund outstanding" loading="lazy"></div>
       </figure>
       <div class="step-body">
-        <h3>Surplus owed back, tracked to the rupee</h3>
+        <h2>Surplus owed back, tracked to the rupee</h2>
         <p>When the proceeds of a share sale exceed what a borrower owes, the surplus has to go back to them. Who was owed a refund, how much, and whether it had actually been paid was spread across the same eleven files, which is exactly the kind of thing that goes unnoticed until someone asks.</p>
         <p>This view holds all of it in one place: refunds pending, the total owed, what has been paid and what is still outstanding. The reconciliation behind it is what surfaces the case nobody wants to find, a refund paid where none was owed.</p>
       </div>
@@ -88,7 +88,7 @@
     </div>
 
     <article class="prose">
-      <h3>How it was built</h3>
+      <h2>How it was built</h2>
       <p>I did not have an engineering team. I had a specification and a clear idea of what correct looked like, so I directed AI as the engineering layer and reviewed every step it took. That produced 108 production deployments over four months, built alongside my regular work.</p>
       <p>The part worth knowing is where the difficulty actually sat. Almost none of it was in the money maths, which is deterministic and easy. It was in reading the source data correctly.</p>
       <ol class="steps">
@@ -98,11 +98,11 @@
       </ol>
       <p>None of those crash. They produce a confident wrong answer, which is far more dangerous in a system people trust with money. Directing AI is what made the building fast. Knowing what to check is what made it correct.</p>
 
-      <h3>Compliance gates on the person, not the loan</h3>
+      <h2>Compliance gates on the person, not the loan</h2>
       <p>Designated Persons under insider trading rules may only have shares released with explicit approval. The original gate matched on Loan ID, but a Designated Person is a person, not a loan, so their other loans passed through as though unregulated. I re-gated on identity, matching by BO ID and Employee Code, and added two fail safes. If the compliance list cannot be read, block every release rather than silently letting them through. If a loan carries no identifier to check, hold it.</p>
 
       <div class="limits">
-        <h3>Honest limitations</h3>
+        <h2>Honest limitations</h2>
         <p>I never instrumented the manual baseline, so I can show what the system catches but not a clean time saved figure. Refresh is slow on the largest sheets. The tool mirrors upstream data it does not control, which is precisely why the reconciliation views exist. And one person built it, so it needs a documented handover.</p>
       </div>
     </article>

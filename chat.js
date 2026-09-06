@@ -54,7 +54,7 @@
     var body = '<div class="proj-body">';
     if (o.badge) body += '<span class="badge">' + o.badge + '</span>';
     body += '<p class="kicker">' + o.kicker + '</p>' +
-            '<h3>' + o.name + '</h3><p class="proj-sub">' + o.sub + '</p>';
+            '<h2>' + o.name + '</h2><p class="proj-sub">' + o.sub + '</p>';
     if (o.figs) body += figs(o.figs);
     body += '<a class="go" href="' + o.href + '">Read the case study ' + ARROW + '</a></div>';
     var art = o.shot
@@ -78,7 +78,7 @@
     '</div>';
 
   var VCARD =
-    '<div class="vcard"><h3>Veronica Singh</h3>' +
+    '<div class="vcard"><h2>Veronica Singh</h2>' +
     '<p>Product Strategy, Employee Financing at FinZ. Delhi NCR.</p>' + REACH + '</div>';
 
   var ESOP_CARD = proj({
@@ -470,7 +470,7 @@
       boost: ['your resume', 'your cv', 'download resume', 'her resume'],
       html:
         '<p>Here it is. One page: FinZ, the lending vertical, the two systems, and the skills behind them. The case studies go considerably further, mainly because they are not fighting for space on a single sheet.</p>' +
-        '<div class="vcard"><h3>Veronica Singh, resume</h3>' +
+        '<div class="vcard"><h2>Veronica Singh, resume</h2>' +
         '<p>PDF, one page. Product Strategy, Employee Financing at FinZ.</p>' +
         '<div class="reach"><a class="primary" href="' + CV + '" download>' + DL_SVG + 'Download resume (PDF)</a>' +
         '<a href="' + LI + '" rel="me noopener" target="_blank">' + IN_SVG + 'LinkedIn</a></div></div>',
@@ -486,7 +486,7 @@
       html:
         '<p>No fluff. The scan-friendly version.</p>' +
         '<div class="scan">' +
-        '<h3>' + bolt() + 'Veronica in 90 seconds</h3>' +
+        '<h2>' + bolt() + 'Veronica in 90 seconds</h2>' +
         '<ul>' +
         '<li>Product Strategy, Employee Financing at FinZ, the fintech vertical at PhysicsWallah. Delhi NCR, open to remote.</li>' +
         '<li>20+ months building an employee lending product from scratch: eligibility, pricing, repayment and collections.</li>' +
@@ -758,9 +758,17 @@
 
   /* What the engine is actually doing, in the order it does it. */
   var STAGES = ['Thinking', 'Writing'];
-  var STAGE_AT = [0, 1250];
-  var PAINT_AT = 2400;
+  var PAINT_MIN = 1500;   /* floor, so short answers still register */
+  var PAINT_MAX = 3000;   /* ceiling, so long ones do not test patience */
   var PAINT_AT_REDUCED = 700;
+
+  /* The run used to be a fixed 2.4s, which made the progress bar a
+     decoration measuring nothing. Answer length is the one quantity known
+     up front, so the bar now tracks that. */
+  function runFor(html) {
+    var words = html.replace(/<[^>]*>/g, ' ').split(/\s+/).length;
+    return Math.max(PAINT_MIN, Math.min(PAINT_MAX, 900 + words * 9));
+  }
 
   var SPARK = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
     '<path d="M12 2.6 13.9 9a3.2 3.2 0 0 0 2.1 2.1l6.4 1.9-6.4 1.9A3.2 3.2 0 0 0 13.9 17' +
@@ -807,7 +815,7 @@
   function answer(id, from, query) {
     var body = shell();
     var html = A[id] ? A[id].html + chipRow(A[id].chips) : fallback(query || '');
-    var total = reduce ? PAINT_AT_REDUCED : PAINT_AT;
+    var total = reduce ? PAINT_AT_REDUCED : runFor(html);
     var timers = [];
 
     if (!reduce) {
@@ -818,7 +826,7 @@
       for (var st = 1; st < STAGES.length; st++) {
         timers.push(window.setTimeout(function (text) {
           return function () { if (label) label.textContent = text; };
-        }(STAGES[st]), STAGE_AT[st]));
+        }(STAGES[st]), total * 0.52 * st));
       }
     }
 
@@ -840,15 +848,29 @@
     }, total));
   }
 
+  function markRail(id) {
+    var links = document.querySelectorAll('.side-link[data-ask]');
+    for (var i = 0; i < links.length; i++) {
+      if (links[i].getAttribute('data-ask') === id) {
+        links[i].setAttribute('aria-current', 'true');
+      } else {
+        links[i].removeAttribute('aria-current');
+      }
+    }
+  }
+
   function ask(id, spoken) {
     if (id === 'reset') { reset(); return; }
+    markRail(id);
     answer(id, youSaid(spoken || (A[id] && A[id].q) || id));
   }
 
   function send(text) {
     text = text.replace(/\s+/g, ' ').trim();
     if (!text) return;
-    answer(match(text), youSaid(text), text);
+    var hit = match(text);
+    markRail(hit);
+    answer(hit, youSaid(text), text);
   }
 
   /* ---- wiring ------------------------------------------------ */
@@ -860,6 +882,7 @@
       thread.removeChild(thread.lastElementChild);
     }
     scroll.scrollTop = 0;
+    markRail(null);
     input.focus();
   }
 

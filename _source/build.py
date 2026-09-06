@@ -197,7 +197,7 @@ def case_cards():
       </span>
       <span class="case-body">
         %(status)s
-        <h3>%(title)s</h3>
+        <h2>%(title)s</h2>
         <p>%(blurb)s</p>
         <ul class="chips">%(chips)s</ul>
         <span class="card-more">View case study</span>
@@ -217,7 +217,7 @@ CASE3 = """    <!-- THIRD CASE STUDY, NOT YET WRITTEN.
         <span class="icon-box"></span>
       </span>
       <span class="case-body">
-        <h3>TITLE</h3>
+        <h2>TITLE</h2>
         <p>ONE OR TWO SENTENCES.</p>
         <ul class="chips"><li class="chip">TAG</li></ul>
         <span class="card-more">View case study</span>
@@ -227,7 +227,7 @@ CASE3 = """    <!-- THIRD CASE STUDY, NOT YET WRITTEN.
 """
 
 FACTS = """      <div class="fact-col card card--blue">
-        <h3>Education</h3>
+        <h2>Education</h2>
         <ul>
           <li>BSc (Hons) Computer Science, minor in Mathematics<span>Aryabhatta College, University of Delhi</span></li>
           <li>Class 12<span>96%</span></li>
@@ -235,7 +235,7 @@ FACTS = """      <div class="fact-col card card--blue">
         </ul>
       </div>
       <div class="fact-col card card--pink">
-        <h3>Domain</h3>
+        <h2>Domain</h2>
         <ul>
           <li>Consumer lending</li>
           <li>User experience</li>
@@ -244,7 +244,7 @@ FACTS = """      <div class="fact-col card card--blue">
         </ul>
       </div>
       <div class="fact-col card card--tan">
-        <h3>Currently</h3>
+        <h2>Currently</h2>
         <ul>
           <li>FinZ, the fintech vertical at PhysicsWallah<span>Responsible for two products</span></li>
           <li>ESOP Financing<span>Lending against pledged ESOP shares so employees can pay the exercise tax before the shares turn into cash</span></li>
@@ -303,17 +303,17 @@ capabilities = """<section>
     <div class="grid grid--3">
       <article class="card card--blue">
         """ + icon("shield") + """
-        <h3>Credit policy</h3>
+        <h2>Credit policy</h2>
         <p>I drafted the CIBIL based credit policy that decides who qualifies and at what limit. It exists to move one number, the collection rate, by declining the wrong loans early rather than chasing them later.</p>
       </article>
       <article class="card card--pink">
         """ + icon("layers") + """
-        <h3>Systems of record</h3>
+        <h2>Systems of record</h2>
         <p>When five teams hold five versions of the truth, the product is not a calculator. It is an audit trail. I build the system that makes disagreements visible instead of silent.</p>
       </article>
       <article class="card card--tan">
         """ + icon("growth") + """
-        <h3>The product itself</h3>
+        <h2>The product itself</h2>
         <p>I own the Employee Financing product and have reworked its user flows again and again over twenty months, each round against real feedback from the employees using it. When footfall needed lifting, I introduced coupons and a waiver on the processing fee, and rebuilt the journey around what actually got people through it.</p>
       </article>
     </div>
@@ -366,19 +366,19 @@ about = """<section>
     </div>
 
     <div class="prose">
-      <h3>Who I am</h3>
+      <h2>Who I am</h2>
       <p>I did not arrive at product through a product title. I arrived by owning a lending book: its eligibility rules, its pricing, its repayment mechanics and its collections. Then I built the systems that keep it honest.</p>
 
-      <h3>More than twenty months, from nothing</h3>
+      <h2>More than twenty months, from nothing</h2>
       <p>I have spent more than twenty months building a financial product from scratch. When I started there was no book. There were no rules for who could borrow, no pricing, no repayment schedule that fit a payroll cycle, and no process for what happens when a deduction does not recover the full amount. I designed all four.</p>
       <p>The product now disburses &#8377;3 Cr+ every month to PhysicsWallah employees through payroll deduction.</p>
       <blockquote><p>A payroll deducted loan only looks safe. Employment tells you someone is paid. It does not tell you whether they are already over borrowed somewhere else.</p></blockquote>
       <p>That gap is what the credit policy closes. I drafted it against bureau data so the decision to lend, and the limit attached to it, is made before the money leaves rather than argued about after it does not come back.</p>
 
-      <h3>What came out of it</h3>
+      <h2>What came out of it</h2>
       <p>Two internal systems, both on this site. The first replaced eleven spreadsheets with a single system of record for the ESOP loan book. The second is replacing a manual monthly cycle that currently runs on spreadsheets and email threads. I specified both and directed AI as the engineering layer to build them.</p>
 
-      <h3>What I am working towards</h3>
+      <h2>What I am working towards</h2>
       <p>A product role where the correctness bar is part of the job. Fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>
     </div>
   </div>
@@ -442,7 +442,7 @@ def step(src, alt, heading, story):
         <div class="shot"><img src="%s" alt="%s" loading="lazy"></div>
       </figure>
       <div class="step-body">
-        <h3>%s</h3>
+        <h2>%s</h2>
         %s
       </div>
     </article>
@@ -484,7 +484,7 @@ c1 = ("""<section>
         <p>This view holds all of it in one place: refunds pending, the total owed, what has been paid and what is still outstanding. The reconciliation behind it is what surfaces the case nobody wants to find, a refund paid where none was owed.</p>""") + """    </div>
 
     <article class="prose">
-      <h3>How it was built</h3>
+      <h2>How it was built</h2>
       <p>I did not have an engineering team. I had a specification and a clear idea of what correct looked like, so I directed AI as the engineering layer and reviewed every step it took. That produced 108 production deployments over four months, built alongside my regular work.</p>
       <p>The part worth knowing is where the difficulty actually sat. Almost none of it was in the money maths, which is deterministic and easy. It was in reading the source data correctly.</p>
       <ol class="steps">
@@ -494,11 +494,11 @@ c1 = ("""<section>
       </ol>
       <p>None of those crash. They produce a confident wrong answer, which is far more dangerous in a system people trust with money. Directing AI is what made the building fast. Knowing what to check is what made it correct.</p>
 
-      <h3>Compliance gates on the person, not the loan</h3>
+      <h2>Compliance gates on the person, not the loan</h2>
       <p>Designated Persons under insider trading rules may only have shares released with explicit approval. The original gate matched on Loan ID, but a Designated Person is a person, not a loan, so their other loans passed through as though unregulated. I re-gated on identity, matching by BO ID and Employee Code, and added two fail safes. If the compliance list cannot be read, block every release rather than silently letting them through. If a loan carries no identifier to check, hold it.</p>
 
       <div class="limits">
-        <h3>Honest limitations</h3>
+        <h2>Honest limitations</h2>
         <p>I never instrumented the manual baseline, so I can show what the system catches but not a clean time saved figure. Refresh is slow on the largest sheets. The tool mirrors upstream data it does not control, which is precisely why the reconciliation views exist. And one person built it, so it needs a documented handover.</p>
       </div>
     </article>
@@ -530,7 +530,7 @@ c2 = """<section>
     </div>
 
     <article class="prose">
-      <h3>The month, as it works today</h3>
+      <h2>The month, as it works today</h2>
       <p>Every month around 2,886 PhysicsWallah employees repay a loan out of their salary. Before any of that money moves, somebody has to do all of this by hand.</p>
       <ol class="steps">
         <li>Build the deduction summary for the month.</li>
@@ -542,13 +542,13 @@ c2 = """<section>
       </ol>
       <p>Every step of it lives in spreadsheets and email threads.</p>
 
-      <h3>Where it goes wrong</h3>
+      <h2>Where it goes wrong</h2>
       <p>Three things went wrong repeatedly, and none of them announced themselves.</p>
       <p><strong>A mis-keyed figure becomes a wrong invoice.</strong> Nothing in the process is capable of noticing. The number is simply wrong from that point on, and it is wrong in a document that has already been sent to another company.</p>
       <p><strong>There is no audit trail.</strong> An error that surfaces in month N+2 cannot be traced back to who changed what in month N. The answer is always somebody trying to remember.</p>
       <p><strong>Loan IDs collide across lenders.</strong> FinZ and Prest each maintain their own ID space, so the same number means two different loans depending on who you ask. That is how a payment gets applied to the wrong loan on the wrong system, and it is very hard to spot afterwards.</p>
 
-      <h3>What I specified</h3>
+      <h2>What I specified</h2>
       <p>One system for the whole cycle, with three decisions doing most of the work.</p>
       <ol class="decisions">
         <li>
@@ -565,11 +565,11 @@ c2 = """<section>
         </li>
       </ol>
 
-      <h3>Where it stands</h3>
+      <h2>Where it stands</h2>
       <p>This is a work in progress and it is not yet launched. It has been built and validated against real production data locally, with 220 automated tests and 86 commits over three and a half weeks. The monthly scheduler exists but is deliberately switched off, pending a go live decision.</p>
 
       <div class="limits">
-        <h3>Honest limitations</h3>
+        <h2>Honest limitations</h2>
         <p>Not yet in daily production use. The live updates work is only partly done, with polling still running in parallel on purpose. Imports are file based because no reliable LMS API was available to integrate against. Until it runs a real month end, the time it saves is an estimate rather than a measurement.</p>
       </div>
     </article>

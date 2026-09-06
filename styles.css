@@ -53,7 +53,7 @@
   --t-lead:clamp(1.0625rem,1.5vw,1.25rem);
   --t-body:clamp(1rem,1.1vw,1.125rem);
   --t-small:clamp(.875rem,1vw,1rem);
-  --t-micro:clamp(.6875rem,.85vw,.8125rem);
+  --t-micro:clamp(.75rem,.85vw,.8125rem);
 
   --measure:38rem;
   --measure-wide:46rem;
@@ -126,6 +126,7 @@ a{color:inherit}
   position:absolute;left:-9999px;top:0;z-index:300;
   background:var(--blue);color:var(--ink);
   border:var(--border);box-shadow:var(--shadow);
+  display:inline-flex;align-items:center;min-height:46px;
   padding:.5rem 1rem;font-weight:700;
 }
 .skip:focus{left:1rem;top:1rem}
@@ -163,7 +164,9 @@ section{padding-block:var(--sec-gap);position:relative}
 .nav-link{
   font-size:var(--t-micro);font-weight:700;
   letter-spacing:.12em;text-transform:uppercase;
-  text-decoration:none;padding:.35rem .2rem;
+  text-decoration:none;
+  display:inline-flex;align-items:center;min-height:44px;
+  padding:.35rem .2rem;
   border-bottom:3px solid transparent;
 }
 .nav-link:hover{border-bottom-color:var(--ink)}
@@ -278,7 +281,7 @@ section{padding-block:var(--sec-gap);position:relative}
 .card--pink{background:var(--pink)}
 .card--lav{background:var(--lavender)}
 .card--tan{background:var(--tan)}
-.card h3{font-size:var(--t-h3);text-transform:uppercase;letter-spacing:.03em;margin-bottom:.75rem}
+.card h2,.card h3{font-size:var(--t-h3);text-transform:uppercase;letter-spacing:.03em;margin-bottom:.75rem}
 .card p{font-size:var(--t-small);line-height:1.6}
 
 .icon-box{
@@ -315,7 +318,7 @@ section{padding-block:var(--sec-gap);position:relative}
 .case--2 .case-head{background:var(--pink)}
 .case--3 .case-head{background:var(--tan)}
 .case-body{padding:clamp(1.15rem,2.4vw,1.6rem);display:flex;flex-direction:column;flex:1}
-.case-body h3{font-size:var(--t-h3);text-transform:uppercase;letter-spacing:.02em;margin-bottom:.75rem}
+.case-body h2,.case-body h3{font-size:var(--t-h3);text-transform:uppercase;letter-spacing:.02em;margin-bottom:.75rem}
 .case-body p{font-size:var(--t-small);color:var(--muted)}
 .status{
   display:inline-block;align-self:flex-start;width:fit-content;background:var(--tan);
@@ -377,11 +380,11 @@ section{padding-block:var(--sec-gap);position:relative}
    PROSE
    ============================================================ */
 .prose{max-width:var(--measure-wide)}
-.prose h3{
+.prose h2,.prose h3{
   font-size:var(--t-h3);text-transform:uppercase;letter-spacing:.03em;
   margin:clamp(2.25rem,4vw,3rem) 0 .9rem;
 }
-.prose h3:first-child{margin-top:0}
+.prose h2:first-child,.prose h3:first-child{margin-top:0}
 .prose blockquote{
   margin:clamp(1.75rem,3vw,2.5rem) 0;
   background:var(--tan);border:var(--border);box-shadow:var(--shadow);
@@ -450,7 +453,7 @@ figure{margin:0}
 .case-steps{display:grid;gap:clamp(2.75rem,5vw,4rem);margin-bottom:clamp(2.75rem,5vw,4rem)}
 .case-step figure{max-width:54rem}
 .case-step .step-body{max-width:var(--measure-wide);margin-top:clamp(1rem,2vw,1.4rem)}
-.case-step .step-body h3{
+.case-step .step-body h2,.case-step .step-body h3{
   font-size:var(--t-h3);text-transform:uppercase;letter-spacing:.03em;margin:0 0 .8rem;
 }
 .case-step .step-body p{margin-bottom:1em}
@@ -592,3 +595,11 @@ figure{margin:0}
   .principles > li{grid-template-columns:3.25rem 1fr}
   .p-text{max-width:54ch}
 }
+
+/* ============================================================
+   TOUCH TARGETS
+   Audit measured these at 21px, 39px and 42px against a 44px
+   minimum. The visual treatment is unchanged; only the
+   interactive box grows.
+   ============================================================ */
+.back-link,.to-top{display:inline-flex;align-items:center;min-height:44px}
