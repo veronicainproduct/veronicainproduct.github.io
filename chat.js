@@ -452,11 +452,9 @@
              'strong suit where do you excel what do you bring biggest strength',
       boost: ['your strengths', 'strengths', 'good at', 'superpower', 'strong suit'],
       html:
-        '<p>Three, and every one of them has a receipt somewhere on this page.</p>' +
-        '<p><b>A number has to work hard to fool me.</b> A column called Confiscation Value held share quantities, not rupees. Day first dates were quietly deleting payments from schedules. 133 of 333 confiscations sat against cancelled orders. Not one of those crashes anything. All three would have shipped a confident wrong figure to somebody counting on it.</p>' +
-        '<p><b>I build the thing, not the deck about the thing.</b> 108 production deployments in four months, solo, alongside the day job. There was no engineering team, so I stopped waiting for one.</p>' +
-        '<p><b>I design for the step that cannot be undone.</b> Pledged collateral used to be released because a spreadsheet cell said Closed. It is now released when the cash has actually landed. That trade cost me speed and removed a class of mistake that has no apology attached to it.</p>' +
-        pull('Short version: right on the paths you cannot reverse, quick everywhere else.'),
+        '<p><b>Numbers.</b> I am good with them, and better with the ones that are quietly wrong.</p>' +
+        '<p><b>Attention.</b> I read the boring row. That is usually where the problem has been living rent free.</p>' +
+        '<p><b>Finishing.</b> Ideas are cheap and I have met a great many of them. Very few had anywhere to be.</p>',
       chips: ['weakness', 'why', 'esop']
     },
 
@@ -469,11 +467,10 @@
       boost: ['your weakness', 'weakness', 'weaknesses', 'bad at', 'blind spot',
               'need to improve', 'struggle with'],
       html:
-        '<p>Three real ones. Not the kind that are a compliment wearing a disguise.</p>' +
-        '<p><b>I have never worked with an engineering team.</b> Everything I have shipped, I shipped by directing AI on my own. It made me fast and it left a hole: I have not had to defend a spec to engineers who push back, argue about tech debt, or hand a system over to the people who will keep it alive after me. My own case study says the ESOP repository needs a handover document more than it needs features. That is a habit, not an accident.</p>' +
-        '<p><b>I do not measure the before.</b> I replaced a manual process without instrumenting it first, so I can tell you precisely what the system catches and not what it saved. It is the most irritating gap in my own case study and it is entirely mine.</p>' +
-        '<p><b>My surface is narrow.</b> Twenty odd months, one company, one problem: money moving through payroll. I have not run an A/B test, shipped at consumer scale, or carried a growth number. On a product that lives or dies on experimentation, I would be learning that on your time.</p>' +
-        pull('None of these are fixed yet. They are written down, which is the part most people skip.'),
+        '<p>Three real ones. Not the kind that are a compliment in disguise.</p>' +
+        '<p><b>I have never worked with an engineering team.</b> Only with AI and my own stubbornness. Excellent for speed. Less excellent practice at losing an argument to a senior engineer.</p>' +
+        '<p><b>I forget to measure the before.</b> I fix the thing, then realise I have no idea how bad it was. Deeply satisfying. Completely unprovable.</p>' +
+        '<p><b>I have done one thing, properly.</b> Twenty odd months, one company, one problem. Deep rather than wide. Ask me about consumer scale and I will go quiet.</p>',
       chips: ['nothire', 'limits', 'strengths']
     },
 
@@ -486,14 +483,14 @@
       boost: ['not hire', 'should i not hire', 'why not hire', 'not to hire',
               'wrong fit', 'bad fit', 'talk me out'],
       html:
-        '<p>Fair question, so here is a straight answer. Four situations where I am the wrong hire.</p>' +
+        '<p>Useful question. Four honest reasons.</p>' +
         '<ul>' +
-        '<li><b>You need someone running a team on day one.</b> I have never had direct reports. I have led work, not people.</li>' +
-        '<li><b>Your edge is shipping rough and correcting later.</b> Mine is deciding what correct means before anything gets built. Where being roughly right on Friday beats being exactly right next month, I will slow you down.</li>' +
-        '<li><b>The job is growth or experimentation.</b> No A/B tests, no funnel I have owned, no consumer scale. You would be paying me to learn it.</li>' +
-        '<li><b>You want someone who takes the system of record at its word.</b> I do not. A cell that says Closed is a claim, and I will go and check whether the money actually arrived. That is slower, and on a good day mildly irritating.</li>' +
+        '<li><b>You need a manager on day one.</b> I have led work, not people.</li>' +
+        '<li><b>You ship rough and fix it live.</b> I want to know what correct means first. We would irritate each other by Wednesday.</li>' +
+        '<li><b>The job is growth and experiments.</b> I have not done those. You would be paying my tuition.</li>' +
+        '<li><b>You want someone who takes the spreadsheet&rsquo;s word for it.</b> I will go and check. Every time.</li>' +
         '</ul>' +
-        pull('Every one of those is a real reason to pass. If none of them describe the job, the argument for the other answer is on the same page.'),
+        '<p>If none of those is the job, the opposite answer is one question away.</p>',
       chips: ['why', 'weakness', 'contact']
     },
 
