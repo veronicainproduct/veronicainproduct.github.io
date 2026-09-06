@@ -450,8 +450,9 @@
       boost: ['are you from', 'you from', 'hometown', 'grew up',
               'originally from', 'your origin', 'born', 'lucknow'],
       html:
-        '<p><b>Lucknow.</b> Which accounts for the manners, and for opinions about kebabs that I will not be talked out of.</p>' +
-        '<p>I came to Delhi for a computer science degree and stayed for a loan book. Currently in Delhi NCR, with the FinZ office in Noida, and entirely happy to work remote.</p>',
+        '<p><b>Lucknow.</b> Nawabs, chikankari, and a monument famous for being a maze, which turns out to be excellent training for tracing one loan across eleven spreadsheets.</p>' +
+        '<p>We are also raised on <i>pehle aap</i>. Put two Lucknawis in a doorway and they will still be there tomorrow. Beautiful manners. Dreadful throughput.</p>' +
+        '<p>I came to Delhi for Delhi University, fell completely for the city, and stayed for the job. Now living in Noida and working in Noida, out of PhysicsWallah&rsquo;s head office. Entirely okay with remote.</p>',
       chips: ['education', 'logistics', 'about']
     },
 
