@@ -558,10 +558,11 @@
       boost: ['outside work', 'outside of work', 'your hobbies', 'for fun',
               'free time', 'side project', 'instagram'],
       html:
-        '<p><b>Final Draft.wav.</b> An Instagram page I run with a friend, about the Indian DHH scene and music generally.</p>' +
-        '<p>Reels, mostly. Which means writing something tight enough to land in fifteen seconds, then watching a number tell me whether it did. Same loop as product, better soundtrack, and nobody&rsquo;s payroll depends on my edit.</p>' +
+        '<p><b>Final Draft.wav.</b> An Instagram page I run with a friend, about the Indian DHH scene, hip hop to everyone standing outside it.</p>' +
+        '<p>The name is optimistic. Nothing in music is ever the final draft, which is most of the fun.</p>' +
+        '<p>Reels, mostly. Verses worth a rewind, releases worth an argument, and a scene putting out more of both than anyone can reasonably keep up with. Made late, on no deadline but ours.</p>' +
         '<div class="reach"><a class="primary" href="' + IG + '" rel="noopener" target="_blank">' + IG_SVG + 'Final Draft.wav on Instagram</a></div>',
-      chips: ['about', 'origin', 'contact']
+      chips: ['origin', 'fun', 'about']
     },
 
     contact: {
