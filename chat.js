@@ -452,9 +452,9 @@
              'strong suit where do you excel what do you bring biggest strength',
       boost: ['your strengths', 'strengths', 'good at', 'superpower', 'strong suit'],
       html:
-        '<p><b>Numbers.</b> I am good with them, and better with the ones that are quietly wrong.</p>' +
-        '<p><b>Attention.</b> I read the boring row. That is usually where the problem has been living rent free.</p>' +
-        '<p><b>Finishing.</b> Ideas are cheap and I have met a great many of them. Very few had anywhere to be.</p>',
+        '<p><b>Numbers.</b> I am good with them, and fonder still of the wrong ones, roughly the way a dentist is fond of a really bad tooth.</p>' +
+        '<p><b>Attention.</b> I read the row everybody scrolls past. Nothing has ever hidden in the interesting rows.</p>' +
+        '<p><b>Finishing.</b> I finish things. Which sounds like nothing at all, right up until you have worked with someone who does not.</p>',
       chips: ['weakness', 'why', 'esop']
     },
 
@@ -467,10 +467,10 @@
       boost: ['your weakness', 'weakness', 'weaknesses', 'bad at', 'blind spot',
               'need to improve', 'struggle with'],
       html:
-        '<p>Three real ones. Not the kind that are a compliment in disguise.</p>' +
-        '<p><b>I have never worked with an engineering team.</b> Only with AI and my own stubbornness. Excellent for speed. Less excellent practice at losing an argument to a senior engineer.</p>' +
-        '<p><b>I forget to measure the before.</b> I fix the thing, then realise I have no idea how bad it was. Deeply satisfying. Completely unprovable.</p>' +
-        '<p><b>I have done one thing, properly.</b> Twenty odd months, one company, one problem. Deep rather than wide. Ask me about consumer scale and I will go quiet.</p>',
+        '<p>Three real ones. None of them is &ldquo;I care too much&rdquo;, which is a compliment in a false moustache.</p>' +
+        '<p><b>I have never worked with an engineering team.</b> Only with AI, which agrees with me far more often than is good for either of us. I could do with a colleague who sighs.</p>' +
+        '<p><b>I forget to measure the before.</b> I keep solving the problem and then remembering I never photographed the crime scene. Enormously satisfying. Completely unprovable.</p>' +
+        '<p><b>I have done one thing, properly.</b> Deep rather than wide. Ask me about consumer scale and watch me become an excellent listener.</p>',
       chips: ['nothire', 'limits', 'strengths']
     },
 
@@ -483,14 +483,14 @@
       boost: ['not hire', 'should i not hire', 'why not hire', 'not to hire',
               'wrong fit', 'bad fit', 'talk me out'],
       html:
-        '<p>Useful question. Four honest reasons.</p>' +
+        '<p>My favourite question. Four honest answers.</p>' +
         '<ul>' +
-        '<li><b>You need a manager on day one.</b> I have led work, not people.</li>' +
-        '<li><b>You ship rough and fix it live.</b> I want to know what correct means first. We would irritate each other by Wednesday.</li>' +
+        '<li><b>You need a manager on day one.</b> I have led work, not people. My direct reports currently number zero and every one of them is thriving.</li>' +
+        '<li><b>You ship rough and fix it in production.</b> I would like to know what correct means first. We would be sighing at each other by Wednesday.</li>' +
         '<li><b>The job is growth and experiments.</b> I have not done those. You would be paying my tuition.</li>' +
-        '<li><b>You want someone who takes the spreadsheet&rsquo;s word for it.</b> I will go and check. Every time.</li>' +
+        '<li><b>You want someone who takes the spreadsheet at its word.</b> I will go and check. Every time. I am told this is exhausting.</li>' +
         '</ul>' +
-        '<p>If none of those is the job, the opposite answer is one question away.</p>',
+        '<p>If none of those is the job, the case for the opposite is one question away.</p>',
       chips: ['why', 'weakness', 'contact']
     },
 
