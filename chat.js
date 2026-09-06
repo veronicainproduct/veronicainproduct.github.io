@@ -366,9 +366,9 @@
       q: 'What did not work?',
       label: 'What did not work',
       terms: 'limitations what did not work went wrong failure failed mistake mistakes ' +
-             'weakness weaknesses honest caveat gaps regrets what would you do differently ' +
-             'criticism shortcomings',
-      boost: ['did not work', 'limitations', 'went wrong', 'weakness', 'go wrong', 'do differently'],
+             'honest caveat gaps regrets what would you do differently ' +
+             'criticism shortcomings time you failed',
+      boost: ['did not work', 'limitations', 'went wrong', 'go wrong', 'do differently', 'you failed'],
       html:
         '<p>Every portfolio has a wins section. This is the other one.</p>' +
         '<p><b>ESOP Loan Repository.</b> I never measured the manual baseline, so I can tell you what the system catches but not how much time it saved. Refresh crawls on the biggest sheets. It mirrors upstream data it does not own, which is exactly why the reconciliation views exist. And one person built it, so it needs a handover document more than it needs features.</p>' +
@@ -433,7 +433,7 @@
       q: 'Why should we hire you?',
       label: 'Why hire you',
       terms: 'why should we hire you why you what are you looking for next role ' +
-             'what do you want strengths good fit sell yourself pitch value add ' +
+             'what do you want good fit sell yourself pitch value add ' +
              'why are you a good candidate convince me',
       boost: ['should we hire', 'hire you', 'hire her', 'looking for', 'why you'],
       html:
@@ -442,7 +442,59 @@
         '<p><b>I ship without a team.</b> 108 production deployments in four months, solo, alongside the day job.</p>' +
         '<p><b>I show you the parts that did not work.</b> Both case studies end with their own limitations. Most portfolios are a highlight reel, and highlight reels are easy to fake.</p>' +
         '<p>What I want is a job where being right is the job. AI-enabled products, fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>',
-      chips: ['limits', 'numbers', 'contact']
+      chips: ['nothire', 'strengths', 'limits', 'contact']
+    },
+
+    strengths: {
+      q: 'What are your strengths?',
+      label: 'Strengths',
+      terms: 'strengths strength what are you good at best qualities superpower ' +
+             'strong suit where do you excel what do you bring biggest strength',
+      boost: ['your strengths', 'strengths', 'good at', 'superpower', 'strong suit'],
+      html:
+        '<p>Three, and every one of them has a receipt somewhere on this page.</p>' +
+        '<p><b>A number has to work hard to fool me.</b> A column called Confiscation Value held share quantities, not rupees. Day first dates were quietly deleting payments from schedules. 133 of 333 confiscations sat against cancelled orders. Not one of those crashes anything. All three would have shipped a confident wrong figure to somebody counting on it.</p>' +
+        '<p><b>I build the thing, not the deck about the thing.</b> 108 production deployments in four months, solo, alongside the day job. There was no engineering team, so I stopped waiting for one.</p>' +
+        '<p><b>I design for the step that cannot be undone.</b> Pledged collateral used to be released because a spreadsheet cell said Closed. It is now released when the cash has actually landed. That trade cost me speed and removed a class of mistake that has no apology attached to it.</p>' +
+        pull('Short version: right on the paths you cannot reverse, quick everywhere else.'),
+      chips: ['weakness', 'why', 'esop']
+    },
+
+    weakness: {
+      q: 'What are your weaknesses?',
+      label: 'Weaknesses',
+      terms: 'weakness weaknesses biggest weakness what are you bad at development areas ' +
+             'blind spots where do you need to improve what do you struggle with ' +
+             'growth areas not good at',
+      boost: ['your weakness', 'weakness', 'weaknesses', 'bad at', 'blind spot',
+              'need to improve', 'struggle with'],
+      html:
+        '<p>Three real ones. Not the kind that are a compliment wearing a disguise.</p>' +
+        '<p><b>I have never worked with an engineering team.</b> Everything I have shipped, I shipped by directing AI on my own. It made me fast and it left a hole: I have not had to defend a spec to engineers who push back, argue about tech debt, or hand a system over to the people who will keep it alive after me. My own case study says the ESOP repository needs a handover document more than it needs features. That is a habit, not an accident.</p>' +
+        '<p><b>I do not measure the before.</b> I replaced a manual process without instrumenting it first, so I can tell you precisely what the system catches and not what it saved. It is the most irritating gap in my own case study and it is entirely mine.</p>' +
+        '<p><b>My surface is narrow.</b> Twenty odd months, one company, one problem: money moving through payroll. I have not run an A/B test, shipped at consumer scale, or carried a growth number. On a product that lives or dies on experimentation, I would be learning that on your time.</p>' +
+        pull('None of these are fixed yet. They are written down, which is the part most people skip.'),
+      chips: ['nothire', 'limits', 'strengths']
+    },
+
+    nothire: {
+      q: 'Why should I not hire you?',
+      label: 'Why not hire me',
+      terms: 'why should i not hire you why not hire reasons not to hire ' +
+             'when are you the wrong fit bad fit when should we not hire ' +
+             'talk me out of it worst case against you red flags',
+      boost: ['not hire', 'should i not hire', 'why not hire', 'not to hire',
+              'wrong fit', 'bad fit', 'talk me out'],
+      html:
+        '<p>Fair question, so here is a straight answer. Four situations where I am the wrong hire.</p>' +
+        '<ul>' +
+        '<li><b>You need someone running a team on day one.</b> I have never had direct reports. I have led work, not people.</li>' +
+        '<li><b>Your edge is shipping rough and correcting later.</b> Mine is deciding what correct means before anything gets built. Where being roughly right on Friday beats being exactly right next month, I will slow you down.</li>' +
+        '<li><b>The job is growth or experimentation.</b> No A/B tests, no funnel I have owned, no consumer scale. You would be paying me to learn it.</li>' +
+        '<li><b>You want someone who takes the system of record at its word.</b> I do not. A cell that says Closed is a claim, and I will go and check whether the money actually arrived. That is slower, and on a good day mildly irritating.</li>' +
+        '</ul>' +
+        pull('Every one of those is a real reason to pass. If none of them describe the job, the argument for the other answer is on the same page.'),
+      chips: ['why', 'weakness', 'contact']
     },
 
     switch: {
