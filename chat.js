@@ -57,7 +57,9 @@
     body += '<p class="kicker">' + o.kicker + '</p>' +
             '<h2>' + o.name + '</h2><p class="proj-sub">' + o.sub + '</p>';
     if (o.figs) body += figs(o.figs);
-    body += '<a class="go" href="' + o.href + '">Read the case study ' + ARROW + '</a></div>';
+    var out = o.external ? ' rel="noopener" target="_blank"' : '';
+    body += '<a class="go" href="' + o.href + '"' + out + '>' +
+            (o.cta || 'Read the case study') + ' ' + ARROW + '</a></div>';
     var art = o.shot
       ? '<div class="proj-art"><img src="' + o.shot + '" alt="' + o.alt +
         '" width="' + o.w + '" height="' + o.h + '" loading="lazy"></div>'
@@ -103,6 +105,18 @@
           'production data, but it has not run a live month end, so anything I showed ' +
           'you would be an empty state dressed up as a product.',
     href: 'project-financing-os.html'
+  });
+
+  var ECHO_CARD = proj({
+    shot: 'img/card-echolabs.png', w: 1280, h: 560,
+    alt: 'The EchoLabs homepage: One idea. Infinite echoes.',
+    kicker: 'Client work &middot; AI-directed build',
+    name: 'EchoLabs',
+    sub: 'The marketing site for a creator-marketing agency. Six pages, live on its own domain.',
+    figs: [['6', 'Pages'], ['0', 'Frameworks'], ['1', 'Person']],
+    href: 'https://echolabs.net.in/',
+    cta: 'Visit the live site',
+    external: true
   });
 
   /* ============================================================
@@ -178,9 +192,28 @@
              'what did you build show me everything all projects things you made shipped',
       boost: ['your work', 'case studies', 'all projects', 'everything you have built'],
       html:
-        '<p>Two case studies, one habit: take a process living in eleven spreadsheets and turn it into a single system of record. Both were built for a book that moves real money, which is a brisk way to find out whether your product works. One is live. One is in build. Neither is a redesign of a landing page.</p>' +
-        ESOP_CARD + EFOS_CARD,
-      chips: ['esop', 'efos', 'best']
+        '<p>Two internal systems and one public website.</p>' +
+        '<p>The first two share a habit: take a process living in eleven spreadsheets and turn it into a single system of record. Both were built for a book that moves real money, which is a brisk way to find out whether your product works. One is live, one is in build.</p>' +
+        '<p>The third is somebody else&rsquo;s business in a completely different industry, built the same way. It is there because a method that only works on the thing you already understand is not a method.</p>' +
+        ESOP_CARD + EFOS_CARD + ECHO_CARD,
+      chips: ['esop', 'efos', 'echolabs']
+    },
+
+    echolabs: {
+      q: 'Tell me about EchoLabs',
+      label: 'EchoLabs',
+      terms: 'echolabs echo labs marketing site website agency creator marketing ' +
+             'client work freelance side project outside fintech public website ' +
+             'built with ai brand mark landing page echolabs.net.in',
+      boost: ['echolabs', 'echo labs', 'marketing site', 'the website you built'],
+      html:
+        '<p>Different industry, same method. EchoLabs is a creator-marketing agency, and they needed a website. I built the whole thing by directing AI: six pages, the brand mark, the copy and the lead capture. It is live on its own domain.</p>' +
+        '<p>A marketing site has exactly one job, and it is not looking good. It is catching the lead. So the forms post to a Google Apps Script that writes the row to a sheet, sends creators and brands to different sheets, and fires the thank you email. If that request fails, the page opens the visitor&rsquo;s email client instead, already addressed.</p>' +
+        pull('A lead is never lost to a bad network. Fail soft, never fail quietly, same rule as the loan book with rather less at stake.') +
+        '<p>The rest of the work was subtraction. AI has a house style and it shows: a decorative gradient tick before every label, an em dash in every other sentence. Most of my time went on removing the parts that looked like a machine had made them.</p>' +
+        '<p>What I cannot give you is a conversion number. It is their site and their funnel, and I am not going to hand you a figure I did not measure.</p>' +
+        ECHO_CARD,
+      chips: ['ai', 'work', 'principles']
     },
 
     esop: {
@@ -232,7 +265,7 @@
         '</ul>' +
         '<p>None of those crash. That is the whole problem. They return a confident wrong number, which is the expensive kind, and the only kind that survives a demo.</p>' +
         pull('Directing AI is what made the building fast. Knowing what to check is what made it correct.'),
-      chips: ['esop', 'limits', 'skills']
+      chips: ['echolabs', 'esop', 'limits', 'skills']
     },
 
     credit: {
@@ -613,7 +646,7 @@
              'are you a bot are you a real person is this real human chatgpt',
       boost: ['can i ask', 'what can you do', 'are you an ai', 'are you a bot', 'real person', 'how does this work'],
       html:
-        '<p>The lending book and how it is priced and collected. The two systems I built. The numbers, and the point where the numbers run out. How I use AI to build things. Where I am from, what I studied, and the awkward ones: remote, notice period, pay.</p>' +
+        '<p>The lending book and how it is priced and collected. The two systems I built, and the marketing site I built for someone else. The numbers, and the point where the numbers run out. How I use AI to build things. Where I am from, what I studied, and the awkward ones: remote, notice period, pay.</p>' +
         '<p>Ask in your own words. Typos are fine. If it is outside my range I will say so rather than improvise, which is a low bar that a surprising amount of writing about product fails to clear.</p>',
       chips: ['recruiter', 'work', 'numbers', 'contact']
     }
