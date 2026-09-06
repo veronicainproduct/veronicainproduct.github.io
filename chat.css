@@ -139,7 +139,8 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
   display:flex;align-items:center;gap:.6rem;
   min-width:0;                       /* so it can shrink instead of pushing */
 }
-.avail > span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.avail span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.avail-short{display:none}
 .dot{
   width:9px;height:9px;flex:0 0 auto;border-radius:50%;background:#1c7a3c;
 }
@@ -453,6 +454,12 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
     padding:.55rem .85rem;cursor:pointer;
   }
   .avail{font-size:var(--t-micro)}
+  /* the full line truncates to nonsense at this width, so it is swapped
+     for one that fits rather than clipped mid-word */
+  .avail-short{display:inline}
+  .avail-full{display:none}
+  /* three stat columns collide inside a card this narrow */
+  .proj .numset{grid-template-columns:1fr 1fr}
   .topbar .home-link span{display:none}
   .topbar .home-link{padding:.55rem .7rem}
   /* the rail no longer carries this link, so the top bar keeps it at every

@@ -119,9 +119,9 @@
              'your background summary profile bio about you overview elevator pitch',
       boost: ['who is veronica', 'who are you'],
       html:
-        '<p>Veronica Singh works on product strategy at FinZ, the fintech vertical at PhysicsWallah, where she owns two employee lending products: ESOP Financing and Employee Financing. She has spent more than twenty months building the employee lending book from nothing, and she owns the parts of it that decide whether it makes money: who qualifies, what it costs, how it is repaid and what happens when a payroll deduction does not recover the full amount.</p>' +
-        '<p>She wrote the CIBIL based credit policy behind it, and she built two internal systems to keep the book honest. One is live and replaced eleven spreadsheets with a single system of record. The other is in build. She directed AI as the engineering layer for both, and reviewed every step it took.</p>' +
-        '<p>Background is computer science at the University of Delhi. Based in Delhi NCR, open to remote.</p>',
+        '<p>Veronica Singh runs product strategy for employee lending at FinZ, the fintech arm of PhysicsWallah. She owns two products, ESOP Financing and Employee Financing, and more to the point she owns the parts nobody puts on a slide: who qualifies, what it costs, how it gets repaid, and what happens the month payroll takes less than it was asked to.</p>' +
+        '<p>She wrote the CIBIL based credit policy underneath it, then built two internal systems to keep the book honest. One is live. One is in build. She pointed AI at the code for both and then read all of it, which is the step most people skip.</p>' +
+        '<p>Computer science at the University of Delhi. Based in Delhi NCR. Open to remote.</p>',
       chips: ['work', 'why', 'timeline', 'contact']
     },
 
@@ -132,49 +132,50 @@
              'journey path career story what do you do',
       boost: ['about me', 'about veronica', 'your story'],
       html:
-        '<p>I did not arrive at product through a product title. I arrived by owning a lending book: its eligibility rules, its pricing, its repayment mechanics and its collections. Then I built the systems that keep it honest.</p>' +
-        '<p>Today I work on product strategy at FinZ, the fintech vertical at PhysicsWallah, and I own two products. <b>ESOP Financing</b> lends against pledged ESOP shares so employees can pay the exercise tax before the shares turn into cash. <b>Employee Financing</b> is salary advance and top-up loans, recovered from monthly pay through payroll deduction.</p>' +
-        '<p>What I am working towards is a product role where the correctness bar is part of the job. Fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>',
+        '<p>She did not get here through a product title. She got here by being handed a lending book and discovering that nobody had written down who was allowed to borrow from it.</p>' +
+        '<p>Twenty odd months later there are eligibility rules, pricing, a repayment schedule that fits a payroll cycle, and a process for the awkward month when a deduction comes back short. She designed all four, then built the systems that stop anyone quietly editing them afterwards.</p>' +
+        '<p>Today that is two products. <b>ESOP Financing</b> lends against pledged ESOP shares so employees can pay the exercise tax before the shares turn into anything spendable. <b>Employee Financing</b> is salary advance and top-up loans, recovered from monthly pay.</p>' +
+        '<p>What she wants next is a product role where being right counts for more than being quick. Fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>',
       chips: ['principles', 'work', 'timeline', 'contact']
     },
 
     dayjob: {
-      q: 'What do you actually do day to day?',
+      q: 'What does she actually do day to day?',
       label: 'Day to day',
       terms: 'day to day daily what do you actually do responsibilities role scope ' +
              'own ownership what are you responsible for typical day job description',
-      boost: ['day to day', 'what do you actually do'],
+      boost: ['day to day', 'what do you actually do', 'actually do'],
       html:
-        '<p>Three things, and they feed each other.</p>' +
-        '<p><b>The book.</b> Who can borrow, at what limit, at what price, on what schedule, and what happens when a deduction comes back short. I wrote those rules and I change them when the collection rate tells me to.</p>' +
-        '<p><b>The product.</b> The journey employees actually walk through, reworked repeatedly against their feedback. When footfall needed lifting I introduced coupons and a waiver on the processing fee, and rebuilt the flow around what was getting people through it.</p>' +
-        '<p><b>The systems underneath.</b> Specifying and building the internal tools that make the book auditable, because a lending product that cannot prove what it did is a liability with a nice interface.</p>',
+        '<p>Three things, and they keep handing work to each other.</p>' +
+        '<p><b>The book.</b> Who can borrow, how much, at what price, on what schedule, and what happens when the deduction comes back short. She wrote those rules and rewrites them when the collection rate tells her to.</p>' +
+        '<p><b>The product.</b> The journey an employee actually walks, reworked against their feedback rather than against a roadmap. When footfall sagged she added coupons and waived the processing fee, which sounds like small change until you watch what it did to the number.</p>' +
+        '<p><b>The systems underneath.</b> A lending product that cannot prove what it did is a liability with good typography.</p>',
       chips: ['credit', 'work', 'numbers']
     },
 
     best: {
-      q: 'What is your best project?',
+      q: 'What is her best project?',
       label: 'Best project',
       terms: 'best project best work proudest strongest best case study ' +
              'which is your best highlight',
       boost: ['best project', 'best work', 'most proud', 'proudest', 'favourite project', 'favorite project'],
       html:
-        '<p>The ESOP Loan Repository, and not because it is the prettiest. It is live in production, I built it solo, and it changed a decision rather than just a screen.</p>' +
-        '<p>Around 300 loans, and the entire lifecycle ran on eleven spreadsheets owned by five different teams. The obvious brief was a better calculator. The money maths is deterministic and easy. The real problem was five teams holding five versions of the truth with no way to prove which was right, which makes it a system of record, not a calculator.</p>' +
-        '<p>The decision I would defend hardest: releasing pledged shares cannot be undone, and in the original process a loan qualified for release if a spreadsheet field said Closed. A human editable cell was authorising an irreversible transfer of collateral. I removed that path and keyed the release queue on evidence that cash actually arrived. The tradeoff I accepted is that a loan genuinely repaid through an unrecorded channel waits until the payment is logged.</p>' +
+        '<p>The ESOP Loan Repository. Not the prettiest thing she has built, but the only one that changed a decision rather than a screen.</p>' +
+        '<p>Around 300 loans, one lifecycle, eleven spreadsheets, five teams, and no agreement about which file was right. The brief everyone expected was a better calculator. The maths was never the problem. Five versions of the truth was the problem.</p>' +
+        '<p>Her favourite fix is the one nobody notices. Releasing pledged shares cannot be undone, and the old process released them whenever a spreadsheet cell said Closed. A cell any human could type into was authorising an irreversible transfer of collateral. She keyed the release queue on evidence that the cash had actually landed instead, and accepted the cost: a loan repaid through some unrecorded channel now waits until the payment is logged.</p>' +
         pull('Failing to release on time is a support ticket. Releasing collateral wrongly is not.') +
         ESOP_CARD,
       chips: ['esop', 'efos', 'ai', 'limits']
     },
 
     work: {
-      q: 'Show me everything you have built',
+      q: 'Show me everything she has built',
       label: 'The work',
       terms: 'your work the work projects case studies portfolio what have you built ' +
              'what did you build show me everything all projects things you made shipped',
       boost: ['your work', 'case studies', 'all projects', 'everything you have built'],
       html:
-        '<p>Two case studies, one through-line: I take a process running on eleven spreadsheets and turn it into one system of record. Both were built for a book that moves real money, which is a good way to find out quickly whether your product works. One is live, one is in build.</p>' +
+        '<p>Two case studies, one habit: take a process living in eleven spreadsheets and turn it into a single system of record. Both were built for a book that moves real money, which is a brisk way to find out whether your product works. One is live. One is in build.</p>' +
         ESOP_CARD + EFOS_CARD,
       chips: ['esop', 'efos', 'best']
     },
@@ -186,11 +187,11 @@
              'compliance designated person insider trading release reconciliation interest accrual',
       boost: ['esop loan repository', 'case 01', 'designated person'],
       html:
-        '<p><b>The problem.</b> PhysicsWallah grants ESOP. Exercising it triggers a tax bill immediately, long before the shares are worth anything spendable, so FinZ lends against the pledged shares. Around 300 loans, and the entire lifecycle ran on eleven spreadsheets owned by five different teams.</p>' +
-        '<p><b>Who it is for.</b> The FinZ operations team, who answer questions about individual loans daily, and the compliance officer, who has to approve every release for a Designated Person before it happens.</p>' +
-        '<p><b>The reframe.</b> The obvious brief was a better calculator. The real problem was five teams holding five versions of the truth with no way to prove which was right.</p>' +
+        '<p><b>The problem.</b> PhysicsWallah grants ESOP. Exercising it triggers a tax bill straight away, long before the shares are worth anything you can spend, which is a rude surprise for the person holding them. FinZ lends against the pledged shares to cover it. Around 300 loans, and the whole lifecycle lived in eleven spreadsheets owned by five different teams.</p>' +
+        '<p><b>Who it is for.</b> The operations team, who field questions about individual loans all day, and the compliance officer, who has to approve every release for a Designated Person before it happens.</p>' +
+        '<p><b>The reframe.</b> Everyone expected a better calculator. The real problem was five teams holding five versions of the truth and no way to settle which one was right.</p>' +
         pull('A Designated Person is a person, not a loan.') +
-        '<p>The gate I am most glad I moved was the compliance one. Designated Persons under insider trading rules may only have shares released with explicit approval, and the original gate matched on Loan ID, so their other loans passed through as though unregulated. I re-gated on identity, matching by BO ID and Employee Code, and added two fail safes: if the compliance list cannot be read, block every release rather than silently letting them through, and if a loan carries no identifier to check, hold it.</p>' +
+        '<p>That sentence is the whole compliance fix. Designated Persons may only have shares released with explicit approval, and the original gate matched on Loan ID, so their other loans sailed through as though unregulated. She re-gated on identity, matching by BO ID and Employee Code, and added two fail safes: if the compliance list cannot be read, block every release rather than quietly waving them past, and if a loan carries no identifier to check, hold it.</p>' +
         ESOP_CARD,
       chips: ['ai', 'limits', 'efos']
     },
@@ -202,31 +203,31 @@
              'lenders month end audit trail in build upload staging rollback prest',
       boost: ['financing os', 'process os', 'case 02', 'audit trail'],
       html:
-        '<p>In build, not yet launched. Every month around 2,886 PhysicsWallah employees repay a loan out of their salary, and before any of that money moves somebody builds the deduction summary by hand, waits for payroll to confirm what was actually deducted, works out what each of the two lenders is owed, raises the invoices, chases the approvals, records the payment and maps it back to individual loans. All of it lives in spreadsheets and email threads.</p>' +
-        '<p>Three things went wrong repeatedly, and none of them announced themselves. A mis-keyed figure becomes a wrong invoice, and nothing in the process is capable of noticing. There is no audit trail, so an error surfacing in month N+2 cannot be traced back to who changed what in month N. And loan IDs collide across the two lenders, so the same number means two different loans depending on who you ask.</p>' +
+        '<p>In build, not launched. Every month around 2,886 PhysicsWallah employees repay a loan out of their salary, and before a rupee moves somebody builds the deduction summary by hand, waits for payroll to confirm what was actually taken, works out what each of the two lenders is owed, raises the invoices, chases the approvals, records the payment, and maps it back to individual loans. All of it in spreadsheets and email threads.</p>' +
+        '<p>Three things went wrong on repeat, and none of them had the decency to announce themselves. A mis-keyed figure becomes a wrong invoice, and nothing in the process can notice. There is no audit trail, so an error that surfaces in month N+2 comes down to who can remember month N. And loan IDs collide across the two lenders, so the same number means two different loans depending on who you ask.</p>' +
         pull('It removes a whole class of error by construction rather than by care, and care is exactly what runs out at the end of a long month.') +
-        '<p>Three decisions do most of the work in what I specified. Every key is a pair, always (lender, loan_id) and never a bare loan ID. Uploads are staged rather than applied, checked against the previous batch, versioned and rollable back, so an unusually large change waits for a human to confirm it. And every change is written to an append only audit log, with the tables checksummed.</p>' +
-        '<p>The monthly scheduler exists but is deliberately switched off, pending a go live decision.</p>' +
+        '<p>Three decisions carry most of the weight in what she specified. Every key is a pair, always (lender, loan_id), never a bare loan ID. Uploads are staged rather than applied, checked against the previous batch, versioned and rollable back, so an unusually large change has to wait for a human to look at it. And every change lands in an append only audit log, with the tables checksummed.</p>' +
+        '<p>The monthly scheduler exists and is switched off on purpose, pending a go live decision.</p>' +
         EFOS_CARD,
       chips: ['limits', 'esop', 'principles']
     },
 
     ai: {
-      q: 'How did you build it without engineers?',
+      q: 'How did she build it without engineers?',
       label: 'AI experience',
       terms: 'ai artificial intelligence claude chatgpt llm prompt engineering no engineers ' +
              'without engineers how did you build engineering layer code coding technical ' +
              'vibe coding ai tools ai native how do you use ai solo alone a team',
       boost: ['without engineers', 'use ai', 'ai experience', 'engineering layer'],
       html:
-        '<p>I did not have an engineering team. I had a specification and a clear idea of what correct looked like, so I directed AI as the engineering layer and reviewed every step it took. That produced <b>108 production deployments over four months</b>, built alongside my regular work.</p>' +
-        '<p>The part worth knowing is where the difficulty actually sat. Almost none of it was in the money maths, which is deterministic and easy. It was in reading the source data correctly.</p>' +
+        '<p>There was no engineering team. There was a specification, a clear idea of what correct looked like, and AI doing the typing. That produced <b>108 production deployments in four months</b>, alongside the day job.</p>' +
+        '<p>The interesting part is where the difficulty actually sat. Almost none of it was the money maths, which is deterministic and frankly dull. It was reading the source data without being lied to by it.</p>' +
         '<ul>' +
-        '<li>A column labelled Confiscation Value turned out to hold share quantities, not rupees.</li>' +
-        '<li>Dates stored day first as text were being misread, which quietly made payments vanish from schedules.</li>' +
+        '<li>A column called Confiscation Value held share quantities, not rupees.</li>' +
+        '<li>Dates stored day first as text were being misread, quietly deleting payments from schedules.</li>' +
         '<li>133 of 333 confiscations sat against cancelled orders, invisible to anything that only loaded completed ones.</li>' +
         '</ul>' +
-        '<p>None of those crash. That is the problem. They produce a confident wrong answer, which is the most expensive kind, and the only sort that survives a demo.</p>' +
+        '<p>None of those crash. That is the whole problem. They produce a confident wrong answer, which is the expensive kind, and the only kind that survives a demo.</p>' +
         pull('Directing AI is what made the building fast. Knowing what to check is what made it correct.'),
       chips: ['esop', 'limits', 'skills']
     },
@@ -240,9 +241,9 @@
       boost: ['credit policy', 'cibil'],
       html:
         '<p>A payroll deducted loan only looks safe.</p>' +
-        pull('Employment tells you someone is paid. It does not tell you whether they are already over borrowed somewhere else.') +
-        '<p>That gap is what the credit policy closes. I drafted it against bureau data, so the decision to lend and the limit attached to it are made before the money leaves, rather than argued about after it does not come back. It replaced manual review with rule based eligibility, which is what made instant approvals possible and cut the turnaround on a disbursal.</p>' +
-        '<p>It exists to move one number, the collection rate, by declining the wrong loans early rather than chasing them later.</p>',
+        pull('Employment tells you someone gets paid. It does not tell you who else is already collecting.') +
+        '<p>Closing that gap is the entire job of the credit policy. Veronica wrote it against bureau data, so the decision to lend and the size of the limit happen before the money leaves, rather than in a meeting three months later about why it did not come back. It also replaced manual review with rules, which is what made instant approval possible and cut the wait on a disbursal.</p>' +
+        '<p>It exists to move exactly one number, the collection rate, by declining the wrong loans early instead of chasing them later.</p>',
       chips: ['collections', 'numbers', 'products']
     },
 
@@ -253,9 +254,8 @@
              'repayment payroll deduction salary deduction what if someone does not pay dpd',
       boost: ['collections', 'default rate', 'defaults'],
       html:
-        '<p>Repayment is architected, not chased. The loan is recovered from monthly pay through payroll deduction, so the money moves before the borrower ever has to decide to pay it.</p>' +
-        '<p>Together with the CIBIL based credit policy, that has held <b>defaults at 1.5 to 2%</b>.</p>' +
-        '<p>The interesting part is the exception. A deduction does not always recover the full amount, and when it does not, somebody has to decide what happens next. There was no process for that when I started. Designing it was most of the work, and it is why the second system exists at all: the monthly cycle is where those exceptions either get caught or quietly become someone else&rsquo;s problem in two months.</p>',
+        '<p>Repayment is designed rather than chased. The money leaves through payroll before the borrower has to decide anything about it, which removes most of the drama. Together with the credit policy, that has held <b>defaults at 1.5 to 2%</b>.</p>' +
+        '<p>The interesting part is the exception. A deduction does not always recover the full amount, and when it does not, someone has to decide what happens next. There was no process for that when she started. Designing one was most of the work, and it is why the second system exists at all: month end is where exceptions either get caught or quietly become February&rsquo;s problem.</p>',
       chips: ['credit', 'efos', 'numbers']
     },
 
@@ -267,20 +267,20 @@
       boost: ['salary advance', 'two products', 'what products'],
       html:
         '<p>Two, both for PhysicsWallah employees.</p>' +
-        '<p><b>Employee Financing.</b> Salary Advance and Salary Top-up. Short duration credit recovered from monthly pay through payroll deduction. I own eligibility, pricing, the repayment flow and the collections design end to end.</p>' +
-        '<p><b>ESOP Financing.</b> Lending against pledged ESOP shares. Exercising ESOP triggers a tax bill immediately, long before the shares are worth anything spendable, so the loan bridges that gap. I own the operations end to end: onboarding, credit checks, the share pledge, disbursement and closure, across credit, NBFC and depository stakeholders.</p>',
+        '<p><b>Employee Financing.</b> Salary Advance and Salary Top-up. Short duration credit recovered from monthly pay through payroll deduction. Veronica owns eligibility, pricing, the repayment flow and the collections design end to end.</p>' +
+        '<p><b>ESOP Financing.</b> Lending against pledged ESOP shares, so an employee can pay the exercise tax before the shares become anything they can actually spend. She owns the operations end to end: onboarding, credit checks, the pledge, disbursement and closure, across credit, an NBFC and a depository, none of whom share a system with each other.</p>',
       chips: ['credit', 'esop', 'work']
     },
 
     research: {
-      q: 'How do you do user research?',
+      q: 'How does she do user research?',
       label: 'User research',
       terms: 'user research interviews surveys users customers talked to employees discovery ' +
-             'feedback validation what users want acquisition funnel talked to users',
+             'feedback validation what users want acquisition funnel',
       boost: ['user research', 'interviews', 'surveys'],
       html:
-        '<p>By talking to the people the deduction actually happens to. I ran interviews and surveys across <b>5,000+ employees</b>, and the initiatives that came out of it contributed to a <b>12% lift in acquisition</b>.</p>' +
-        '<p>The most useful finding was not a feature request. It was that people abandoned at the point where the cost stopped being legible. So I introduced coupons and a waiver on the processing fee, and rebuilt the journey around what was actually getting people through it rather than around what we had assumed was the blocker.</p>',
+        '<p>By talking to the people the deduction actually happens to. Interviews and surveys across <b>5,000+ employees</b>, and the work that came out of it contributed to a <b>12% lift in acquisition</b>.</p>' +
+        '<p>The most useful finding was not a feature request. People dropped out at the point where the cost stopped being legible. So she added coupons, waived the processing fee, and rebuilt the flow around what was actually stopping people rather than around what everyone had assumed was stopping them.</p>',
       chips: ['dayjob', 'numbers', 'principles']
     },
 
@@ -297,24 +297,24 @@
           ['4,500+', 'Employees served'],
           ['1.5 to 2%', 'Default rate']
         ]) +
-        '<p>From the two systems: around 300 ESOP loans that ran on eleven spreadsheets owned by five teams, 108 production deployments over four months, and a bank reconciliation that parses to &#8377;64,05,97,403 and matches the bank&rsquo;s own summary. On the Financing OS, 2,886 employees repaying through payroll in a month, 220 automated tests and 86 commits over three and a half weeks.</p>' +
-        '<p>Every figure here is one I can walk through in an interview. Where I do not have a number, I say so, and the case studies list those places explicitly.</p>',
+        '<p>From the two systems: around 300 ESOP loans that ran on eleven spreadsheets owned by five teams, 108 production deployments over four months, and a bank reconciliation that parses to &#8377;64,05,97,403 and agrees with the bank&rsquo;s own summary. On the Financing OS, 2,886 employees repaying through payroll in a month, 220 automated tests and 86 commits over three and a half weeks.</p>' +
+        '<p>Every figure here survives a follow-up question, which is a lower bar than it sounds and one a surprising number of portfolios fail. Where there is no number, the case studies say so out loud.</p>',
       chips: ['limits', 'esop', 'efos']
     },
 
     principles: {
-      q: 'How do you think about product?',
-      label: 'How you think',
+      q: 'How does she think about product?',
+      label: 'How she thinks',
       terms: 'principles philosophy how do you think approach process beliefs values ' +
              'design principles opinions product sense judgement how do you prioritise tradeoffs',
       boost: ['principles', 'philosophy', 'how do you think'],
       html:
-        '<p>Five, and all of them come out of the same job.</p>' +
+        '<p>Five, all of them learned the expensive way.</p>' +
         '<ul>' +
         '<li><b>Irreversibility drives the design.</b> Releasing collateral and paying money out cannot be undone, so those paths get the strictest gates and fail safe defaults.</li>' +
         '<li><b>Evidence over declaration.</b> Prefer the cash arrived over someone ticked Closed.</li>' +
-        '<li><b>Business exceptions belong to the business.</b> Encoded as data the operations team owns, not as rules buried in code they cannot see.</li>' +
-        '<li><b>Silence is the enemy.</b> Fail soft, but never fail quietly. A financial tool that degrades without saying so is worse than one that stops.</li>' +
+        '<li><b>Business exceptions belong to the business.</b> Encoded as data the operations team owns, not as rules buried in code they will never see.</li>' +
+        '<li><b>Silence is the enemy.</b> Fail soft, but never fail quietly. A financial tool that degrades without mentioning it is worse than one that stops.</li>' +
         '<li><b>Signal over completeness.</b> A report nobody trusts because it flags &#8377;3 discrepancies is worse than no report at all. Choosing what not to show is a product decision.</li>' +
         '</ul>',
       chips: ['esop', 'why', 'about']
@@ -328,53 +328,53 @@
              'criticism shortcomings',
       boost: ['did not work', 'limitations', 'went wrong', 'weakness', 'go wrong', 'do differently'],
       html:
-        pull('Both case studies carry a section I did not have to write. It is the section I would read first.') +
-        '<p><b>ESOP Loan Repository.</b> I never instrumented the manual baseline, so I can show what the system catches but not a clean time saved figure. Refresh is slow on the largest sheets. The tool mirrors upstream data it does not control, which is precisely why the reconciliation views exist. And one person built it, so it needs a documented handover.</p>' +
-        '<p><b>Employee Financing Process OS.</b> Not yet in daily production use. The live updates work is only partly done, with polling still running in parallel on purpose. Imports are file based because no reliable LMS API was available to integrate against. Until it runs a real month end, the time it saves is an estimate rather than a measurement.</p>',
+        pull('Both case studies carry a section she did not have to write. It is the section worth reading first.') +
+        '<p><b>ESOP Loan Repository.</b> She never instrumented the manual baseline, so she can show what the system catches but not a clean time saved figure. Refresh is slow on the largest sheets. The tool mirrors upstream data it does not control, which is precisely why the reconciliation views exist. And one person built it, so it needs a documented handover before that person takes a holiday.</p>' +
+        '<p><b>Employee Financing Process OS.</b> Not in daily production use. The live updates work is only half done, with polling still running alongside it on purpose. Imports are file based because no reliable LMS API was available to integrate against. Until it survives a real month end, the time it saves is an estimate wearing the clothes of a measurement.</p>',
       chips: ['esop', 'efos', 'principles']
     },
 
     timeline: {
-      q: 'Give me your experience timeline',
+      q: 'Give me her experience timeline',
       label: 'Experience timeline',
       terms: 'timeline experience history career when did you start how long years ' +
              'previous jobs internship edumentor employment work history cv path progression',
       boost: ['timeline', 'experience', 'how long have you'],
       html:
-        '<p><b>FinZ (PhysicsWallah), Noida. December 2024 to now.</b> Product strategy on Employee Financing. Launched the vertical from concept and scaled it to &#8377;3 Cr+ in monthly disbursal. Designed two loan products end to end, wrote the CIBIL based credit policy, and own ESOP Financing operations across credit, NBFC and depository stakeholders. Built the two internal systems on this site along the way.</p>' +
+        '<p><b>FinZ (PhysicsWallah), Noida. December 2024 to now.</b> Product strategy on Employee Financing. Launched the vertical from concept and scaled it to &#8377;3 Cr+ in monthly disbursal. Designed two loan products end to end, wrote the CIBIL based credit policy, and owns ESOP Financing operations across credit, NBFC and depository stakeholders. Built the two systems on this site along the way, which was not in the job description.</p>' +
         '<p><b>Edumentor Educational Services. April to June 2023.</b> Zonal Manager intern. Scoped and delivered a one month student engagement programme, and ran a 20 to 25 member team executing daily operations for a multi-centre activation.</p>' +
         '<p><b>University of Delhi. 2021 to 2024.</b> BSc (Hons) Computer Science, minor in Mathematics.</p>',
       chips: ['education', 'work', 'resume']
     },
 
     skills: {
-      q: 'What are your skills?',
+      q: 'What are her skills?',
       label: 'Skills and tools',
       terms: 'skills tools stack technical abilities sql python power bi excel figma ' +
              'what can you do capabilities competencies prd prds analytics data',
-      boost: ['your skills', 'what tools', 'tech stack'],
+      boost: ['your skills', 'what tools', 'tech stack', 'her skills'],
       html:
         '<p><b>Product.</b> 0 to 1 launches, PRDs, pricing constructs, user research, funnel metrics.</p>' +
         '<p><b>Product operations.</b> Process automation, SOP design, reconciliation, exception handling, turnaround time reporting.</p>' +
         '<p><b>AI and data.</b> Claude API, LLM prompt engineering, evaluation design, SQL, Python, Power BI.</p>' +
         '<p><b>Domain.</b> Consumer lending, underwriting, collections, compliance workflows, payroll integrations.</p>' +
-        '<p>The computer science degree is why the AI-directed build worked. I can read what it writes, which is the difference between directing a build and hoping.</p>',
+        '<p>The computer science degree is why the AI-directed build worked. She can read what it writes, which is the whole difference between directing a build and hoping about one.</p>',
       chips: ['ai', 'certs', 'education']
     },
 
     certs: {
-      q: 'What certifications do you have?',
+      q: 'What certifications does she have?',
       label: 'Certifications',
       terms: 'certifications certificates courses coursera google hackerrank pwc credentials qualifications',
       boost: ['certifications', 'certificates'],
       html:
         '<p>Google Data Analytics (Coursera). Data Analysis and Presentation Skills, a five course specialisation (PwC). SQL (HackerRank).</p>' +
-        '<p>None of them taught me as much as being responsible for a loan book, but they are on the resume and they are real.</p>',
+        '<p>None of them taught her as much as being responsible for a live loan book did, but they are real, they are on the resume, and she finished them.</p>',
       chips: ['skills', 'education', 'resume']
     },
 
     education: {
-      q: 'What did you study?',
+      q: 'What did she study?',
       label: 'Education',
       terms: 'education college degree university studied study studies graduate graduation ' +
              'class 10 class 12 marks school academics delhi aryabhatta computer science',
@@ -387,18 +387,18 @@
     },
 
     why: {
-      q: 'Why should we hire you?',
-      label: 'Why hire you',
+      q: 'Why should we hire her?',
+      label: 'Why hire her',
       terms: 'why should we hire you why you what are you looking for next role ' +
              'what do you want strengths good fit sell yourself pitch value add ' +
              'why are you a good candidate convince me',
-      boost: ['should we hire', 'hire you', 'looking for', 'why you'],
+      boost: ['should we hire', 'hire you', 'hire her', 'looking for', 'why you'],
       html:
-        '<p>Three things, and you can check all of them on this site.</p>' +
-        '<p><b>I own outcomes, not screens.</b> The credit policy I drafted exists to move one number, the collection rate, by declining the wrong loans early rather than chasing them later. Defaults sit at 1.5 to 2%. That is a business decision expressed as a product.</p>' +
-        '<p><b>I ship.</b> 108 production deployments over four months on the ESOP Repository, built solo and alongside my regular work. 220 automated tests and 86 commits over three and a half weeks on the Financing OS.</p>' +
-        '<p><b>I am honest about what I do not know.</b> Both case studies list their limitations, including the ones that make the numbers less impressive. I would rather be trusted on the figures I do give.</p>' +
-        '<p>What I want is a product role where the correctness bar is part of the job. AI-native products, fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>',
+        '<p>Three claims, all of them checkable on this site, which is more than most portfolios offer.</p>' +
+        '<p><b>She owns outcomes, not screens.</b> The credit policy exists to move the collection rate by declining the wrong loans early. Defaults sit at 1.5 to 2%. That is a business decision wearing a product costume.</p>' +
+        '<p><b>She ships.</b> 108 production deployments in four months on the ESOP Repository, solo, alongside the day job. 220 automated tests and 86 commits in three and a half weeks on the Financing OS.</p>' +
+        '<p><b>She tells you what went wrong.</b> Both case studies list their own limitations, including the ones that make the numbers less flattering. A portfolio containing nothing but triumphs is asking you to take the lot on trust.</p>' +
+        '<p>What she wants is a product role where the correctness bar is part of the job. AI-enabled products, fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>',
       chips: ['limits', 'numbers', 'contact']
     },
 
@@ -409,25 +409,25 @@
              'computer science developer coder why not software',
       boost: ['why product', 'not engineering', 'not be an engineer', 'switch from'],
       html:
-        '<p>I read computer science, so engineering was the obvious road. I did not take it because the decisions I found interesting were not in the code.</p>' +
-        '<p>Whether to lend someone money, at what limit, and what to do when the repayment falls short is not an engineering question. It is a product question with a balance sheet attached. The degree still earns its keep every day: it is why I can direct AI to build a system and then catch the three data bugs that would otherwise have produced a confident wrong answer.</p>',
+        '<p>She read computer science, so engineering was the obvious road. She did not take it because the decisions she found interesting were not in the code.</p>' +
+        '<p>Whether to lend someone money, how much, and what to do when the repayment falls short is not an engineering question. It is a product question with a balance sheet attached. The degree still earns its keep every week: it is why she can point AI at a system and then catch the three data bugs that would otherwise have shipped a confident wrong answer to people counting on it.</p>',
       chips: ['ai', 'about', 'why']
     },
 
     stakeholders: {
-      q: 'Who do you work with?',
+      q: 'Who does she work with?',
       label: 'Stakeholders',
       terms: 'stakeholders teams who do you work with collaborate cross functional ' +
              'engineering design operations compliance nbfc depository payroll lenders partners',
       boost: ['stakeholders', 'who do you work with'],
       html:
-        '<p>More external than most product roles. ESOP Financing runs across credit, an NBFC and a depository, and none of them share a system with us, which is exactly why the reconciliation views in the first case study exist.</p>' +
-        '<p>Internally: the FinZ operations team, who answer questions about individual loans daily and are the real users of both systems; payroll, who confirm what was actually deducted each month, which is never quite what was requested; and a compliance officer who has to approve every share release for a Designated Person before it happens.</p>',
+        '<p>More external than most product roles. ESOP Financing runs across credit, an NBFC and a depository, and none of them share a system with FinZ or with each other, which is exactly why the reconciliation views in the first case study exist.</p>' +
+        '<p>Internally: the operations team, who field questions about individual loans all day and are the real users of both systems. Payroll, who confirm what was actually deducted, which is never quite what was requested. And a compliance officer who has to approve every share release for a Designated Person before it happens.</p>',
       chips: ['esop', 'efos', 'dayjob']
     },
 
     logistics: {
-      q: 'Are you open to remote roles?',
+      q: 'Is she open to remote roles?',
       label: 'Remote, notice and pay',
       terms: 'remote remotely work from home wfh hybrid onsite relocate relocation ' +
              'notice period joining start date availability salary compensation ctc pay ' +
@@ -435,20 +435,20 @@
              'how much do you want budget band offer',
       boost: ['open to remote', 'notice period', 'expected salary', 'salary expectation', 'compensation', 'work from home'],
       html:
-        '<p><b>Remote.</b> Yes. I have spent more than twenty months building a lending product with the people who use it sitting in a different city, so I am well past needing a desk next to anyone.</p>' +
+        '<p><b>Remote.</b> Yes. She has spent twenty odd months building a lending product whose users sit in a different city, so proximity was never the thing holding it together.</p>' +
         '<p><b>Notice period.</b> 20 to 30 days.</p>' +
-        '<p><b>Pay.</b> Best discussed on a call. It is the one number on this site I would rather not publish, and unlike the others it is genuinely negotiable.</p>' +
+        '<p><b>Pay.</b> Worth a call. It is the one number on this site she would rather not publish, and unlike the others it is negotiable.</p>' +
         REACH,
       chips: ['contact', 'why', 'work']
     },
 
     location: {
-      q: 'Where are you based?',
+      q: 'Where is she based?',
       label: 'Location',
       terms: 'where are you based location city live delhi ncr noida india timezone',
-      boost: ['where are you based', 'which city'],
+      boost: ['where are you based', 'which city', 'where is she'],
       html:
-        '<p>Delhi NCR. The FinZ office is in Noida. Open to remote, and used to working with the people who use the product sitting somewhere else.</p>',
+        '<p>Delhi NCR, with the FinZ office in Noida. Open to remote, and well practised at it.</p>',
       chips: ['logistics', 'contact']
     },
 
@@ -457,19 +457,19 @@
       label: 'Get in touch',
       terms: 'contact email reach get in touch linkedin phone whatsapp call talk connect ' +
              'hire me message speak dm how do i contact you',
-      boost: ['get in touch', 'contact you', 'reach you'],
+      boost: ['get in touch', 'contact you', 'reach you', 'contact her'],
       html:
-        '<p>I would love to talk. I am open to conversations about AI-native product roles, fintech, and internal platform teams.</p>' + VCARD,
+        '<p>She would like that. Open to conversations about AI-enabled product roles, fintech, and internal platform teams. Email is read, WhatsApp is faster.</p>' + VCARD,
       chips: ['why', 'work', 'logistics']
     },
 
     resume: {
-      q: 'Can I see your resume?',
+      q: 'Can I see her resume?',
       label: 'Resume',
       terms: 'resume cv download pdf one pager curriculum vitae send me your resume',
-      boost: ['your resume', 'your cv', 'download resume'],
+      boost: ['your resume', 'your cv', 'download resume', 'her resume'],
       html:
-        '<p>Here it is. One page: FinZ and the employee lending vertical, the two systems, and the skills behind them. The case studies go a good deal further, mostly because they are not obliged to fit on one page.</p>' +
+        '<p>Here it is. One page: FinZ, the lending vertical, the two systems, and the skills behind them. The case studies go considerably further, mainly because they are not fighting for space on a single sheet.</p>' +
         '<div class="vcard"><h3>Veronica Singh, resume</h3>' +
         '<p>PDF, one page. Product Strategy, Employee Financing at FinZ.</p>' +
         '<div class="reach"><a class="primary" href="' + CV + '" download>' + DL_SVG + 'Download resume (PDF)</a>' +
@@ -484,20 +484,20 @@
              'tldr tl dr overview scan brief short version give me the gist fast',
       boost: ['recruiter mode', '90 second', 'tldr', 'summary', 'the gist'],
       html:
-        '<p>No fluff. Here is the scan-friendly version.</p>' +
+        '<p>No fluff. The scan-friendly version.</p>' +
         '<div class="scan">' +
         '<h3>' + bolt() + 'Veronica in 90 seconds</h3>' +
         '<ul>' +
         '<li>Product Strategy, Employee Financing at FinZ, the fintech vertical at PhysicsWallah. Delhi NCR, open to remote.</li>' +
         '<li>20+ months building an employee lending product from scratch: eligibility, pricing, repayment and collections.</li>' +
         '<li>&#8377;3 Cr+ disbursed monthly, &#8377;34 Cr active loan book, 4,500+ employees served, defaults held at 1.5 to 2%.</li>' +
-        '<li>Wrote the CIBIL based credit policy that decides who qualifies and at what limit, replacing manual review with rule based eligibility.</li>' +
+        '<li>Wrote the CIBIL based credit policy that decides who qualifies and at what limit, replacing manual review with rules.</li>' +
         '<li>Owns two products: ESOP Financing and Employee Financing.</li>' +
         '<li>ESOP Loan Repository, live: eleven spreadsheets across five teams replaced with one system of record. 108 production deployments in four months, built solo.</li>' +
         '<li>Employee Financing Process OS, in build: the monthly cycle for 2,886 employees and two lenders. 220 automated tests, 86 commits, three and a half weeks.</li>' +
-        '<li>Directs AI as the engineering layer, and reviews every step of what it produces.</li>' +
+        '<li>Directs AI as the engineering layer, and reads every line of what it produces.</li>' +
         '<li>BSc (Hons) Computer Science, minor in Mathematics, University of Delhi. Class 12 96%, Class 10 97%.</li>' +
-        '<li>Every case study lists its own limitations. No figure on this site is one that cannot survive a follow-up question.</li>' +
+        '<li>Every case study lists its own limitations. No figure on this site falls apart under a follow-up question.</li>' +
         '</ul>' +
         '</div>',
       chips: ['why', 'numbers', 'limits', 'contact']
@@ -510,8 +510,8 @@
              'nice to meet you sup yo greetings',
       boost: ['hello', 'thank you'],
       html:
-        '<p>Hello. Ask me anything about the lending product I own, the two systems I built for it, the numbers behind them, or the parts that did not work.</p>' +
-        '<p>If you are recruiting, the fastest route is the 90 second version.</p>',
+        '<p>Hello. I am the assistant on Veronica&rsquo;s site, and my entire area of expertise is one person.</p>' +
+        '<p>Ask about the lending product she owns, the two systems she built for it, the numbers, or the parts that did not work. If you are recruiting and short on time, the 90 second version is the quickest route in.</p>',
       chips: ['recruiter', 'best', 'numbers', 'contact']
     },
 
@@ -522,8 +522,8 @@
              'are you a bot are you a real person is this real human chatgpt',
       boost: ['can i ask', 'are you an ai', 'are you a bot', 'real person', 'how does this work'],
       html:
-        '<p>Anything on this site, which is: the lending book and how it is priced and collected, the two systems I built, the numbers, how I use AI, my background and education, and the practical questions about hiring me.</p>' +
-        '<p>To be straight with you, I am not a model. Every reply here was written by Veronica in advance and matched to your question. That is deliberate: a model would eventually state a figure about her work that nobody can defend in an interview, and this whole site is built on the opposite promise.</p>',
+        '<p>Anything on this site: the lending book and how it is priced and collected, the two systems, the numbers, how she uses AI, her background, and the practical hiring questions like remote, notice and pay.</p>' +
+        '<p>Since you asked what I am: not a large language model. Every answer here was written in advance and matched to your question, because a model would eventually produce a confident figure about Veronica&rsquo;s work that nobody could defend in an interview, and this entire site is built on the opposite promise. So I am narrow. I would rather be narrow and right.</p>',
       chips: ['recruiter', 'work', 'numbers', 'contact']
     }
   };
@@ -739,7 +739,7 @@
     wrap.className = 'msg';
     wrap.innerHTML =
       '<img class="face" src="img/avatar.jpg" alt="" width="320" height="320">' +
-      '<div class="said"><p class="who">Veronica</p>' +
+      '<div class="said"><p class="who">Veronica AI</p>' +
       '<div class="body">' +
         '<div class="thinking" role="status">' +
           '<div class="think-row">' +
@@ -766,7 +766,7 @@
     var ids = related
       ? r.slice(0, 3).map(function (x) { return x[0]; })
       : ['best', 'work', 'numbers', 'why', 'contact'];
-    return '<p>That is not something I have a written answer for. I could improvise, but improvising around numbers is exactly how lending products go wrong, so I will not.</p>' +
+    return '<p>Not something I have an answer for. I could take a confident guess, but guessing about numbers is precisely how lending products come apart, and Veronica would never let me hear the end of it.</p>' +
            '<p>' + (related ? 'The closest things I do have:' : 'Here is what I can cover:') + '</p>' +
            chipRow(ids) +
            '<p style="margin-top:1rem">Or ask me directly and I will answer properly.</p>' + REACH;
