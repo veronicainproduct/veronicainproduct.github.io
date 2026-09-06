@@ -115,8 +115,8 @@
     whois: {
       q: 'Who is Veronica?',
       label: 'Who is Veronica',
-      terms: 'who is veronica singh who are you introduce yourself tell me about yourself ' +
-             'your background summary profile bio about you overview elevator pitch',
+      terms: 'who is veronica singh who are you profile bio overview elevator pitch ' +
+             'summary introduce short version of you',
       boost: ['who is veronica', 'who are you'],
       html:
         '<p>I run product strategy for employee lending at FinZ, the fintech arm of PhysicsWallah. I own two products, ESOP Financing and Employee Financing, and more to the point I own the parts nobody puts on a slide: who qualifies, what it costs, how it gets repaid, and what happens the month payroll takes less than it was asked to.</p>' +
@@ -128,14 +128,15 @@
     about: {
       q: 'Tell me about yourself',
       label: 'About Veronica',
-      terms: 'about veronica about me your story how did you get into product background ' +
-             'journey path career story what do you do',
-      boost: ['about me', 'about veronica', 'your story'],
+      terms: 'about veronica about me yourself your story background how did you get into ' +
+             'product journey path career story introduce',
+      boost: ['about me', 'about veronica', 'your story', 'about yourself', 'yourself'],
       html:
-        '<p>I did not get here through a product title. I got here by being handed a lending book and finding that nobody had written down who was allowed to borrow from it.</p>' +
-        '<p>Twenty odd months later: eligibility rules, pricing, a repayment schedule that fits a payroll cycle, and a plan for the month a deduction comes back short. I designed all four, then built the systems that stop anyone quietly editing them.</p>' +
-        '<p>Two products now. <b>ESOP Financing</b> lends against pledged shares so employees can pay the exercise tax before those shares are worth anything spendable. <b>Employee Financing</b> is salary advance and top-ups, recovered from payroll.</p>' +
-        '<p>Next I want a role where being right beats being quick. Fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>',
+        '<p><b>Nobody had written down who was allowed to borrow.</b></p>' +
+        '<p>That was the lending book when it landed on my desk. Money going out, money coming back, and not one document explaining why either was happening. Product, for me, started there rather than with a title.</p>' +
+        '<p>Twenty odd months on there are eligibility rules, pricing, a repayment schedule built around payday, and a plan for the month the deduction falls short. I wrote all four. Then I built the systems that stop anyone quietly editing them.</p>' +
+        '<p>Two products, &#8377;34 Cr on the book, defaults at 1.5 to 2%.</p>' +
+        '<p>Next I want a room where being right matters more than being fast.</p>',
       chips: ['principles', 'work', 'timeline', 'contact']
     },
 
@@ -220,14 +221,14 @@
              'vibe coding ai tools ai native how do you use ai solo alone a team',
       boost: ['without engineers', 'use ai', 'ai experience', 'engineering layer'],
       html:
-        '<p>There was no engineering team. There was a specification, a clear idea of what correct looked like, and AI doing the typing. That produced <b>108 production deployments in four months</b>, alongside the day job.</p>' +
-        '<p>The interesting part is where the difficulty actually sat. Almost none of it was the money maths, which is deterministic and frankly dull. It was reading the source data without being lied to by it.</p>' +
+        '<p>There was no engineering team. There was a spec, a clear idea of what correct looked like, and AI doing the typing. <b>108 production deployments in four months</b>, alongside the day job.</p>' +
+        '<p>The money maths was never the hard part. It is arithmetic. The hard part was source data that lied politely.</p>' +
         '<ul>' +
         '<li>A column called Confiscation Value held share quantities, not rupees.</li>' +
         '<li>Dates stored day first as text were being misread, quietly deleting payments from schedules.</li>' +
         '<li>133 of 333 confiscations sat against cancelled orders, invisible to anything that only loaded completed ones.</li>' +
         '</ul>' +
-        '<p>None of those crash. That is the whole problem. They produce a confident wrong answer, which is the expensive kind, and the only kind that survives a demo.</p>' +
+        '<p>None of those crash. That is the whole problem. They return a confident wrong number, which is the expensive kind, and the only kind that survives a demo.</p>' +
         pull('Directing AI is what made the building fast. Knowing what to check is what made it correct.'),
       chips: ['esop', 'limits', 'skills']
     },
@@ -309,14 +310,15 @@
              'design principles opinions product sense judgement how do you prioritise tradeoffs',
       boost: ['principles', 'philosophy', 'how do you think'],
       html:
-        '<p>Five, all of them learned the expensive way.</p>' +
+        '<p>Five rules. All of them paid for.</p>' +
         '<ul>' +
-        '<li><b>Irreversibility drives the design.</b> Releasing collateral and paying money out cannot be undone, so those paths get the strictest gates and fail safe defaults.</li>' +
-        '<li><b>Evidence over declaration.</b> Prefer the cash arrived over someone ticked Closed.</li>' +
-        '<li><b>Business exceptions belong to the business.</b> Encoded as data the operations team owns, not as rules buried in code they will never see.</li>' +
-        '<li><b>Silence is the enemy.</b> Fail soft, but never fail quietly. A financial tool that degrades without mentioning it is worse than one that stops.</li>' +
-        '<li><b>Signal over completeness.</b> A report nobody trusts because it flags &#8377;3 discrepancies is worse than no report at all. Choosing what not to show is a product decision.</li>' +
-        '</ul>',
+        '<li><b>Irreversibility sets the bar.</b> Releasing collateral and paying money out cannot be undone. Those paths get the strictest gates and the safest defaults.</li>' +
+        '<li><b>Evidence beats declaration.</b> The cash arrived is a fact. Someone ticked Closed is a hope.</li>' +
+        '<li><b>Business exceptions belong to the business.</b> Written as data the operations team owns, not as rules buried in code they will never see.</li>' +
+        '<li><b>Silence is the enemy.</b> Fail soft, never fail quietly. A financial tool that degrades without mentioning it is worse than one that stops.</li>' +
+        '<li><b>Signal beats completeness.</b> A report nobody trusts because it flags &#8377;3 discrepancies is worse than no report. Choosing what not to show is a product decision.</li>' +
+        '</ul>' +
+        '<p>Every one of them came from something going wrong first.</p>',
       chips: ['esop', 'why', 'about']
     },
 
@@ -328,9 +330,10 @@
              'criticism shortcomings',
       boost: ['did not work', 'limitations', 'went wrong', 'weakness', 'go wrong', 'do differently'],
       html:
-        pull('Both case studies carry a section I did not have to write. It is the section worth reading first.') +
-        '<p><b>ESOP Loan Repository.</b> I never instrumented the manual baseline, so I can show what the system catches but not a clean time saved figure. Refresh is slow on the largest sheets. The tool mirrors upstream data it does not control, which is precisely why the reconciliation views exist. And one person built it, so it needs a documented handover before that person takes a holiday.</p>' +
-        '<p><b>Employee Financing Process OS.</b> Not in daily production use. The live updates work is only half done, with polling still running alongside it on purpose. Imports are file based because no reliable LMS API was available to integrate against. Until it survives a real month end, the time it saves is an estimate wearing the clothes of a measurement.</p>',
+        '<p>Every portfolio has a wins section. This is the other one.</p>' +
+        '<p><b>ESOP Loan Repository.</b> I never measured the manual baseline, so I can tell you what the system catches but not how much time it saved. Refresh crawls on the biggest sheets. It mirrors upstream data it does not own, which is exactly why the reconciliation views exist. And one person built it, so it needs a handover document more than it needs features.</p>' +
+        '<p><b>Employee Financing Process OS.</b> Not in daily use. Live updates are half done, with polling still running beside them on purpose. Imports are file based because there was no LMS API worth trusting. Until it survives a real month end, the time it saves is an estimate wearing the clothes of a measurement.</p>' +
+        pull('I would rather you found these here than in the interview.'),
       chips: ['esop', 'efos', 'principles']
     },
 
@@ -394,11 +397,11 @@
              'why are you a good candidate convince me',
       boost: ['should we hire', 'hire you', 'hire her', 'looking for', 'why you'],
       html:
-        '<p>Three claims, and you can check every one of them without leaving this page.</p>' +
-        '<p><b>I own outcomes, not screens.</b> The credit policy exists to move one number, the collection rate. Defaults sit at 1.5 to 2%. That is a business decision wearing a product costume.</p>' +
-        '<p><b>I ship.</b> 108 production deployments in four months, solo, alongside the day job. 220 automated tests in three and a half weeks on the second system.</p>' +
-        '<p><b>I tell you what went wrong.</b> Both case studies list their own limitations. A portfolio of nothing but triumphs is asking you to take the lot on trust.</p>' +
-        '<p>I want a role where the correctness bar is part of the job. AI-enabled products, fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>',
+        '<p>Three claims. You can check all of them before you close this tab.</p>' +
+        '<p><b>I move numbers, not pixels.</b> The credit policy exists to do one thing: hold the collection rate up by declining the wrong loans early instead of chasing them later. Defaults sit at 1.5 to 2%. That is a business decision in a product costume.</p>' +
+        '<p><b>I ship without a team.</b> 108 production deployments in four months, solo, alongside the day job.</p>' +
+        '<p><b>I show you the parts that did not work.</b> Both case studies end with their own limitations. Most portfolios are a highlight reel, and highlight reels are easy to fake.</p>' +
+        '<p>What I want is a job where being right is the job. AI-enabled products, fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>',
       chips: ['limits', 'numbers', 'contact']
     },
 
@@ -450,8 +453,8 @@
       boost: ['are you from', 'you from', 'hometown', 'grew up',
               'originally from', 'your origin', 'born', 'lucknow'],
       html:
-        '<p><b>Lucknow.</b> Which explains the manners and the very strong opinions about kebabs.</p>' +
-        '<p>Delhi for university, and I stayed for the job. Now in Noida, at PhysicsWallah&rsquo;s head office. Happy to work remote.</p>',
+        '<p><b>Lucknow.</b> Which explains the manners. The loan book explains the opinions.</p>' +
+        '<p>Came to Delhi for a bachelors at Delhi University, stayed in NCR for the job. Now in Noida, at PhysicsWallah&rsquo;s head office, and happy to work remote.</p>',
       chips: ['education', 'logistics', 'about']
     },
 
