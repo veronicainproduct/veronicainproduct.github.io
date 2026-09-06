@@ -73,7 +73,7 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
 
 .side-label{
   margin:0 0 .55rem;font-family:var(--mono);
-  font-size:var(--t-micro);letter-spacing:.14em;
+  font-size:var(--t-micro);letter-spacing:.07em;
   text-transform:uppercase;color:var(--muted);
 }
 .try-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.4rem}
@@ -177,8 +177,13 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
   max-width:52rem;margin-inline:auto;
   padding:clamp(1.5rem,3.5vw,2.5rem) 0 1rem;
   display:flex;flex-direction:column;gap:1.75rem;
-  font-size:15px;line-height:1.72;
+  font-size:14px;line-height:1.75;
 }
+
+/* In a monospaced face 1ch is exactly one character wide, so a measure
+   set in ch actually means what it says. Prose is capped; cards and
+   figures keep the full column. */
+.said p, .said ul{max-width:68ch}
 
 .msg{display:flex;gap:.85rem;max-width:100%}
 .msg-open .said{padding-left:0}
@@ -203,8 +208,8 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
 
 /* the opening */
 .lede{
-  font-size:clamp(1.3rem,2vw,1.7rem);
-  font-weight:600;line-height:1.2;letter-spacing:-.015em;
+  font-size:clamp(1.15rem,1.8vw,1.5rem);
+  font-weight:600;line-height:1.25;letter-spacing:0;
   margin:0 0 .6rem;display:flex;align-items:center;gap:.55rem;
 }
 .mark{
@@ -215,13 +220,13 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
   box-shadow:0 1px 2px rgba(16,25,43,.12), 0 6px 16px rgba(226,160,63,.28);
 }
 .mark svg{width:.85em;height:.85em}
-.sub{font-size:14px;line-height:1.72;color:var(--muted);margin-bottom:1.25rem;max-width:64ch}
+.sub{font-size:13.5px;line-height:1.8;color:var(--muted);margin-bottom:1.3rem;max-width:70ch}
 
 /* the line in an answer that carries the argument */
 .pull{
   margin:1.15rem 0;padding:.15rem 0 .15rem 1.1rem;
   border-left:3px solid var(--accent);
-  font-size:16px;font-weight:500;line-height:1.5;
+  font-size:14.5px;font-weight:500;line-height:1.6;max-width:64ch;
 }
 
 /* An answer arriving. The block fades in, then its words land in order,
@@ -296,14 +301,14 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
   grid-template-columns:repeat(auto-fit,minmax(8rem,1fr));
 }
 .num b{
-  display:block;font-size:clamp(1.7rem,3vw,2.4rem);
-  font-weight:700;line-height:1;letter-spacing:-.02em;
+  display:block;font-size:clamp(1.35rem,2.2vw,1.8rem);
+  font-weight:700;line-height:1.05;letter-spacing:0;
 }
 .num span{
   display:block;margin-top:.4rem;
   font-family:var(--mono);font-size:var(--t-micro);
-  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
-  line-height:1.35;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--muted);
+  line-height:1.4;
 }
 
 /* ---- case study card ---------------------------------------- */
@@ -315,10 +320,10 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
 .proj-body{padding:1.3rem 1.4rem 1.5rem;min-width:0}
 .kicker{
   margin:0 0 .55rem;font-family:var(--mono);
-  font-size:var(--t-micro);letter-spacing:.11em;
+  font-size:var(--t-micro);letter-spacing:.05em;
   text-transform:uppercase;color:var(--accent-deep);
 }
-.proj h3{font-size:clamp(1.4rem,2.4vw,1.85rem);margin:0 0 .25rem;letter-spacing:-.01em}
+.proj h3{font-size:clamp(1.05rem,1.7vw,1.3rem);margin:0 0 .3rem;letter-spacing:0}
 .proj-sub{margin:0 0 1.15rem;color:var(--muted);font-size:var(--t-small)}
 .proj .numset{margin:0 0 1.35rem;gap:1rem 1.4rem;grid-template-columns:repeat(3,minmax(0,1fr))}
 .proj .num b{font-size:clamp(1.4rem,2.2vw,1.75rem)}
@@ -357,7 +362,7 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
   display:inline-block;background:var(--tan);color:var(--ink);
   border-radius:999px;padding:.25rem .7rem;margin-bottom:.7rem;
   font-family:var(--mono);font-size:var(--t-micro);
-  letter-spacing:.08em;text-transform:uppercase;
+  letter-spacing:.04em;text-transform:uppercase;
 }
 
 .scan{
@@ -456,7 +461,7 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
     background:var(--card);color:var(--ink);
     border:var(--border);border-radius:12px;box-shadow:var(--shadow);
     font-family:var(--font);font-weight:700;font-size:var(--t-micro);
-    letter-spacing:.1em;text-transform:uppercase;
+    letter-spacing:.04em;text-transform:uppercase;
     padding:.55rem .85rem;cursor:pointer;
   }
   .avail{font-size:var(--t-micro)}
