@@ -10,3 +10,12 @@ desktop.ini
 .DS_Store
 *.tmp
 *.bak
+
+# scratch files from testing
+_probe.html
+_res.json
+_a*.html
+_h*.html
+_v*.html
+_s*.html
+_audit.js
