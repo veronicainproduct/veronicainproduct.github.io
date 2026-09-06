@@ -25,6 +25,7 @@
   var LI = 'https://www.linkedin.com/in/veronicasingh250803';
   var WA = 'https://wa.me/919555914534';
   var CV = 'assets/Veronica-Singh-Resume.pdf';
+  var IG = 'https://www.instagram.com/finaldraft.wav';
 
   var reduce = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -67,6 +68,7 @@
   var MAIL_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2.5 7 9.5 6 9.5-6"/></svg>';
   var IN_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>';
   var WA_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 1.67c2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.25-8.25 8.25a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.39c0-4.54 3.7-8.24 8.24-8.24Zm-2.9 4.06c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.43s1.05 2.82 1.19 3.01c.15.2 2.03 3.1 4.93 4.23 2.41.95 2.9.76 3.43.71.52-.05 1.68-.69 1.92-1.35.24-.66.24-1.23.17-1.35-.07-.12-.27-.2-.56-.34-.29-.15-1.68-.83-1.94-.93-.26-.09-.45-.14-.64.15-.19.29-.73.93-.9 1.12-.16.2-.33.22-.61.08-.29-.15-1.21-.45-2.31-1.42-.85-.76-1.43-1.7-1.6-1.98-.16-.29-.02-.45.13-.59.13-.13.29-.34.44-.51.14-.17.19-.29.29-.49.1-.19.05-.37-.02-.51-.07-.15-.63-1.54-.88-2.1-.21-.5-.43-.5-.61-.51h-.53Z"/></svg>';
+  var IG_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.8 3.8 0 0 1-1.38-.9 3.8 3.8 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16ZM12 0C8.74 0 8.33.01 7.05.07c-1.28.06-2.15.26-2.91.56-.79.3-1.46.72-2.13 1.38A5.9 5.9 0 0 0 .63 4.14c-.3.76-.5 1.63-.56 2.91C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13a5.9 5.9 0 0 0 2.13 1.38c.76.3 1.63.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.63.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.63-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm7.85-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Z"/></svg>';
   var DL_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>';
 
   var REACH =
@@ -307,18 +309,23 @@
       q: 'How do you think about product?',
       label: 'How I think',
       terms: 'principles philosophy how do you think approach process beliefs values ' +
-             'design principles opinions product sense judgement how do you prioritise tradeoffs',
-      boost: ['principles', 'philosophy', 'how do you think'],
+             'design principles opinions product sense judgement how do you prioritise tradeoffs ' +
+             'how do you use ai in product ai first ai native way of working method',
+      boost: ['principles', 'philosophy', 'how do you think', 'think about product',
+              'approach to product', 'product philosophy'],
       html:
-        '<p>Five rules. All of them paid for.</p>' +
+        '<p><b>Building used to be the expensive part. It is not any more, and that changes what the job is.</b></p>' +
+        '<p>108 production deployments in four months, one person, AI doing the typing. What AI did not make cheap is knowing what correct looks like. So that is where the whole job moved: upstream into the spec, and downstream into trying to break what came back.</p>' +
+        '<p>Six rules hold that loop together, and every one of them was paid for.</p>' +
         '<ul>' +
-        '<li><b>Irreversibility sets the bar.</b> Releasing collateral and paying money out cannot be undone. Those paths get the strictest gates and the safest defaults.</li>' +
-        '<li><b>Evidence beats declaration.</b> The cash arrived is a fact. Someone ticked Closed is a hope.</li>' +
-        '<li><b>Business exceptions belong to the business.</b> Written as data the operations team owns, not as rules buried in code they will never see.</li>' +
-        '<li><b>Silence is the enemy.</b> Fail soft, never fail quietly. A financial tool that degrades without mentioning it is worse than one that stops.</li>' +
+        '<li><b>Define correct before you build the thing that does it.</b> AI will build whatever you describe, fast and with total confidence. A vague spec does not fail loudly. It ships.</li>' +
+        '<li><b>Irreversibility sets the bar.</b> Releasing collateral and paying money out cannot be undone. Those paths get the strictest gates, the safest defaults, and a human on the last step.</li>' +
+        '<li><b>Evidence beats declaration.</b> The cash arrived is a fact. Someone ticked Closed is a hope. A passing test suite is also a hope until it is reconciled against the bank.</li>' +
+        '<li><b>Business exceptions belong to the business.</b> Written as data the operations team owns, not as rules buried in code. Doubly true when the code was written in an afternoon.</li>' +
+        '<li><b>Silence is the enemy.</b> Fail soft, never fail quietly. AI-built systems are extremely good at returning a confident wrong number, which is the expensive kind and the only kind that survives a demo.</li>' +
         '<li><b>Signal beats completeness.</b> A report nobody trusts because it flags &#8377;3 discrepancies is worse than no report. Choosing what not to show is a product decision.</li>' +
         '</ul>' +
-        '<p>Every one of them came from something going wrong first.</p>',
+        '<p>So the loop is: decide what correct means, let AI build it in a week, then spend the time I saved attacking it. The three data bugs I caught in the ESOP repository all turned up in that last step. Not one of them would have crashed anything.</p>',
       chips: ['esop', 'why', 'about']
     },
 
@@ -453,8 +460,9 @@
       boost: ['are you from', 'you from', 'hometown', 'grew up',
               'originally from', 'your origin', 'born', 'lucknow'],
       html:
-        '<p><b>Lucknow.</b> Which explains the manners. The loan book explains the opinions.</p>' +
-        '<p>Came to Delhi for a bachelors at Delhi University, stayed in NCR for the job. Now in Noida, at PhysicsWallah&rsquo;s head office, and happy to work remote.</p>',
+        '<p><b>Lucknow.</b> Home of <i>pehle aap</i>, where two people can stand at a doorway being polite to each other until the train leaves without them.</p>' +
+        '<p>I kept the manners and left the hesitation behind. It comes in handy in a job where somebody has to decide who gets the money and who does not.</p>' +
+        '<p>Delhi for the bachelors at Delhi University, and I never left NCR after that. Now in Noida at PhysicsWallah&rsquo;s head office, and entirely happy to work remote.</p>',
       chips: ['education', 'logistics', 'about']
     },
 
@@ -490,6 +498,37 @@
         '<p style="font-size:1.6rem;font-weight:700;margin:0 0 .5rem">96%</p>' +
         '<p>Physics, Chemistry, Maths. Class 10 was 97%, in case that is next.</p>',
       chips: ['class10', 'education', 'skills']
+    },
+
+    physicswallah: {
+      q: 'Why PhysicsWallah?',
+      label: 'Why PhysicsWallah',
+      terms: 'why physicswallah physics wallah pw why this company why did you join ' +
+             'why join why edtech education technology alakh pandey what drew you ' +
+             'why finz why fintech why here reason for joining current company',
+      boost: ['why physicswallah', 'why physics wallah', 'why pw', 'why this company',
+              'why did you join', 'why join', 'why edtech', 'alakh pandey'],
+      html:
+        '<p><b>I was a user before I was an employee.</b></p>' +
+        '<p>A good deal of the physics that got me through Class 12 arrived through a screen with Alakh Pandey sir on the other side of it. The result was 96%, and I would not claim every point of that was mine.</p>' +
+        '<p>So when a role opened at PhysicsWallah there was no long deliberation. Edtech was the industry I actually cared about, and this was the company that had already graded me once.</p>' +
+        '<p>The twist came after I joined. Inside the edtech company sat a fintech one: FinZ, lending to the people who work here. Edtech got me through the door. The loan book is why I am still at the desk.</p>',
+      chips: ['about', 'dayjob', 'class12']
+    },
+
+    outside: {
+      q: 'What do you do outside work?',
+      label: 'Outside work',
+      terms: 'outside work hobby hobbies interests free time weekend fun passion ' +
+             'side project side hustle instagram reels music hip hop rap dhh desi ' +
+             'final draft what do you do for fun personal life beyond work',
+      boost: ['outside work', 'outside of work', 'your hobbies', 'for fun',
+              'free time', 'side project', 'instagram'],
+      html:
+        '<p><b>Final Draft.wav.</b> An Instagram page I run with a friend, about the Indian DHH scene and music generally.</p>' +
+        '<p>Reels, mostly. Which means writing something tight enough to land in fifteen seconds, then watching a number tell me whether it did. Same loop as product, better soundtrack, and nobody&rsquo;s payroll depends on my edit.</p>' +
+        '<div class="reach"><a class="primary" href="' + IG + '" rel="noopener" target="_blank">' + IG_SVG + 'Final Draft.wav on Instagram</a></div>',
+      chips: ['about', 'origin', 'contact']
     },
 
     contact: {
@@ -558,8 +597,8 @@
     fun: {
       q: 'Tell me a joke',
       label: 'Tell me a joke',
-      terms: 'joke funny laugh sing song poem dance weather sports movie film music ' +
-             'hobby fun entertain surprise me bored something else',
+      terms: 'joke funny laugh sing song poem dance weather sports movie film ' +
+             'entertain surprise me bored something else',
       boost: ['tell me a joke', 'a joke', 'funny', 'surprise me', 'sing'],
       html:
         '<p>I have one and it is always the same one: a lending product where nobody had written down who was allowed to borrow. It ran like that for a while.</p>' +
