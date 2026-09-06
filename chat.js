@@ -144,7 +144,7 @@
       label: 'Day to day',
       terms: 'day to day daily what do you actually do responsibilities role scope ' +
              'own ownership what are you responsible for typical day job description',
-      boost: ['day to day', 'what do you actually do', 'actually do'],
+      boost: ['day to day', 'what do you actually do', 'actually do', 'what do you do'],
       html:
         '<p>Three things, and they keep handing work to each other.</p>' +
         '<p><b>The book.</b> Who can borrow, how much, at what price, on what schedule, and what happens when the deduction comes back short. I wrote those rules and I rewrite them when the collection rate tells me to.</p>' +
@@ -350,7 +350,7 @@
     skills: {
       q: 'What are your skills?',
       label: 'Skills and tools',
-      terms: 'skills tools stack technical abilities sql python power bi excel figma ' +
+      terms: 'skills tools technical abilities sql python power bi excel figma ' +
              'what can you do capabilities competencies prd prds analytics data',
       boost: ['your skills', 'what tools', 'tech stack', 'her skills'],
       html:
@@ -570,7 +570,7 @@
       label: 'What can I ask?',
       terms: 'what can i ask help topics options how does this work are you an ai ' +
              'are you a bot are you a real person is this real human chatgpt',
-      boost: ['can i ask', 'are you an ai', 'are you a bot', 'real person', 'how does this work'],
+      boost: ['can i ask', 'what can you do', 'are you an ai', 'are you a bot', 'real person', 'how does this work'],
       html:
         '<p>The lending book and how it is priced and collected. The two systems I built. The numbers, and the point where the numbers run out. How I use AI to build things. Where I am from, what I studied, and the awkward ones: remote, notice period, pay.</p>' +
         '<p>Ask in your own words. Typos are fine. If it is outside my range I will say so rather than improvise, which is a low bar that a surprising amount of writing about product fails to clear.</p>',
@@ -582,6 +582,23 @@
      RETRIEVAL
      ============================================================ */
 
+  /* ============================================================
+     RETRIEVAL
+
+     Three things people actually type break a naive keyword matcher,
+     and all three were breaking this one:
+
+       1. "where are u from" is entirely stopwords plus shorthand. Strip
+          the stopwords and one token survives, "u", which matches nothing.
+       2. Shorthand never appears in the corpus. u, ur, wat, hw, plz.
+       3. A short typo like "wat" is two characters from "what", but the
+          old edit-distance rule only looked at tokens of five or more.
+
+     So: shorthand is expanded first, matching runs twice (once with
+     stopwords dropped for precision, once with them kept for recall),
+     and the fuzzy thresholds reach down to three characters.
+     ============================================================ */
+
   var STOP = ('a an the and or but if is are was were be been being do does did doing ' +
     'to of in on at for with about into over after by from up down out so than then ' +
     'that this these those it its i me my you your yours we us our he she they them ' +
@@ -591,15 +608,45 @@
   var STOPSET = {};
   for (var si = 0; si < STOP.length; si++) STOPSET[STOP[si]] = 1;
 
+  /* How people type when they are not being careful. */
+  var SHORT = {
+    u: 'you', ur: 'your', urs: 'yours', urself: 'yourself', usrself: 'yourself',
+    r: 'are', n: 'and', y: 'why',
+    pls: 'please', plz: 'please', thx: 'thanks', ty: 'thanks',
+    wat: 'what', wht: 'what', wot: 'what', hw: 'how', cn: 'can',
+    abt: 'about', whr: 'where', wer: 'where', frm: 'from', bcz: 'because',
+    bcoz: 'because', coz: 'because', im: 'i am', dont: 'do not',
+    doesnt: 'does not', didnt: 'did not', cant: 'can not', wont: 'will not',
+    whats: 'what is', hows: 'how is', wheres: 'where is', whos: 'who is',
+    wrk: 'work', exp: 'experience', edu: 'education', clg: 'college',
+    sal: 'salary', comp: 'compensation', pkg: 'package', qual: 'qualification',
+    proj: 'project', prj: 'project', projs: 'projects', co: 'company',
+    bg: 'background', info: 'information', num: 'number', nums: 'numbers',
+    cv: 'resume', wanna: 'want to', gonna: 'going to', gimme: 'give me',
+    lemme: 'let me', ppl: 'people', yrs: 'years', asap: 'soon', rn: 'now',
+    lko: 'lucknow', pw: 'physicswallah', wfh: 'remote'
+  };
+
   function norm(s) {
     return String(s).toLowerCase()
-      .replace(/[‘’]/g, "'")
-      .replace(/[^a-z0-9%+.\s]/g, ' ')
+      .replace(/[\u2018\u2019]/g, "'")
+      .replace(/[^a-z0-9%+.\s']/g, ' ')
       .replace(/\s+/g, ' ').trim();
   }
 
+  /* Expand shorthand before anything else looks at the query, so both the
+     phrase boosts and the token matching see real words. */
+  function expand(s) {
+    var parts = norm(s).split(' '), out = [];
+    for (var i = 0; i < parts.length; i++) {
+      var t = parts[i].replace(/'/g, '');
+      out.push(SHORT[t] || t);
+    }
+    return out.join(' ');
+  }
+
   function tokenise(s, keepStop) {
-    var raw = norm(s).split(' '), out = [];
+    var raw = s.split(' '), out = [];
     for (var i = 0; i < raw.length; i++) {
       var t = raw[i].replace(/\.$/, '');
       if (!t) continue;
@@ -609,20 +656,15 @@
     return out;
   }
 
-  /* true when a and b differ by at most one edit, counting a swap of two
-     neighbouring letters as one: "recuriter" is one slip, not two. */
+  /* one edit apart, counting a swap of neighbours as one */
   function near(a, b) {
+    if (a === b) return true;
     if (a.length === b.length) {
       var d = [];
       for (var x = 0; x < a.length; x++) if (a.charAt(x) !== b.charAt(x)) d.push(x);
       if (d.length === 2 && d[1] === d[0] + 1 &&
           a.charAt(d[0]) === b.charAt(d[1]) && a.charAt(d[1]) === b.charAt(d[0])) return true;
     }
-    return near1(a, b);
-  }
-
-  function near1(a, b) {
-    if (a === b) return true;
     var la = a.length, lb = b.length;
     if (Math.abs(la - lb) > 1) return false;
     var i = 0, j = 0, edits = 0;
@@ -635,58 +677,87 @@
     return edits <= 1;
   }
 
-  var IDS = [], DF = {}, INDEX = {};
-  for (var id in A) {
-    if (!Object.prototype.hasOwnProperty.call(A, id)) continue;
-    IDS.push(id);
-    var toks = tokenise(A[id].terms + ' ' + A[id].q + ' ' + A[id].label);
-    var seen = {};
-    for (var k = 0; k < toks.length; k++) seen[toks[k]] = 1;
-    INDEX[id] = seen;
-    for (var t in seen) DF[t] = (DF[t] || 0) + 1;
-  }
-  var N = IDS.length;
-  function idf(t) {
-    var df = DF[t];
-    if (!df) return 0;
-    return Math.log(1 + N / df);
+  /* Two indexes over the same corpus. The stopped one is precise; the full
+     one is the safety net for questions made almost entirely of stopwords. */
+  function buildIndex(keepStop) {
+    var ids = [], df = {}, index = {};
+    for (var id in A) {
+      if (!Object.prototype.hasOwnProperty.call(A, id)) continue;
+      ids.push(id);
+      var toks = tokenise(expand(A[id].terms + ' ' + A[id].q + ' ' + A[id].label), keepStop);
+      var seen = {};
+      for (var k = 0; k < toks.length; k++) seen[toks[k]] = 1;
+      index[id] = seen;
+      for (var t in seen) df[t] = (df[t] || 0) + 1;
+    }
+    return { ids: ids, df: df, index: index, n: ids.length };
   }
 
-  function rank(query) {
-    var qn = norm(query);
-    var qt = tokenise(query);
-    if (!qt.length) qt = tokenise(query, true);
+  var IX = buildIndex(false);
+  var IXF = buildIndex(true);
+
+  function sim(q, tt) {
+    if (tt === q) return 1;
+    if (q.length >= 3 && tt.length >= 3 && (tt.indexOf(q) === 0 || q.indexOf(tt) === 0)) return 0.8;
+    if (q.length >= 4 && tt.length >= 4 && near(q, tt)) return 0.62;
+    if (q.length === 3 && tt.length >= 3 && tt.length <= 4 && near(q, tt)) return 0.5;
+    return 0;
+  }
+
+  function scoreAll(qt, ix, qn) {
     var scored = [];
-    for (var i = 0; i < IDS.length; i++) {
-      var id = IDS[i], set = INDEX[id], s = 0;
+    for (var i = 0; i < ix.ids.length; i++) {
+      var id = ix.ids[i], set = ix.index[id], total = 0;
       for (var j = 0; j < qt.length; j++) {
         var q = qt[j], best = 0;
         for (var tt in set) {
-          var v = 0;
-          if (tt === q) v = 1;
-          else if (q.length >= 4 && tt.length >= 4 &&
-                   (tt.indexOf(q) === 0 || q.indexOf(tt) === 0)) v = 0.82;
-          else if (q.length >= 5 && tt.length >= 5 && near(q, tt)) v = 0.62;
-          /* The weight is the matched term's rarity, not the typed token's.
-             A typo is by definition absent from the index, so weighting by
-             the query token scored every misspelling at zero. */
-          if (v) { var sc = v * idf(tt); if (sc > best) best = sc; }
+          var v = sim(q, tt);
+          if (!v) continue;
+          var d = ix.df[tt];
+          var sc = v * Math.log(1 + ix.n / d);
+          if (sc > best) best = sc;
         }
-        s += best;
+        total += best;
       }
       var boosts = A[id].boost || [];
       for (var b = 0; b < boosts.length; b++) {
-        if (qn.indexOf(boosts[b]) !== -1) s += 3.2;
+        if (qn.indexOf(boosts[b]) !== -1) total += 3.2;
       }
-      scored.push([id, s]);
+      scored.push([id, total]);
     }
     scored.sort(function (x, y) { return y[1] - x[1]; });
     return scored;
   }
 
+  var THRESH = 1.15;
+  /* The recall pass keeps stopwords, so common words like do, you and know
+     can accumulate a score on their own. It has to clear a higher bar than
+     the precision pass or "do you know kubernetes" starts matching things. */
+  var THRESH_RECALL = 2.4;
+
+  function rank(query) {
+    var qn = expand(query);
+    var content = tokenise(qn, false);
+    var a = scoreAll(content, IX, qn);
+    if (a[0] && a[0][1] >= THRESH) return a;
+
+    /* The recall pass is only for questions with nothing but stopwords in
+       them, like "where are you from" or "what do you do", where the
+       precision pass has literally no tokens to work with. If the query
+       does contain content words and none of them are in the corpus, that
+       is a question about something else, not a stopword problem, and
+       running recall on it just finds noise. */
+    if (content.length) return a;
+
+    var b = scoreAll(tokenise(qn, true), IXF, qn);
+    b.recall = true;
+    return b;
+  }
+
   function match(query) {
     var r = rank(query);
-    return (r[0] && r[0][1] >= 1.15) ? r[0][0] : null;
+    if (!r[0]) return null;
+    return r[0][1] >= (r.recall ? THRESH_RECALL : THRESH) ? r[0][0] : null;
   }
 
   /* ---- rendering -------------------------------------------- */
