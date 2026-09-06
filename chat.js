@@ -723,9 +723,12 @@
   var STAGES = ['Reading your question',
                 'Searching what Veronica has written',
                 'Pulling the answer together'];
-  var STAGE_AT = [0, 620, 1240];
-  var PAINT_AT = 1800;
-  var PAINT_AT_REDUCED = 550;
+  /* Each stage holds for roughly a second, which is how long it takes to
+     actually read one. The bar's duration is derived from PAINT_AT below,
+     so changing these numbers keeps everything in step. */
+  var STAGE_AT = [0, 1050, 2150];
+  var PAINT_AT = 3300;
+  var PAINT_AT_REDUCED = 900;
 
   var SPARK = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
     '<path d="M12 2.6 13.9 9a3.2 3.2 0 0 0 2.1 2.1l6.4 1.9-6.4 1.9A3.2 3.2 0 0 0 13.9 17' +
