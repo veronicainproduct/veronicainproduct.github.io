@@ -132,10 +132,10 @@
              'journey path career story what do you do',
       boost: ['about me', 'about veronica', 'your story'],
       html:
-        '<p>I did not get here through a product title. I got here by being handed a lending book and discovering that nobody had written down who was allowed to borrow from it.</p>' +
-        '<p>Twenty odd months later there are eligibility rules, pricing, a repayment schedule that fits a payroll cycle, and a process for the awkward month when a deduction comes back short. I designed all four, then built the systems that stop anyone quietly editing them afterwards.</p>' +
-        '<p>Today that is two products. <b>ESOP Financing</b> lends against pledged ESOP shares so employees can pay the exercise tax before the shares turn into anything spendable. <b>Employee Financing</b> is salary advance and top-up loans, recovered from monthly pay.</p>' +
-        '<p>What I want next is a product role where being right counts for more than being quick. Fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>',
+        '<p>I did not get here through a product title. I got here by being handed a lending book and finding that nobody had written down who was allowed to borrow from it.</p>' +
+        '<p>Twenty odd months later: eligibility rules, pricing, a repayment schedule that fits a payroll cycle, and a plan for the month a deduction comes back short. I designed all four, then built the systems that stop anyone quietly editing them.</p>' +
+        '<p>Two products now. <b>ESOP Financing</b> lends against pledged shares so employees can pay the exercise tax before those shares are worth anything spendable. <b>Employee Financing</b> is salary advance and top-ups, recovered from payroll.</p>' +
+        '<p>Next I want a role where being right beats being quick. Fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>',
       chips: ['principles', 'work', 'timeline', 'contact']
     },
 
@@ -160,7 +160,7 @@
              'which is your best highlight',
       boost: ['best project', 'best work', 'most proud', 'proudest', 'favourite project', 'favorite project'],
       html:
-        '<p>The ESOP Loan Repository. Not the prettiest thing I have built, but the only one that changed a decision rather than a screen.</p>' +
+        '<p>The ESOP Loan Repository. Not the prettiest thing I have built. The only one that changed a decision instead of a screen.</p>' +
         '<p>Around 300 loans, one lifecycle, eleven spreadsheets, five teams, and no agreement about which file was right. The brief everyone expected was a better calculator. The maths was never the problem. Five versions of the truth was the problem.</p>' +
         '<p>My favourite fix is the one nobody notices. Releasing pledged shares cannot be undone, and the old process released them whenever a spreadsheet cell said Closed. A cell any human could type into was authorising an irreversible transfer of collateral. I keyed the release queue on evidence that the cash had actually landed instead, and I accepted the cost: a loan repaid through some unrecorded channel now waits until the payment is logged.</p>' +
         pull('Failing to release on time is a support ticket. Releasing collateral wrongly is not.') +
@@ -254,7 +254,7 @@
              'repayment payroll deduction salary deduction what if someone does not pay dpd',
       boost: ['collections', 'default rate', 'defaults'],
       html:
-        '<p>Repayment is designed rather than chased. The money leaves through payroll before the borrower has to decide anything about it, which removes most of the drama. Together with the credit policy, that has held <b>defaults at 1.5 to 2%</b>.</p>' +
+        '<p>Repayment is designed, not chased. The money leaves through payroll before the borrower has to decide anything about it, which removes most of the drama. With the credit policy on top, defaults sit at <b>1.5 to 2%</b>.</p>' +
         '<p>The interesting part is the exception. A deduction does not always recover the full amount, and when it does not, someone has to decide what happens next. There was no process for that when I started. Designing one was most of the work, and it is why the second system exists at all: month end is where exceptions either get caught or quietly become February&rsquo;s problem.</p>',
       chips: ['credit', 'efos', 'numbers']
     },
@@ -279,8 +279,8 @@
              'feedback validation what users want acquisition funnel',
       boost: ['user research', 'interviews', 'surveys'],
       html:
-        '<p>By talking to the people the deduction actually happens to. Interviews and surveys across <b>5,000+ employees</b>, and the work that came out of it contributed to a <b>12% lift in acquisition</b>.</p>' +
-        '<p>The most useful finding was not a feature request. People dropped out at the point where the cost stopped being legible. So I added coupons, waived the processing fee, and rebuilt the flow around what was actually stopping people rather than around what everyone had assumed was stopping them.</p>',
+        '<p>By talking to the people the deduction actually happens to. Interviews and surveys across <b>5,000+ employees</b>, and the work that came out of it contributed to a <b>12% lift in acquisition</b>. Nobody asked for a feature.</p>' +
+        '<p>They dropped out at the point where the cost stopped being legible. So I added coupons, waived the processing fee, and rebuilt the flow around what was actually stopping people rather than what we had all assumed was stopping them.</p>',
       chips: ['dayjob', 'numbers', 'principles']
     },
 
@@ -395,10 +395,10 @@
       boost: ['should we hire', 'hire you', 'hire her', 'looking for', 'why you'],
       html:
         '<p>Three claims, and you can check every one of them without leaving this page.</p>' +
-        '<p><b>I own outcomes, not screens.</b> The credit policy exists to move the collection rate by declining the wrong loans early. Defaults sit at 1.5 to 2%. That is a business decision wearing a product costume.</p>' +
-        '<p><b>I ship.</b> 108 production deployments in four months on the ESOP Repository, solo, alongside the day job. 220 automated tests and 86 commits in three and a half weeks on the Financing OS.</p>' +
-        '<p><b>I tell you what went wrong.</b> Both case studies list their own limitations, including the ones that make the numbers less flattering. A portfolio containing nothing but triumphs is asking you to take the lot on trust.</p>' +
-        '<p>What I want is a product role where the correctness bar is part of the job. AI-enabled products, fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>',
+        '<p><b>I own outcomes, not screens.</b> The credit policy exists to move one number, the collection rate. Defaults sit at 1.5 to 2%. That is a business decision wearing a product costume.</p>' +
+        '<p><b>I ship.</b> 108 production deployments in four months, solo, alongside the day job. 220 automated tests in three and a half weeks on the second system.</p>' +
+        '<p><b>I tell you what went wrong.</b> Both case studies list their own limitations. A portfolio of nothing but triumphs is asking you to take the lot on trust.</p>' +
+        '<p>I want a role where the correctness bar is part of the job. AI-enabled products, fintech, internal platforms, or anywhere the expensive mistakes are the quiet ones.</p>',
       chips: ['limits', 'numbers', 'contact']
     },
 
@@ -507,7 +507,7 @@
       terms: 'resume cv download pdf one pager curriculum vitae send me your resume',
       boost: ['your resume', 'your cv', 'download resume', 'her resume'],
       html:
-        '<p>Here it is. One page: FinZ, the lending vertical, the two systems, and the skills behind them. The case studies go considerably further, mainly because they are not fighting for space on a single sheet.</p>' +
+        '<p>Here it is. One page: FinZ, the lending vertical, the two systems, the skills. The case studies go further, mainly because they are not fighting for room on a single sheet.</p>' +
         '<div class="vcard"><h2>Veronica Singh, resume</h2>' +
         '<p>PDF, one page. Product Strategy, Employee Financing at FinZ.</p>' +
         '<div class="reach"><a class="primary" href="' + CV + '" download>' + DL_SVG + 'Download resume (PDF)</a>' +
@@ -1029,23 +1029,6 @@
   rec.addEventListener('change', function () {
     if (rec.checked) ask('recruiter', 'Recruiter mode');
   });
-
-  /* night mode. White is the default in every browser; the moon
-     switches it for this visit. Persisting the choice would need
-     localStorage, which this site does not use. */
-  var themeBtn = document.getElementById('theme-toggle');
-  var root = document.documentElement;
-
-  function isDark() { return root.getAttribute('data-theme') === 'dark'; }
-  function syncThemeBtn() {
-    themeBtn.setAttribute('aria-pressed', String(isDark()));
-    themeBtn.setAttribute('aria-label', isDark() ? 'Switch to day mode' : 'Switch to night mode');
-  }
-  themeBtn.addEventListener('click', function () {
-    root.setAttribute('data-theme', isDark() ? 'light' : 'dark');
-    syncThemeBtn();
-  });
-  syncThemeBtn();
 
 
   /* Same backstop as the classic pages, against the conversation's scroller. */

@@ -60,7 +60,7 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
   font-size:var(--t-micro);color:var(--muted);line-height:1.3;
 }
 
-.side-nav{display:flex;flex-direction:column;gap:.6rem}
+.side-nav{display:flex;flex-direction:column;gap:.5rem}
 .side-link{
   display:flex;align-items:center;gap:.7rem;width:100%;text-align:left;
   font-family:var(--font);font-size:13px;font-weight:500;
@@ -81,7 +81,7 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
   font-size:var(--t-micro);letter-spacing:.14em;
   text-transform:uppercase;color:var(--muted);
 }
-.try-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem}
+.try-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem}
 .try{
   display:flex;align-items:center;width:100%;text-align:left;
   font-family:var(--font);font-size:13px;color:var(--ink);
@@ -126,10 +126,18 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
 .side-social a{
   display:inline-flex;align-items:center;justify-content:center;
   width:44px;height:44px;color:var(--ink);
-  background:var(--card);border:var(--border);border-radius:50%;
+  background:none;border:0;border-radius:50%;
 }
-.side-social a:hover{border-color:var(--ink)}
-.side-social svg{width:17px;height:17px}
+/* The circle you see is 32px. The thing you can hit is still 44. */
+.side-social a::before{
+  content:"";position:absolute;width:32px;height:32px;border-radius:50%;
+  background:var(--card);border:var(--border);
+}
+.side-social li{position:relative;display:flex}
+.side-social a{position:relative}
+.side-social svg{position:relative}
+.side-social a:hover::before{border-color:var(--ink)}
+.side-social svg{width:15px;height:15px}
 
 /* ---- main column ------------------------------------------- */
 .main{display:flex;flex-direction:column;min-width:0;min-height:0;background:var(--bone)}
@@ -160,18 +168,7 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
 }
 .topbar .home-link:hover{border-color:var(--ink)}
 .topbar .home-link svg{width:16px;height:16px}
-.theme-toggle{
-  flex:0 0 auto;width:44px;height:44px;margin-left:auto;
-  display:inline-flex;align-items:center;justify-content:center;
-  background:none;border:0;border-radius:10px;
-  color:var(--muted);cursor:pointer;
-}
-.theme-toggle:hover{background:var(--muted-surface);color:var(--ink)}
-.theme-toggle svg{width:19px;height:19px}
-.theme-toggle .sun{display:none}
-:root[data-theme="dark"] .theme-toggle .sun{display:block}
-:root[data-theme="dark"] .theme-toggle .moon{display:none}
-.topbar .home-link{margin-left:0}
+.topbar .home-link:first-of-type{margin-left:auto}
 .drawer-toggle{display:none}
 
 /* ---- the conversation --------------------------------------- */
@@ -494,6 +491,20 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
 /* On a full HD screen the conversation left ~400px empty on each side.
    The column widens; prose keeps its own measure, so only the cards and
    figures actually use the extra width. */
+@media (pointer:fine) and (min-width:60em){
+  /* 44px is a touch-target rule. With a mouse these can be tighter, which
+     is what buys the Try asking list four or five visible questions
+     instead of one. */
+  .side-link{min-height:34px;padding:.35rem .6rem}
+  .side-nav{gap:.15rem}
+  .try{min-height:38px;padding:.45rem .7rem}
+  .try-list{gap:.35rem}
+  .side-social a{width:38px;height:38px}
+  .side{gap:1rem}
+  .side-id{margin-bottom:.9rem}
+  .side-nav{margin-bottom:.9rem}
+}
+
 @media (min-width:100em){
   .thread, .composer{max-width:62rem}
   .side{width:21rem}
