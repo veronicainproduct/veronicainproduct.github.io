@@ -4,10 +4,10 @@
    One token block for the whole site, so the chat, the case
    studies and the full page version cannot drift apart.
 
-   Inter for text, IBM Plex Mono for small labels. White ground,
-   near-black navy, hairline rules, soft shadows, and one amber
-   accent that only ever means "do this". Night mode swaps the
-   token values and nothing else.
+   Poppins throughout, with no second family anywhere. White ground,
+   near-black navy, hairline rules, soft shadows, and one amber accent
+   that only ever means "do this". Night mode swaps the token values
+   and nothing else.
 
    Plain static HTML. No build step required to host.
    ============================================================ */
@@ -40,11 +40,14 @@
   --shadow-lg:0 4px 10px rgba(16,25,43,.06), 0 18px 44px rgba(16,25,43,.10);
   --radius-lg:20px;
 
-  --font:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --font:"Poppins","Segoe UI",system-ui,-apple-system,sans-serif;
+  /* One family, everywhere. --mono is kept as an alias so the small
+     label rules keep working, but it resolves to the same face: this
+     is meant to look uniform, not mixed. */
+  --mono:var(--font);
 
-  --t-display:clamp(2.5rem,7vw,5rem);
-  --t-h1:clamp(2rem,4.6vw,3.5rem);
+  --t-display:clamp(2.35rem,6.4vw,4.5rem);
+  --t-h1:clamp(1.9rem,4.2vw,3.15rem);
   --t-h2:clamp(1.6rem,3.2vw,2.6rem);
   --t-h3:clamp(1.15rem,1.7vw,1.5rem);
   --t-lead:clamp(1.0625rem,1.5vw,1.25rem);
