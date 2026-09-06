@@ -654,6 +654,48 @@
                         scroll.getBoundingClientRect().top - 12;
   }
 
+  /* Blocks inside a long answer arrive as you reach them. Scoped to the
+     conversation's scroller, not the page, because the page never scrolls. */
+  var io = ('IntersectionObserver' in window && !reduce)
+    ? new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) {
+            entries[i].target.classList.add('is-in');
+            io.unobserve(entries[i].target);
+          }
+        }
+      }, { root: scroll, rootMargin: '0px 0px -6% 0px', threshold: 0.05 })
+    : null;
+
+  if (io) document.documentElement.className += ' js';
+
+  if (io) {
+  /* Fail-safe. .rise starts at opacity 0, so if the observer never fires
+     the page would be blank. Body is always intersecting, so this probe
+     must run; if it does not, drop .js and everything shows unanimated. */
+  var alive = false;
+  var probe = new IntersectionObserver(function () { alive = true; probe.disconnect(); });
+  probe.observe(document.body);
+  window.setTimeout(function () {
+    if (!alive) {
+      document.documentElement.className =
+        document.documentElement.className.replace(' js', '');
+    }
+  }, 2500);
+  }
+
+  var RISE = '.proj, .scan, .vcard, .pull, .numset > .num, .reach, .asks';
+
+  function reveal(container) {
+    if (!io) return;
+    var els = container.querySelectorAll(RISE);
+    for (var i = 0; i < els.length; i++) {
+      els[i].classList.add('rise');
+      els[i].style.setProperty('--d', Math.min(i, 5) * 70 + 'ms');
+      io.observe(els[i]);
+    }
+  }
+
   function chipRow(ids) {
     if (!ids || !ids.length) return '';
     var out = '<div class="asks">';
@@ -677,14 +719,34 @@
     return wrap;
   }
 
+  /* What the engine is actually doing, in the order it does it. */
+  var STAGES = ['Reading your question',
+                'Searching what Veronica has written',
+                'Pulling the answer together'];
+  var STAGE_AT = [0, 620, 1240];
+  var PAINT_AT = 1800;
+  var PAINT_AT_REDUCED = 550;
+
+  var SPARK = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+    '<path d="M12 2.6 13.9 9a3.2 3.2 0 0 0 2.1 2.1l6.4 1.9-6.4 1.9A3.2 3.2 0 0 0 13.9 17' +
+    'L12 23.4 10.1 17A3.2 3.2 0 0 0 8 14.9L1.6 13 8 11.1A3.2 3.2 0 0 0 10.1 9z"/></svg>';
+
   function shell() {
     var wrap = document.createElement('div');
     wrap.className = 'msg';
     wrap.innerHTML =
       '<img class="face" src="img/avatar.jpg" alt="" width="320" height="320">' +
       '<div class="said"><p class="who">Veronica</p>' +
-      '<div class="body"><span class="dots" role="status">' +
-      '<span class="think">Thinking</span><i></i><i></i><i></i></span></div></div>';
+      '<div class="body">' +
+        '<div class="thinking" role="status">' +
+          '<div class="think-row">' +
+            '<span class="think-spark">' + SPARK + '</span>' +
+            '<span class="think-label">' + (reduce ? 'Thinking' : STAGES[0]) + '</span>' +
+            '<span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>' +
+          '</div>' +
+          '<span class="think-track" aria-hidden="true"><span class="think-bar"></span></span>' +
+        '</div>' +
+      '</div></div>';
     thread.appendChild(wrap);
     toBottom();
     return wrap.querySelector('.body');
@@ -710,14 +772,29 @@
   function answer(id, from, query) {
     var body = shell();
     var html = A[id] ? A[id].html + chipRow(A[id].chips) : fallback(query || '');
-    var paint = function () {
+    var total = reduce ? PAINT_AT_REDUCED : PAINT_AT;
+    var timers = [];
+
+    if (!reduce) {
+      var bar = body.querySelector('.think-bar');
+      /* one source of truth for how long this takes */
+      if (bar) bar.style.animationDuration = total + 'ms';
+      var label = body.querySelector('.think-label');
+      for (var st = 1; st < STAGES.length; st++) {
+        timers.push(window.setTimeout(function (text) {
+          return function () { if (label) label.textContent = text; };
+        }(STAGES[st]), STAGE_AT[st]));
+      }
+    }
+
+    timers.push(window.setTimeout(function () {
       var fresh = document.createElement('div');
       fresh.className = 'body';
       fresh.innerHTML = html;
       body.parentNode.replaceChild(fresh, body);
       anchor(from);
-    };
-    window.setTimeout(paint, reduce ? 350 : 700);
+      reveal(fresh);
+    }, total));
   }
 
   function ask(id, spoken) {
@@ -782,6 +859,26 @@
     syncThemeBtn();
   });
   syncThemeBtn();
+
+
+  /* Same backstop as the classic pages, against the conversation's scroller. */
+  function sweep() {
+    if (!io) return;
+    var box = scroll.getBoundingClientRect();
+    var pending = thread.querySelectorAll('.rise:not(.is-in)');
+    for (var i = 0; i < pending.length; i++) {
+      var r = pending[i].getBoundingClientRect();
+      if (r.top < box.bottom - box.height * 0.06 && r.bottom > box.top) {
+        pending[i].classList.add('is-in');
+      }
+    }
+  }
+  var sweeping = false;
+  scroll.addEventListener('scroll', function () {
+    if (sweeping) return;
+    sweeping = true;
+    window.requestAnimationFrame(function () { sweeping = false; sweep(); });
+  }, { passive: true });
 
   /* mobile drawer */
   var side = document.getElementById('side');
