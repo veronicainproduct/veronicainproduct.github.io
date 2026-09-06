@@ -175,7 +175,7 @@
              'what did you build show me everything all projects things you made shipped',
       boost: ['your work', 'case studies', 'all projects', 'everything you have built'],
       html:
-        '<p>Two case studies, one habit: take a process living in eleven spreadsheets and turn it into a single system of record. Both were built for a book that moves real money, which is a brisk way to find out whether your product works. One is live. One is in build.</p>' +
+        '<p>Two case studies, one habit: take a process living in eleven spreadsheets and turn it into a single system of record. Both were built for a book that moves real money, which is a brisk way to find out whether your product works. One is live. One is in build. Neither is a redesign of a landing page.</p>' +
         ESOP_CARD + EFOS_CARD,
       chips: ['esop', 'efos', 'best']
     },
@@ -298,7 +298,7 @@
           ['1.5 to 2%', 'Default rate']
         ]) +
         '<p>From the two systems: around 300 ESOP loans that ran on eleven spreadsheets owned by five teams, 108 production deployments over four months, and a bank reconciliation that parses to &#8377;64,05,97,403 and agrees with the bank&rsquo;s own summary. On the Financing OS, 2,886 employees repaying through payroll in a month, 220 automated tests and 86 commits over three and a half weeks.</p>' +
-        '<p>Every figure here survives a follow-up question, which is a lower bar than it sounds and one a surprising number of portfolios fail. Where there is no number, the case studies say so out loud.</p>',
+        '<p>Every figure here survives a follow-up question, which is a lower bar than it sounds and one a surprising number of portfolios fail. Where there is no number, the case studies say so out loud. Go on, pick one and ask.</p>',
       chips: ['limits', 'esop', 'efos']
     },
 
@@ -378,7 +378,7 @@
       label: 'Education',
       terms: 'education college degree university studied study studies graduate graduation ' +
              'class 10 class 12 marks school academics delhi aryabhatta computer science',
-      boost: ['did you study', 'education', 'your degree', 'class 12', 'class 10'],
+      boost: ['did you study', 'education', 'your degree', 'college', 'university'],
       html:
         '<p>BSc (Hons) Computer Science with a minor in Mathematics, Aryabhatta College, University of Delhi, 2021 to 2024. Coursework included machine learning, artificial intelligence, data structures and algorithms, SQL and DBMS, and Python data analysis.</p>' +
         figs([['96%', 'Class 12'], ['97%', 'Class 10']]) +
@@ -394,7 +394,7 @@
              'why are you a good candidate convince me',
       boost: ['should we hire', 'hire you', 'hire her', 'looking for', 'why you'],
       html:
-        '<p>Three claims, all of them checkable on this site, which is more than most portfolios offer.</p>' +
+        '<p>Three claims, and you can check every one of them without leaving this page.</p>' +
         '<p><b>I own outcomes, not screens.</b> The credit policy exists to move the collection rate by declining the wrong loans early. Defaults sit at 1.5 to 2%. That is a business decision wearing a product costume.</p>' +
         '<p><b>I ship.</b> 108 production deployments in four months on the ESOP Repository, solo, alongside the day job. 220 automated tests and 86 commits in three and a half weeks on the Financing OS.</p>' +
         '<p><b>I tell you what went wrong.</b> Both case studies list their own limitations, including the ones that make the numbers less flattering. A portfolio containing nothing but triumphs is asking you to take the lot on trust.</p>' +
@@ -442,14 +442,51 @@
       chips: ['contact', 'why', 'work']
     },
 
+    origin: {
+      q: 'Where are you from?',
+      label: 'Where I am from',
+      terms: 'where from origin city town hometown home native born grew up raised roots ' +
+             'lucknow uttar pradesh up nawabi background family place belong come from',
+      boost: ['are you from', 'you from', 'hometown', 'grew up',
+              'originally from', 'your origin', 'born', 'lucknow'],
+      html:
+        '<p><b>Lucknow.</b> Which accounts for the manners, and for opinions about kebabs that I will not be talked out of.</p>' +
+        '<p>I came to Delhi for a computer science degree and stayed for a loan book. Currently in Delhi NCR, with the FinZ office in Noida, and entirely happy to work remote.</p>',
+      chips: ['education', 'logistics', 'about']
+    },
+
     location: {
       q: 'Where are you based?',
-      label: 'Location',
-      terms: 'where are you based location city live delhi ncr noida india timezone',
-      boost: ['where are you based', 'which city', 'where is she'],
+      label: 'Where I am now',
+      terms: 'based location city live living delhi ncr noida gurgaon india timezone ' +
+             'work from office located',
+      boost: ['where are you based', 'based out of', 'based in', 'which city are you in'],
       html:
-        '<p>Delhi NCR, with the FinZ office in Noida. Open to remote, and well practised at it.</p>',
-      chips: ['logistics', 'contact']
+        '<p>Delhi NCR. The FinZ office is in Noida, the users are scattered across the country, and none of that has ever been the hard part.</p>',
+      chips: ['logistics', 'origin', 'contact']
+    },
+
+    class10: {
+      q: 'What was your Class 10 grade?',
+      label: 'Class 10',
+      terms: 'class 10 10th tenth grade marks percentage score board result matric',
+      boost: ['class 10', 'class 10th', '10th grade', '10th marks', 'tenth', 'class x'],
+      html:
+        '<p style="font-size:1.6rem;font-weight:700;margin:0 0 .5rem">97%</p>' +
+        '<p>Class 12 was 96%, since that is usually the next question.</p>',
+      chips: ['class12', 'education', 'why']
+    },
+
+    class12: {
+      q: 'What was your Class 12 grade?',
+      label: 'Class 12',
+      terms: 'class 12 12th twelfth grade marks percentage score board result intermediate ' +
+             'physics chemistry mathematics pcm',
+      boost: ['class 12', 'class 12th', '12th grade', '12th marks', 'twelfth', 'class xii'],
+      html:
+        '<p style="font-size:1.6rem;font-weight:700;margin:0 0 .5rem">96%</p>' +
+        '<p>Physics, Chemistry, Maths. Class 10 was 97%, in case that is next.</p>',
+      chips: ['class10', 'education', 'skills']
     },
 
     contact: {
@@ -510,9 +547,21 @@
              'nice to meet you sup yo greetings',
       boost: ['hello', 'thank you'],
       html:
-        '<p>Hello. Ask me about the lending product I own, the two systems I built for it, the numbers behind them, or the parts that did not work.</p>' +
-        '<p>If you are recruiting and short on time, the 90 second version is the quickest way in.</p>',
+        '<p>Hello. You have reached the part of a portfolio that answers back.</p>' +
+        '<p>Ask about the lending product I own, the systems I built for it, the numbers, or the parts that went wrong. If you are recruiting and short on time, the 90 second version is the quickest way in.</p>',
       chips: ['recruiter', 'best', 'numbers', 'contact']
+    },
+
+    fun: {
+      q: 'Tell me a joke',
+      label: 'Tell me a joke',
+      terms: 'joke funny laugh sing song poem dance weather sports movie film music ' +
+             'hobby fun entertain surprise me bored something else',
+      boost: ['tell me a joke', 'a joke', 'funny', 'surprise me', 'sing'],
+      html:
+        '<p>I have one and it is always the same one: a lending product where nobody had written down who was allowed to borrow. It ran like that for a while.</p>' +
+        '<p>The punchline is a credit policy, eleven spreadsheets and a compliance gate keyed on the wrong field. Ask what went wrong and you get the long version.</p>',
+      chips: ['limits', 'best', 'recruiter']
     },
 
     capabilities: {
@@ -522,8 +571,8 @@
              'are you a bot are you a real person is this real human chatgpt',
       boost: ['can i ask', 'are you an ai', 'are you a bot', 'real person', 'how does this work'],
       html:
-        '<p>The lending book and how it is priced and collected. The two systems I built. The numbers, and where the numbers run out. How I use AI to build things. My background, and the practical questions: remote, notice period, pay.</p>' +
-        '<p>Ask in your own words. If it is outside my range I will say so rather than improvise, which is a low bar that a surprising amount of writing about product fails to clear.</p>',
+        '<p>The lending book and how it is priced and collected. The two systems I built. The numbers, and the point where the numbers run out. How I use AI to build things. Where I am from, what I studied, and the awkward ones: remote, notice period, pay.</p>' +
+        '<p>Ask in your own words. Typos are fine. If it is outside my range I will say so rather than improvise, which is a low bar that a surprising amount of writing about product fails to clear.</p>',
       chips: ['recruiter', 'work', 'numbers', 'contact']
     }
   };
@@ -806,7 +855,7 @@
     var ids = related
       ? r.slice(0, 3).map(function (x) { return x[0]; })
       : ['best', 'work', 'numbers', 'why', 'contact'];
-    return '<p>I do not have that one. I could guess, but guessing around numbers is how lending books come apart, so no.</p>' +
+    return '<p>Nothing for that one. I could improvise, but improvising around numbers is how lending books come apart, and I would rather lose the question than the plot.</p>' +
            '<p>' + (related ? 'Closest things to it:' : 'What I can cover:') + '</p>' +
            chipRow(ids) +
            '<p style="margin-top:1rem">Or ask me directly and I will answer properly.</p>' + REACH;
