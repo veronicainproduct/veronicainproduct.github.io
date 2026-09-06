@@ -195,11 +195,6 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
   box-shadow:0 0 0 3px var(--bone), 0 0 0 4px var(--line);
 }
 .said{min-width:0;flex:1 1 auto}
-.who{
-  margin:0 0 .45rem;font-family:var(--mono);
-  font-size:11px;font-weight:500;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--muted);
-}
 .said p{margin:0 0 .9em}
 .said p:last-child{margin-bottom:0}
 .said a{text-decoration-thickness:2px;text-underline-offset:3px}
@@ -229,9 +224,20 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
   font-size:16px;font-weight:500;line-height:1.5;
 }
 
+/* An answer arriving. The block fades in, then its words land in order,
+   which is what watching an answer get written actually looks like.
+   Opacity only, so nothing reflows and the text wraps exactly as it
+   would have if it had all been there from the start. */
 @media (prefers-reduced-motion:no-preference){
   .body{animation:say .22s ease-out}
   @keyframes say{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  .streaming .w{
+    opacity:0;
+    animation:wordin .26s ease forwards;
+    animation-delay:calc(var(--i,0) * 16ms);
+  }
+  @keyframes wordin{to{opacity:1}}
 }
 
 /* ---- the thinking state -------------------------------------
