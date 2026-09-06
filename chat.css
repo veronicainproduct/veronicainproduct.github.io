@@ -63,7 +63,7 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
 .side-nav{display:flex;flex-direction:column;gap:.5rem}
 .side-link{
   display:flex;align-items:center;gap:.7rem;width:100%;text-align:left;
-  font-family:var(--font);font-size:13px;font-weight:500;
+  font-family:var(--font);font-size:12.5px;font-weight:500;
   color:var(--ink);text-decoration:none;
   background:none;border:0;border-radius:10px;
   min-height:44px;padding:.5rem .6rem;cursor:pointer;
@@ -84,7 +84,7 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
 .try-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem}
 .try{
   display:flex;align-items:center;width:100%;text-align:left;
-  font-family:var(--font);font-size:13px;color:var(--ink);
+  font-family:var(--font);font-size:12.5px;color:var(--ink);
   background:var(--card);border:var(--border);border-radius:12px;
   min-height:44px;padding:.5rem .7rem;cursor:pointer;line-height:1.35;
 }
@@ -100,25 +100,25 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
   box-shadow:var(--shadow);
 }
 .rec-bar{display:block;height:3px;background:linear-gradient(90deg,var(--accent),#e2a03f)}
-.rec-row{display:flex;align-items:center;gap:.8rem;cursor:pointer;padding:1rem}
+.rec-row{display:flex;align-items:center;gap:.65rem;cursor:pointer;padding:.7rem .8rem}
 .rec-bolt{flex:0 0 auto;display:inline-flex;color:#b7791f}
-.rec-bolt svg{width:18px;height:18px}
+.rec-bolt svg{width:16px;height:16px}
 .rec-copy{flex:1 1 auto}
-.rec-name{display:block;font-weight:600;font-size:13px;line-height:1.3}
-.rec-sub{display:block;font-size:12px;color:var(--muted);line-height:1.4;margin-top:.1rem}
+.rec-name{display:block;font-weight:600;font-size:12.5px;line-height:1.25}
+.rec-sub{display:block;font-size:12px;color:var(--muted);line-height:1.3;margin-top:.05rem}
 .rec input{position:absolute;opacity:0;width:0;height:0}
 .rec-switch{
-  flex:0 0 auto;width:44px;height:24px;
+  flex:0 0 auto;width:38px;height:21px;
   background:#cdd3dc;border-radius:999px;position:relative;
   transition:background .15s ease;
 }
 .rec-switch::after{
   content:"";position:absolute;top:3px;left:3px;
-  width:18px;height:18px;border-radius:50%;background:#fff;
+  width:15px;height:15px;border-radius:50%;background:#fff;
   box-shadow:0 1px 3px rgba(16,25,43,.35);transition:left .15s ease;
 }
 .rec input:checked + .rec-switch{background:#15803d}
-.rec input:checked + .rec-switch::after{left:23px}
+.rec input:checked + .rec-switch::after{left:20px}
 .rec input:focus-visible + .rec-switch{outline:3px solid var(--ink);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){.rec-switch,.rec-switch::after{transition:none}}
 
@@ -130,14 +130,14 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
 }
 /* The circle you see is 32px. The thing you can hit is still 44. */
 .side-social a::before{
-  content:"";position:absolute;width:32px;height:32px;border-radius:50%;
+  content:"";position:absolute;width:28px;height:28px;border-radius:50%;
   background:var(--card);border:var(--border);
 }
 .side-social li{position:relative;display:flex}
 .side-social a{position:relative}
 .side-social svg{position:relative}
 .side-social a:hover::before{border-color:var(--ink)}
-.side-social svg{width:15px;height:15px}
+.side-social svg{width:13px;height:13px}
 
 /* ---- main column ------------------------------------------- */
 .main{display:flex;flex-direction:column;min-width:0;min-height:0;background:var(--bone)}
@@ -169,6 +169,7 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
 .topbar .home-link:hover{border-color:var(--ink)}
 .topbar .home-link svg{width:16px;height:16px}
 .topbar .home-link:first-of-type{margin-left:auto}
+.topbar .home-link + .home-link{margin-left:-.4rem}
 .drawer-toggle{display:none}
 
 /* ---- the conversation --------------------------------------- */
@@ -180,7 +181,7 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
   max-width:52rem;margin-inline:auto;
   padding:clamp(1.5rem,3.5vw,2.5rem) 0 1rem;
   display:flex;flex-direction:column;gap:1.75rem;
-  font-size:15px;line-height:1.72;
+  font-size:14px;line-height:1.7;
 }
 
 .msg{display:flex;gap:.85rem;max-width:100%}
@@ -222,13 +223,13 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
   box-shadow:0 1px 2px rgba(16,25,43,.12), 0 6px 16px rgba(226,160,63,.28);
 }
 .mark svg{width:.85em;height:.85em}
-.sub{font-size:14px;line-height:1.72;color:var(--muted);margin-bottom:1.25rem;max-width:64ch}
+.sub{font-size:13px;line-height:1.75;color:var(--muted);margin-bottom:1.1rem;max-width:70ch}
 
 /* the line in an answer that carries the argument */
 .pull{
   margin:1.15rem 0;padding:.15rem 0 .15rem 1.1rem;
   border-left:3px solid var(--accent);
-  font-size:16px;font-weight:500;line-height:1.5;
+  font-size:14px;font-weight:500;line-height:1.55;
 }
 
 /* An answer arriving. The block fades in, then its words land in order,
@@ -399,7 +400,7 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
 .asks{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1.1rem}
 .askchip{
   display:inline-flex;align-items:center;
-  font-family:var(--font);font-size:13px;font-weight:500;color:var(--ink);
+  font-family:var(--font);font-size:12.5px;font-weight:500;color:var(--ink);
   background:var(--card);border:var(--border);border-radius:999px;
   min-height:44px;padding:.4rem 1.05rem;cursor:pointer;
 }
@@ -495,14 +496,17 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
   /* 44px is a touch-target rule. With a mouse these can be tighter, which
      is what buys the Try asking list four or five visible questions
      instead of one. */
-  .side-link{min-height:34px;padding:.35rem .6rem}
-  .side-nav{gap:.15rem}
-  .try{min-height:38px;padding:.45rem .7rem}
-  .try-list{gap:.35rem}
-  .side-social a{width:38px;height:38px}
-  .side{gap:1rem}
-  .side-id{margin-bottom:.9rem}
-  .side-nav{margin-bottom:.9rem}
+  .side-link{min-height:30px;padding:.25rem .6rem}
+  .side-nav{gap:0}
+  .try{min-height:34px;padding:.35rem .7rem;line-height:1.3}
+  .try-list{gap:.3rem}
+  .side-social a{width:34px;height:34px}
+  .side{gap:.8rem;padding-top:1rem}
+  .side-id{margin-bottom:.7rem}
+  .side-nav{margin-bottom:.7rem}
+  .side-label{margin-bottom:.4rem}
+  .rec{margin-top:.7rem}
+  .side-social{margin-top:.7rem}
 }
 
 @media (min-width:100em){
