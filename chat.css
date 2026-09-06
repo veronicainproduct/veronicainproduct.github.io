@@ -76,10 +76,23 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
 .side-link[aria-current="true"] svg{color:var(--accent-deep)}
 .side-link svg{width:18px;height:18px;flex:0 0 auto;color:var(--muted)}
 
+/* This block is the whole invitation to interact, so it stops looking
+   like a list and starts looking like an offer. */
+.try-wrap{
+  background:linear-gradient(180deg,rgba(243,199,122,.18),rgba(243,199,122,.04));
+  border:1px solid rgba(226,160,63,.35);
+  border-radius:14px;
+  padding-block:.7rem;
+}
 .side-label{
-  margin:0 0 .55rem;font-family:var(--mono);
-  font-size:var(--t-micro);letter-spacing:.14em;
-  text-transform:uppercase;color:var(--muted);
+  margin:0 0 .55rem;display:flex;align-items:center;gap:.4rem;
+  font-family:var(--mono);
+  font-size:var(--t-micro);letter-spacing:.08em;font-weight:600;
+  text-transform:uppercase;color:#8a6314;
+}
+.side-label::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--accent);flex:0 0 auto;
 }
 .try-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem}
 .try{
@@ -513,4 +526,116 @@ body.app{overflow:hidden;display:block;background:var(--muted-surface)}
   .thread, .composer{max-width:62rem}
   .side{width:21rem}
   .shell{grid-template-columns:21rem minmax(0,1fr)}
+}
+
+
+/* ============================================================
+   MOTION
+   Everything here either answers something the visitor did, or
+   arrives once on load and then stops. All of it sits inside
+   prefers-reduced-motion: no-preference.
+   ============================================================ */
+@media (prefers-reduced-motion:no-preference){
+
+  .side-id,.side-nav,.try-wrap,.rec,.side-social{
+    animation:railin .5s cubic-bezier(.22,1,.36,1) backwards;
+  }
+  .side-nav{animation-delay:.06s}
+  .try-wrap{animation-delay:.12s}
+  .rec{animation-delay:.18s}
+  .side-social{animation-delay:.24s}
+  @keyframes railin{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+
+  .try-list li{animation:railin .45s cubic-bezier(.22,1,.36,1) backwards}
+  .try-list li:nth-child(1){animation-delay:.18s}
+  .try-list li:nth-child(2){animation-delay:.23s}
+  .try-list li:nth-child(3){animation-delay:.28s}
+  .try-list li:nth-child(4){animation-delay:.33s}
+  .try-list li:nth-child(5){animation-delay:.38s}
+  .try-list li:nth-child(n+6){animation-delay:.43s}
+
+  .msg-open .wave{animation:pop .55s cubic-bezier(.34,1.56,.64,1) backwards;animation-delay:.1s}
+  .msg-open .lede{animation:railin .55s cubic-bezier(.22,1,.36,1) backwards;animation-delay:.16s}
+  .msg-open .sub{animation:railin .55s cubic-bezier(.22,1,.36,1) backwards;animation-delay:.24s}
+  .msg-open .asks{animation:railin .55s cubic-bezier(.22,1,.36,1) backwards;animation-delay:.32s}
+  @keyframes pop{from{opacity:0;transform:scale(.6) rotate(-12deg)}to{opacity:1;transform:none}}
+
+  /* the mark breathes, quietly, and only for a while */
+  .mark{animation:breathe 3.2s ease-in-out 1.2s 4}
+  @keyframes breathe{
+    0%,100%{box-shadow:0 1px 2px rgba(16,25,43,.12), 0 6px 16px rgba(226,160,63,.28)}
+    50%{box-shadow:0 1px 2px rgba(16,25,43,.12), 0 8px 26px rgba(226,160,63,.55)}
+  }
+
+  .try,.askchip,.reach a,.go,.side-social a,.topbar .home-link{
+    transition:transform .16s cubic-bezier(.22,1,.36,1),
+               border-color .16s ease, background-color .16s ease,
+               box-shadow .16s ease;
+  }
+  .try:hover,.askchip:hover,.reach a:hover,.topbar .home-link:hover{transform:translateY(-2px)}
+  .go:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(226,160,63,.45)}
+  .try:active,.askchip:active,.go:active,.reach a:active{transform:translateY(0) scale(.98)}
+  .side-social a:hover{transform:translateY(-2px)}
+
+  .proj{transition:transform .22s cubic-bezier(.22,1,.36,1), box-shadow .22s ease}
+  .proj:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+
+  .send{transition:transform .14s cubic-bezier(.34,1.56,.64,1), background-color .16s ease}
+  .send:hover{transform:scale(1.08)}
+  .send:active{transform:scale(.92)}
+
+  .side-link{transition:background-color .16s ease, box-shadow .22s cubic-bezier(.22,1,.36,1)}
+}
+
+/* counted figures must not reflow as the digits change */
+.num b{font-variant-numeric:tabular-nums}
+
+/* ============================================================
+   PORTRAIT VIEWER
+   The avatar is 42px, which is not enough of a face to go on.
+   ============================================================ */
+.side-face-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:0;border:0;background:none;cursor:zoom-in;
+  border-radius:50%;line-height:0;flex:0 0 auto;
+  width:44px;height:44px;   /* the photo is 42px; the target is 44 */
+}
+.lightbox{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(1rem,5vw,3rem);
+}
+.lightbox[hidden]{display:none}
+.lightbox-scrim{
+  position:absolute;inset:0;border:0;padding:0;cursor:zoom-out;
+  background:rgba(10,16,28,.72);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+}
+.lightbox-figure{
+  position:relative;margin:0;max-width:min(560px,92vw);
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 24px 70px rgba(0,0,0,.45);
+}
+.lightbox-figure img{display:block;width:100%;height:auto}
+.lightbox-close{
+  position:absolute;top:.6rem;right:.6rem;
+  width:44px;height:44px;border:0;border-radius:50%;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.92);color:var(--ink);
+}
+.lightbox-close svg{width:18px;height:18px}
+.lightbox-close:hover{background:#fff}
+
+@media (prefers-reduced-motion:no-preference){
+  .lightbox-scrim{animation:scrimin .28s ease backwards}
+  .lightbox-figure{animation:zoomin .42s cubic-bezier(.22,1,.36,1) backwards}
+  .lightbox.closing .lightbox-scrim{animation:scrimin .22s ease reverse forwards}
+  .lightbox.closing .lightbox-figure{animation:zoomin .26s ease reverse forwards}
+  @keyframes scrimin{from{opacity:0}to{opacity:1}}
+  @keyframes zoomin{
+    from{opacity:0;transform:scale(.82) translateY(14px)}
+    to{opacity:1;transform:none}
+  }
+  .side-face-btn{transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+  .side-face-btn:hover{transform:scale(1.08)}
 }

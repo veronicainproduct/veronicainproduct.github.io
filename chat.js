@@ -203,7 +203,7 @@
              'lenders month end audit trail in build upload staging rollback prest',
       boost: ['financing os', 'process os', 'case 02', 'audit trail'],
       html:
-        '<p>In build, not launched. Every month around 2,886 PhysicsWallah employees repay a loan out of their salary, and before a rupee moves somebody builds the deduction summary by hand, waits for payroll to confirm what was actually taken, works out what each of the two lenders is owed, raises the invoices, chases the approvals, records the payment, and maps it back to individual loans. All of it in spreadsheets and email threads.</p>' +
+        '<p>In build, not launched, and I will say so before you ask. Every month around 2,886 PhysicsWallah employees repay a loan out of their salary, and before a rupee moves somebody builds the deduction summary by hand, waits for payroll to confirm what was actually taken, works out what each of the two lenders is owed, raises the invoices, chases the approvals, records the payment, and maps it back to individual loans. All of it in spreadsheets and email threads.</p>' +
         '<p>Three things went wrong on repeat, and none of them had the decency to announce themselves. A mis-keyed figure becomes a wrong invoice, and nothing in the process can notice. There is no audit trail, so an error that surfaces in month N+2 comes down to who can remember month N. And loan IDs collide across the two lenders, so the same number means two different loans depending on who you ask.</p>' +
         pull('It removes a whole class of error by construction rather than by care, and care is exactly what runs out at the end of a long month.') +
         '<p>Three decisions carry most of the weight in what I specified. Every key is a pair, always (lender, loan_id), never a bare loan ID. Uploads are staged rather than applied, checked against the previous batch, versioned and rollable back, so an unusually large change has to wait for a human to look at it. And every change lands in an append only audit log, with the tables checksummed.</p>' +
@@ -266,7 +266,7 @@
              'esop financing employee financing what do you sell offering lending products',
       boost: ['salary advance', 'two products', 'what products'],
       html:
-        '<p>Two, both for PhysicsWallah employees.</p>' +
+        '<p>Two, both aimed at the same person: an employee who needs money before payday and would rather not explain why.</p>' +
         '<p><b>Employee Financing.</b> Salary Advance and Salary Top-up. Short duration credit recovered from monthly pay through payroll deduction. I own eligibility, pricing, the repayment flow and the collections design end to end.</p>' +
         '<p><b>ESOP Financing.</b> Lending against pledged ESOP shares, so an employee can pay the exercise tax before the shares become anything they can actually spend. I own the operations end to end: onboarding, credit checks, the pledge, disbursement and closure, across credit, an NBFC and a depository, none of whom share a system with each other.</p>',
       chips: ['credit', 'esop', 'work']
@@ -341,7 +341,7 @@
              'previous jobs internship edumentor employment work history cv path progression',
       boost: ['timeline', 'experience', 'how long have you'],
       html:
-        '<p><b>FinZ (PhysicsWallah), Noida. December 2024 to now.</b> Product strategy on Employee Financing. Launched the vertical from concept and scaled it to &#8377;3 Cr+ in monthly disbursal. Designed two loan products end to end, wrote the CIBIL based credit policy, and own ESOP Financing operations across credit, NBFC and depository stakeholders. Built the two systems on this site along the way, which was not in the job description.</p>' +
+        '<p>Short, and all of it in one place.</p>' + '<p><b>FinZ (PhysicsWallah), Noida. December 2024 to now.</b> Product strategy on Employee Financing. Launched the vertical from concept and scaled it to &#8377;3 Cr+ in monthly disbursal. Designed two loan products end to end, wrote the CIBIL based credit policy, and own ESOP Financing operations across credit, NBFC and depository stakeholders. Built the two systems on this site along the way, which was not in the job description.</p>' +
         '<p><b>Edumentor Educational Services. April to June 2023.</b> Zonal Manager intern. Scoped and delivered a one month student engagement programme, and ran a 20 to 25 member team executing daily operations for a multi-centre activation.</p>' +
         '<p><b>University of Delhi. 2021 to 2024.</b> BSc (Hons) Computer Science, minor in Mathematics.</p>',
       chips: ['education', 'work', 'resume']
@@ -368,8 +368,8 @@
       terms: 'certifications certificates courses coursera google hackerrank pwc credentials qualifications',
       boost: ['certifications', 'certificates'],
       html:
-        '<p>Google Data Analytics (Coursera). Data Analysis and Presentation Skills, a five course specialisation (PwC). SQL (HackerRank).</p>' +
-        '<p>None of them taught me as much as being responsible for a live loan book did, but they are real, they are on the resume, and I finished them.</p>',
+        '<p>Three, and I finished all of them, which is not the usual ratio.</p>' + '<p>Google Data Analytics (Coursera). Data Analysis and Presentation Skills, a five course specialisation (PwC). SQL (HackerRank).</p>' +
+        '<p>None of them taught me as much as one live loan book did.</p>',
       chips: ['skills', 'education', 'resume']
     },
 
@@ -421,7 +421,7 @@
              'engineering design operations compliance nbfc depository payroll lenders partners',
       boost: ['stakeholders', 'who do you work with'],
       html:
-        '<p>More external than most product roles. ESOP Financing runs across credit, an NBFC and a depository, and none of them share a system with FinZ or with each other, which is exactly why the reconciliation views in the first case study exist.</p>' +
+        '<p>More external than most product roles, and none of them share a database. ESOP Financing runs across credit, an NBFC and a depository, none of which talk to FinZ or to each other, which is exactly why the reconciliation views in the first case study exist.</p>' +
         '<p>Internally: the operations team, who field questions about individual loans all day and are the real users of both systems. Payroll, who confirm what was actually deducted, which is never quite what was requested. And a compliance officer who has to approve every share release for a Designated Person before it happens.</p>',
       chips: ['esop', 'efos', 'dayjob']
     },
@@ -450,9 +450,8 @@
       boost: ['are you from', 'you from', 'hometown', 'grew up',
               'originally from', 'your origin', 'born', 'lucknow'],
       html:
-        '<p><b>Lucknow.</b> Nawabs, chikankari, and a monument famous for being a maze, which turns out to be excellent training for tracing one loan across eleven spreadsheets.</p>' +
-        '<p>We are also raised on <i>pehle aap</i>. Put two Lucknawis in a doorway and they will still be there tomorrow. Beautiful manners. Dreadful throughput.</p>' +
-        '<p>I came to Delhi for Delhi University, fell completely for the city, and stayed for the job. Now living in Noida and working in Noida, out of PhysicsWallah&rsquo;s head office. Entirely okay with remote.</p>',
+        '<p><b>Lucknow.</b> Which explains the manners and the very strong opinions about kebabs.</p>' +
+        '<p>Delhi for university, and I stayed for the job. Now in Noida, at PhysicsWallah&rsquo;s head office. Happy to work remote.</p>',
       chips: ['education', 'logistics', 'about']
     },
 
@@ -844,8 +843,48 @@
     return Math.min(i, STEP_CAP);
   }
 
+  /* A figure that animates up from zero is read, not skimmed. Only the
+     numeric part moves; prefixes, suffixes and words are left alone. */
+  function countUp(el) {
+    var raw = el.textContent;
+    var m = raw.match(/^(\D*)([\d,\.]+)(.*)$/);
+    if (!m) return;
+    var target = parseFloat(m[2].replace(/,/g, ''));
+    if (!isFinite(target) || target <= 0) return;
+    var decimals = (m[2].split('.')[1] || '').length;
+    var grouped = m[2].indexOf(',') !== -1;
+    var start = null, dur = 850;
+    function fmt(v) {
+      var t = decimals ? v.toFixed(decimals) : String(Math.round(v));
+      if (grouped) {
+        var p = t.split('.');
+        p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        t = p.join('.');
+      }
+      return m[1] + t + m[3];
+    }
+    function tick(now) {
+      if (start === null) start = now;
+      var p = Math.min(1, (now - start) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(target * eased);
+      if (p < 1) window.requestAnimationFrame(tick);
+      else el.textContent = raw;
+    }
+    el.textContent = fmt(0);
+    window.requestAnimationFrame(tick);
+  }
+
   function reveal(container, after) {
     if (!io) return;
+    if (!reduce) {
+      var figs = container.querySelectorAll('.num b');
+      for (var f = 0; f < figs.length; f++) {
+        (function (el, delay) {
+          window.setTimeout(function () { countUp(el); }, delay);
+        })(figs[f], after + 120 + f * 90);
+      }
+    }
     var els = container.querySelectorAll(RISE);
     for (var i = 0; i < els.length; i++) {
       els[i].classList.add('rise');
@@ -1050,6 +1089,37 @@
     window.requestAnimationFrame(function () { sweeping = false; sweep(); });
   }, { passive: true });
 
+  /* ---- portrait viewer -------------------------------------- */
+  var lb = document.getElementById('lightbox');
+  var lbOpen = document.getElementById('face-open');
+  var lbClose = document.getElementById('lb-close');
+  var lbScrim = document.getElementById('lb-scrim');
+  var lbReturn = null;
+
+  function openPhoto() {
+    lbReturn = document.activeElement;
+    lb.hidden = false;
+    lb.classList.remove('closing');
+    lbClose.focus();
+  }
+  function closePhoto() {
+    if (lb.hidden) return;
+    if (reduce) { lb.hidden = true; if (lbReturn) lbReturn.focus(); return; }
+    lb.classList.add('closing');
+    window.setTimeout(function () {
+      lb.hidden = true;
+      lb.classList.remove('closing');
+      if (lbReturn) lbReturn.focus();
+    }, 240);
+  }
+  if (lbOpen) lbOpen.addEventListener('click', openPhoto);
+  if (lbClose) lbClose.addEventListener('click', closePhoto);
+  if (lbScrim) lbScrim.addEventListener('click', closePhoto);
+  /* the avatar beside a reply opens it too */
+  document.addEventListener('click', function (e) {
+    if (e.target && e.target.classList && e.target.classList.contains('face')) openPhoto();
+  });
+
   /* mobile drawer */
   var side = document.getElementById('side');
   var toggle = document.getElementById('drawer-toggle');
@@ -1075,6 +1145,8 @@
   });
   backdrop.addEventListener('click', closeDrawer);
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeDrawer();
+    if (e.key !== 'Escape') return;
+    if (lb && !lb.hidden) { closePhoto(); return; }
+    closeDrawer();
   });
 })();
